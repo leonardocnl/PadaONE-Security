@@ -1,0 +1,38 @@
+:root {
+    /* Paleta Midnight Cyber */
+    --bg-app: #020408;
+    --bg-sidebar: #05080F;
+    --bg-panel: #0D1117;
+    --bg-hover: #161B22;
+    --bg-code: #000000;
+    
+    /* Acentos */
+    --primary-blue: #3B82F6;
+    --primary-glow: rgba(59, 130, 246, 0.15);
+    --accent-cyan: #22D3EE;
+    --accent-gold: #F59E0B;
+    --border-subtle: #1F2937;
+    
+    /* Texto */
+    --text-main: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-dark: #64748B;
+    
+    /* Status */
+    --status-success: #10B981;
+    --status-critical: #EF4444;
+
+    /* Fontes */
+    --font-primary: 'Inter', sans-serif; /* Apenas para textos explicativos */
+    --font-code: 'JetBrains Mono', 'Fira Code', monospace; /* Títulos, UI, Labels */
+    
+    /* Dimensões */
+    --sidebar-width: 260px;
+    --toc-width: 240px;
+    --header-height: 64px;
+    
+    /* SHARP DESIGN (Sem arredondamento) */
+    --radius-sm: 0px;
+    --radius-md: 0px;
+    --radius-lg: 0px;
+}

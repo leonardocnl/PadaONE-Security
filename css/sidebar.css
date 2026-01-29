@@ -1,0 +1,63 @@
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    font-family: var(--font-code); /* Garante Mono no menu */
+}
+
+.sidebar-header { margin-bottom: 50px; }
+.logo-area { display: flex; align-items: center; gap: 14px; }
+
+/* Logo Sharp */
+.logo-box { 
+    width: 40px; 
+    height: 40px; 
+    background: var(--primary-blue); 
+    border-radius: 0px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white;
+    font-size: 1.2rem;
+}
+
+.nav-group { margin-bottom: 30px; }
+.nav-title { 
+    font-size: 0.65rem; 
+    text-transform: uppercase; 
+    color: var(--text-dark); 
+    font-weight: 700; 
+    margin-bottom: 12px; 
+    padding-left: 12px;
+    letter-spacing: 1px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    color: var(--text-muted);
+    border-radius: 0px;
+    cursor: pointer;
+    transition: all 0.1s;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-left: 2px solid transparent;
+}
+
+.nav-item:hover { 
+    background: var(--bg-hover); 
+    color: #fff; 
+}
+
+.nav-item.active { 
+    background: var(--bg-hover); 
+    color: #fff; 
+    border-left: 2px solid var(--primary-blue); 
+}
+
+.nav-item i { font-size: 1.1rem; }
