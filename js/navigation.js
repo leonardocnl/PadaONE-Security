@@ -1,49 +1,80 @@
 const nav = {
     history: [],
+    currentPage: 'dashboard',
 
     switchTool: (toolId, isBack = false) => {
-        document.querySelectorAll('.tool-layout').forEach(el => el.classList.add('hidden'));
-        
-        const target = document.getElementById(`view-${toolId}`);
-        if(target) target.classList.remove('hidden');
-        
-        const title = toolId === 'dashboard' ? 'Dashboard' : toolId.charAt(0).toUpperCase() + toolId.slice(1);
-        document.getElementById('breadcrumb').innerText = `DevSecOps > ${title}`;
-        
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.classList.remove('active');
-            if(item.innerText.toLowerCase().includes(title.toLowerCase())) item.classList.add('active');
-        });
+        // Mapear IDs de ferramentas para nomes de páginas
+        const pageMap = {
+            'dashboard': 'dashboard',
+            'logic': 'logic',
+            'trivy': 'trivy',
+            'semgrep': 'semgrep',
+            'gitleaks': 'gitleaks'
+        };
 
-        const backBtn = document.getElementById('btn-back');
+        const pageName = pageMap[toolId] || 'dashboard';
+        nav.currentPage = pageName;
+
+        // Carregar página dinamicamente via index.html
+        if (window.loadPage && typeof window.loadPage === 'function') {
+            window.loadPage(pageName);
+        }
+
+        const title = {
+            'dashboard': 'Dashboard',
+            'logic': 'Lógica de Bibliotecas',
+            'trivy': 'Trivy (SCA)',
+            'semgrep': 'Semgrep (SAST)',
+            'gitleaks': 'Gitleaks (Secrets)'
+        }[toolId] || 'Dashboard';
+
+        // Atualizar histórico
         if (!isBack) {
             if (nav.history.length === 0 || nav.history[nav.history.length - 1] !== toolId) {
                 nav.history.push(toolId);
             }
         }
 
-        if (backBtn) {
-            if (nav.history.length > 1) {
-                backBtn.style.display = 'flex';
-            } else {
-                backBtn.style.display = 'none';
+        // Atualizar breadcrumb quando página for carregada
+        setTimeout(() => {
+            const breadcrumb = document.getElementById('breadcrumb');
+            if (breadcrumb) {
+                breadcrumb.innerText = title;
             }
-        }
 
-        if(toolId === 'semgrep' && typeof flowLogic !== 'undefined') flowLogic.start('sast');
-        if(toolId === 'gitleaks' && typeof flowLogic !== 'undefined') flowLogic.start('secrets');
-        if(toolId === 'logic' && typeof flowLogic !== 'undefined') flowLogic.start('sca');
+            // Marcar item de navegação como ativo
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                if (item.getAttribute('onclick') && item.getAttribute('onclick').includes(`switchTool('${toolId}')`)) {
+                    item.classList.add('active');
+                }
+            });
+
+            // Iniciar fluxogramas se necessário
+            if (toolId === 'semgrep' && typeof flowLogic !== 'undefined') {
+                flowLogic.start('sast');
+            }
+            if (toolId === 'gitleaks' && typeof flowLogic !== 'undefined') {
+                flowLogic.start('secrets');
+            }
+            if (toolId === 'logic' && typeof flowLogic !== 'undefined') {
+                flowLogic.start('sca');
+            }
+        }, 100);
     },
 
     goBack: () => {
-        if (nav.history.length > 1) {
-            nav.history.pop();
-            const previousPage = nav.history[nav.history.length - 1];
-            nav.switchTool(previousPage, true);
-        }
+        // Voltar sempre para o dashboard
+        nav.switchTool('dashboard');
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    nav.switchTool('dashboard');
+    // A página inicial é carregada pelo index.html
+    // Apenas sincronizar o estado
+    nav.history.push('dashboard');
 });

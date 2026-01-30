@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PadaONE Security</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/flowcharts.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
+                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-group">
+                    <div class="nav-title">Geral</div>
+                    <div class="nav-item active" onclick="nav.switchTool('dashboard')">
+                        <i class="ph ph-squares-four"></i> Dashboard
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('logic')">
+                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-title">Ferramentas</div>
+                    <div class="nav-item" onclick="nav.switchTool('trivy')">
+                        <i class="ph ph-package"></i> Trivy (SCA)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('semgrep')">
+                        <i class="ph ph-code"></i> Semgrep (SAST)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('gitleaks')">
+                        <i class="ph ph-key"></i> Gitleaks (Secrets)
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Dashboard</span>
+            </header>
+
+            <div class="tool-layout">
+                <div class="scroll-area">
+                    <div class="badge-group">
+                        <span class="badge recommend">PIPELINE</span>
+                        <span class="badge">DEVSECOPS</span>
+                        <span class="badge">VISUALIZAÇÃO INTERATIVA</span>
+                    </div>
+                    <h1>Pipeline DevSecOps Completo</h1>
+                    <p>Fluxo integrado de segurança em 3 fases: Estação de Trabalho, Pipeline CI/CD e Auditoria Manual. O diagrama abaixo representa todo o ciclo de vida de segurança do desenvolvimento até a produção.</p>
+
+                    <div style="background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-cyan) 100%); height: 2px; width: 100px; margin: 30px 0;"></div>
+
+                    <div class="diagram-container">
+                        <img src="assets/images/Fluxograma-Seguranca.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg">
+                    </div>
+
+                    <div class="meta-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 40px 0;">
+                        <div style="background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.3); padding: 20px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="ph ph-info" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
+                                <strong style="color: var(--primary-blue); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Sobre o Diagrama</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                                O pipeline representa o fluxo completo de segurança, desde a configuração do ambiente até o sign-off final. Linhas sólidas indicam fluxo principal, linhas tracejadas indicam falhas e loops de feedback.
+                            </p>
+                        </div>
+                        <div style="background: rgba(34, 139, 230, 0.1); border: 1px solid rgba(34, 139, 230, 0.3); padding: 20px;">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                <i class="ph ph-lightbulb" style="font-size: 1.5rem; color: var(--accent-cyan);"></i>
+                                <strong style="color: var(--accent-cyan); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Navegação Rápida</strong>
+                            </div>
+                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+                                Use o menu lateral ou os cards abaixo para acessar a documentação completa de cada ferramenta do pipeline DevSecOps.
+                            </p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin: 50px 0 20px 0; color: var(--text-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                        <i class="ph ph-shield-check" style="margin-right: 10px; color: var(--primary-blue);"></i>Ferramentas Principais
+                    </h3>
+                    <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr); margin: 0 0 40px 0;">
+                        <div class="meta-card clickable" onclick="nav.switchTool('trivy')">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                                <span class="meta-label" style="color: var(--primary-blue); margin: 0;">TRIVY (SCA)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Software Composition Analysis e scan de vulnerabilidades</p>
+                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 1px;">
+                                Ver Documentação →
+                            </div>
+                        </div>
+                        <div class="meta-card clickable" onclick="nav.switchTool('semgrep')">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan);"></i>
+                                <span class="meta-label" style="color: var(--accent-cyan); margin: 0;">SEMGREP (SAST)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Análise estática de código e detecção de padrões inseguros</p>
+                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px;">
+                                Ver Documentação →
+                            </div>
+                        </div>
+                        <div class="meta-card clickable" onclick="nav.switchTool('gitleaks')">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold);"></i>
+                                <span class="meta-label" style="color: var(--accent-gold); margin: 0;">GITLEAKS (SECRETS)</span>
+                            </div>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Detecção de credenciais e secrets comprometidos no código</p>
+                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px;">
+                                Ver Documentação →
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border-subtle);">
+                        <h3 style="margin-bottom: 30px; color: var(--text-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
+                            <i class="ph ph-list-numbers" style="margin-right: 10px; color: var(--primary-blue);"></i>Fases do Pipeline
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div style="background: rgba(132, 94, 247, 0.05); border-left: 3px solid #845EF7; padding: 20px;">
+                                <div style="font-weight: 700; color: #845EF7; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+                                    Fase 1: Estação de Trabalho
+                                </div>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                    Configuração do ambiente, análise de bibliotecas e execução de ferramentas de segurança locais antes do commit.
+                                </p>
+                            </div>
+                            <div style="background: rgba(239, 68, 68, 0.05); border-left: 3px solid #EF4444; padding: 20px;">
+                                <div style="font-weight: 700; color: #EF4444; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+                                    Fase 2: Pipeline CI/CD
+                                </div>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                    Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no pipeline de integração.
+                                </p>
+                            </div>
+                            <div style="background: rgba(64, 192, 87, 0.05); border-left: 3px solid #40C057; padding: 20px;">
+                                <div style="font-weight: 700; color: #40C057; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
+                                    Fase 3: Auditoria Manual
+                                </div>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                    Triagem de escopo, pentest com Burp Suite, coleta de evidências e geração de relatório final com sign-off.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

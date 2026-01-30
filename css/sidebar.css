@@ -9,7 +9,17 @@
 }
 
 .sidebar-header { margin-bottom: 50px; }
-.logo-area { display: flex; align-items: center; gap: 14px; }
+.logo-area { 
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start;
+    padding: 12px 14px;
+    width: 100%;
+}
+
+.logo-area button {
+    width: 100%;
+}
 
 /* Logo Sharp */
 .logo-box { 
@@ -43,7 +53,7 @@
     color: var(--text-muted);
     border-radius: 0px;
     cursor: pointer;
-    transition: all 0.1s;
+    transition: all 0.3s ease-in-out;
     font-size: 0.85rem;
     font-weight: 500;
     border-left: 2px solid transparent;

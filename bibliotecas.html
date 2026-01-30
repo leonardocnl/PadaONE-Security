@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lógica de Bibliotecas - PadaONE Security</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/flowcharts.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
+                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-group">
+                    <div class="nav-title">Geral</div>
+                    <div class="nav-item" onclick="nav.switchTool('dashboard')">
+                        <i class="ph ph-squares-four"></i> Dashboard
+                    </div>
+                    <div class="nav-item active" onclick="nav.switchTool('logic')">
+                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-title">Ferramentas</div>
+                    <div class="nav-item" onclick="nav.switchTool('trivy')">
+                        <i class="ph ph-package"></i> Trivy (SCA)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('semgrep')">
+                        <i class="ph ph-code"></i> Semgrep (SAST)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('gitleaks')">
+                        <i class="ph ph-key"></i> Gitleaks (Secrets)
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="btn-back" class="back-btn" onclick="nav.goBack()">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Lógica de Bibliotecas</span>
+            </header>
+
+            <div class="tool-layout">
+                <div class="scroll-area">
+                    <div class="badge-group">
+                        <span class="badge recommend">GOVERNANÇA</span>
+                        <span class="badge">SCA</span>
+                        <span class="badge">MANUAL V1.0</span>
+                    </div>
+                    <h1>Lógica de Bibliotecas</h1>
+                    <p>Este fluxo fornece as diretrizes para que o desenvolvedor decida, de forma autônoma, entre a correção imediata de uma biblioteca, sua substituição ou o aceite de riscos residuais. O objetivo é proteger a Supply Chain.</p>
+
+                    <section id="logic-quick" style="margin-bottom: 50px;">
+                        <h3>1. Tabela de Decisão Rápida</h3>
+                        <p>Utilize esta tabela como filtro inicial ao identificar uma vulnerabilidade no Trivy ou deps.dev.</p>
+                        
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">SEVERIDADE</span>
+                                <span class="col-label">PLANO DE AÇÃO IMEDIATO</span>
+                                <span class="col-label" style="text-align: center;">WAIVER</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-critical); font-weight: 700;">ALTA/CRÍTICA (7.0+)</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Bloqueio imediato ou update obrigatório se for alcançável.</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">RESTRITO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-success); font-weight: 700;">MÉDIA/BAIXA (<6.9)</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Update se houver versão estável; caso contrário, monitorar.</span>
+                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">PERMITIDO</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-cvss" style="margin-bottom: 50px;">
+                        <h3>2. Entenda a Métrica CVSS v4.0</h3>
+                        <p>A pontuação define a autonomia do desenvolvedor.</p>
+                        
+                        <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">COMPOSIÇÃO</span>
+                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Base, Ameaça, Ambiental e Suplementar.</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">STRING VETORIAL</span>
+                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Ex: <code>CVSS:4.0/AV:N...</code></p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">GATILHO</span>
+                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Nota 9.0+ exige revisão Sênior.</p>
+                            </div>
+                        </div>
+
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">PONTUAÇÃO</span>
+                                <span class="col-label">AÇÃO DE GOVERNANÇA</span>
+                                <span class="col-label" style="text-align: center;">AUTONOMIA</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-critical); font-weight: 700;">9.0 - 10.0</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Escalonamento Crítico Obrigatório.</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">NENHUMA</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-gold); font-weight: 700;">7.0 - 8.9</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Waiver exige busca comprovada de alternativas.</span>
+                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RESTRITA</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-success); font-weight: 700;">0.0 - 6.9</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Waiver permitido se Esforço > 16h.</span>
+                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">TOTAL</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-context" style="margin-bottom: 50px;">
+                        <h3>3. Diferenciação de Contexto</h3>
+                        <p>O rigor da análise depende da natureza da dependência.</p>
+                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="meta-card card-critical">
+                                <span class="meta-label" style="color: var(--status-critical);">DEPENDENCIES (PRODUÇÃO)</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Rigor Máximo.</p>
+                            </div>
+                            <div class="meta-card card-warning">
+                                <span class="meta-label" style="color: var(--accent-gold);">DEVDEPENDENCIES (BUILD)</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Foco em Supply Chain.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-steps" style="margin-bottom: 50px;">
+                        <h3>4. Fluxo de Decisão e Triagem</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 1: IDENTIFICAÇÃO</h4>
+                        <p style="font-size: 0.9rem;">Identifique a vulnerabilidade via Trivy ou deps.dev.</p>
+                        <img src="assets/images/deps-dev.png" class="manual-img" style="max-width: 100%;" alt="Relatório Trivy">
+                        
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 2: TRIAGEM INTERATIVA</h4>
+                        <div id="flowchart-sca" class="flowchart-container" style="margin-bottom: 30px;"></div>
+
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 3: BUSCA POR ALTERNATIVAS</h4>
+                        <p style="font-size: 0.9rem;">Se a correção for inviável, busque alternativas no Snyk Advisor.</p>
+                        <img src="assets/images/snyk-advisor.png" class="manual-img" style="max-width: 500px; margin: 20px auto;" alt="Snyk Advisor">
+                    </section>
+
+                    <section id="logic-calc" style="margin-bottom: 50px;">
+                        <h3>5. Avaliação de Esforço (Regra das 16h)</h3>
+                        <p>O esforço total (E = Ta + Ti + Tv) contempla todo o ciclo.</p>
+                        
+                        <div class="pro-tip">
+                            <div class="pro-tip-header"><i class="ph ph-function"></i> Regra das 16 Horas</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Se a correção custar menos de 16h, ela é <strong>OBRIGATÓRIA</strong>.</p>
+                        </div>
+
+                        <div style="background: var(--bg-panel); padding: 24px; border: 1px solid var(--border-subtle);">
+                            <div class="form-grid">
+                                <div>
+                                    <label>TEMPO ANÁLISE (Ta)</label>
+                                    <input type="number" id="time-analysis" placeholder="Horas">
+                                </div>
+                                <div>
+                                    <label>TEMPO IMPLEMENTAÇÃO (Ti)</label>
+                                    <input type="number" id="time-implementation" placeholder="Horas">
+                                </div>
+                                <div>
+                                    <label>TEMPO VALIDAÇÃO (Tv)</label>
+                                    <input type="number" id="time-validation" placeholder="Horas">
+                                </div>
+                            </div>
+                            <button class="action-btn" onclick="calculators.calculateEffort()">Calcular Elegibilidade</button>
+                            <div id="effort-result" class="result-box hidden"></div>
+                        </div>
+                    </section>
+
+                    <section id="logic-waiver" style="margin-bottom: 50px;">
+                        <h3>6. Gestão de Waivers e Templates</h3>
+                        <h4 style="margin-top: 30px; font-size: 0.9rem; color: #fff;">NO GIT (MENSAGEM DE COMMIT)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Template</span>
+                                <button class="btn-copy" onclick="utils.copyCode('waiver-git')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="waiver-git">Waiver de Segurança: [CVE-ID]
+Justificativa: [Motivo Técnico]
+Status: Função isolada.
+Prazo: 10 dias.</code></pre>
+                        </div>
+
+                        <h4 style="margin-top: 30px; font-size: 0.9rem; color: #fff;">NO OPENPROJECT</h4>
+                        <img src="assets/images/open-project.png" class="manual-img" style="max-width: 600px; margin: 20px auto;" alt="OpenProject">
+                    </section>
+
+                    <section id="logic-escalation" style="margin-bottom: 50px;">
+                        <h3>7. Escalonamento Crítico</h3>
+                        <div class="meta-card card-critical">
+                            <span class="meta-label" style="color: var(--status-critical);">PROCEDIMENTO (CVSS > 9.0)</span>
+                            <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem;">
+                                <li>Alterar status para <strong>[Em Revisão]</strong>.</li>
+                                <li>Solicitar revisão de Sênior/Sec.</li>
+                                <li>Aguardar "De Acordo" no ticket.</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="right-toc">
+                    <div class="toc-header">Nesta Página</div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#logic-quick">Decisão Rápida</a></li>
+                        <li class="toc-item"><a href="#logic-cvss">Métrica CVSS</a></li>
+                        <li class="toc-item"><a href="#logic-context">Contexto</a></li>
+                        <li class="toc-item"><a href="#logic-steps">Fluxo e Triagem</a></li>
+                        <li class="toc-item"><a href="#logic-calc">Calculadora</a></li>
+                        <li class="toc-item"><a href="#logic-waiver">Templates Waiver</a></li>
+                        <li class="toc-item"><a href="#logic-escalation">Escalonamento</a></li>
+                    </ul>
+                </aside>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/flow-logic.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

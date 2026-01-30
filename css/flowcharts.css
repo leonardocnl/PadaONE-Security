@@ -99,7 +99,7 @@
     font-family: var(--font-code);
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s ease-in-out;
 }
 .btn-start:hover {
     background-color: #2563EB;
@@ -115,7 +115,7 @@
     padding: 14px 20px;
     border-radius: 0px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease-in-out;
     font-family: var(--font-code);
     font-weight: 700;
     font-size: 0.9rem;

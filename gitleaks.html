@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gitleaks - PadaONE Security</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/flowcharts.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
+                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-group">
+                    <div class="nav-title">Geral</div>
+                    <div class="nav-item" onclick="nav.switchTool('dashboard')">
+                        <i class="ph ph-squares-four"></i> Dashboard
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('logic')">
+                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-title">Ferramentas</div>
+                    <div class="nav-item" onclick="nav.switchTool('trivy')">
+                        <i class="ph ph-package"></i> Trivy (SCA)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('semgrep')">
+                        <i class="ph ph-code"></i> Semgrep (SAST)
+                    </div>
+                    <div class="nav-item active" onclick="nav.switchTool('gitleaks')">
+                        <i class="ph ph-key"></i> Gitleaks (Secrets)
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="btn-back" class="back-btn" onclick="nav.goBack()">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Gitleaks (Secrets)</span>
+            </header>
+
+            <div class="tool-layout">
+                <div class="scroll-area">
+                    <div class="badge-group">
+                        <span class="badge recommend">SECRETS DETECTION</span>
+                        <span class="badge">GITLEAKS</span>
+                        <span class="badge">MANUAL V1.0</span>
+                    </div>
+                    <h1>Gitleaks - Detecção de Credenciais</h1>
+                    <p>O Gitleaks é uma ferramenta de detecção de secrets (credenciais, tokens, chaves de API) comprometidas no código-fonte e histórico do Git. A execução deve ocorrer tanto localmente quanto no pipeline CI/CD.</p>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>1. Visão Geral</h3>
+                        <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">TIPO</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Secrets Detection</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGEM</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Agnóstico (All)</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>2. Instalação e Configuração</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (WINDOWS)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>PowerShell</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-install-win')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-install-win"># Via Chocolatey
+choco install gitleaks
+
+# Verificar instalação
+gitleaks version</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (LINUX/MAC)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-install-linux')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-install-linux"># Via Homebrew
+brew install gitleaks
+
+# Ou via script de instalação
+curl -sSfL https://raw.githubusercontent.com/gitleaks/gitleaks/master/scripts/install.sh | sh</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>3. Execução Local (Pré-Commit)</h3>
+                        
+                        <div class="pro-tip">
+                            <div class="pro-tip-header"><i class="ph ph-shield-check"></i> Boa Prática</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Execute o Gitleaks <strong>antes de cada commit</strong> para detectar credenciais vazadas antes de enviá-las ao repositório remoto.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">SCAN COMPLETO DO REPOSITÓRIO</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-scan')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-scan"># Escanear todo o repositório (histórico completo)
+gitleaks detect --source . --verbose
+
+# Escanear apenas arquivos staged (pré-commit)
+gitleaks protect --staged --verbose
+
+# Gerar relatório em JSON
+gitleaks detect --source . --report-path gitleaks-report.json</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INTEGRAÇÃO COM GIT HOOKS</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.git/hooks/pre-commit</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-hook')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-hook">#!/bin/sh
+# Pre-commit hook para Gitleaks
+
+echo "Running Gitleaks..."
+gitleaks protect --staged --verbose
+
+if [ $? -eq 1 ]; then
+    echo "⚠️  Gitleaks detectou credenciais! Commit bloqueado."
+    exit 1
+fi
+
+echo "✅ Gitleaks: Nenhum secret detectado."
+exit 0</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>4. Integração CI/CD (Pipeline)</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITHUB ACTIONS</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.github/workflows/gitleaks.yml</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-github')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-github">name: Gitleaks
+
+on: [push, pull_request]
+
+jobs:
+  gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITLAB CI</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.gitlab-ci.yml</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-gitlab')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-gitlab">gitleaks:
+  stage: security
+  image: zricethezav/gitleaks:latest
+  script:
+    - gitleaks detect --source . --verbose --report-path gitleaks-report.json
+  artifacts:
+    reports:
+      junit: gitleaks-report.json
+    when: always</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>5. Tratamento de Falsos Positivos</h3>
+                        
+                        <p>Use o arquivo <code>.gitleaksignore</code> para suprimir falsos positivos específicos.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.gitleaksignore</span>
+                                <button class="btn-copy" onclick="utils.copyCode('gitleaks-ignore')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="gitleaks-ignore"># Exemplos de hashes de commits ou arquivos a ignorar
+# Hash do commit
+abc123def456
+
+# Arquivo específico
+src/test/fixtures/fake-secrets.json
+
+# Padrão de arquivo
+**/test/fixtures/**</code></pre>
+                        </div>
+
+                        <div class="meta-card card-warning" style="margin-top: 30px;">
+                            <span class="meta-label" style="color: var(--accent-gold);">ATENÇÃO</span>
+                            <p style="margin: 0; font-size: 0.85rem; color: #fff;">Documente sempre a justificativa para ignorar um alerta no <code>.gitleaksignore</code>. Nunca ignore alertas sem validação de segurança.</p>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>6. Critérios de Severidade</h3>
+                        
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">TIPO DE SECRET</span>
+                                <span class="col-label">AÇÃO IMEDIATA</span>
+                                <span class="col-label" style="text-align: center;">WAIVER</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-critical); font-weight: 700;">API KEYS / TOKENS</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Revogar imediatamente e rotacionar.</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">PROIBIDO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-gold); font-weight: 700;">SENHAS / CREDENCIAIS</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Alterar senha e validar acessos.</span>
+                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RESTRITO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-success); font-weight: 700;">EXEMPLOS DE TESTE</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Validar que não são credenciais reais.</span>
+                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">PERMITIDO</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>7. Resposta a Incidentes</h3>
+                        
+                        <div class="meta-card card-critical">
+                            <span class="meta-label" style="color: var(--status-critical);">PROCEDIMENTO EM CASO DE DETECÇÃO</span>
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li><strong>Revogar</strong> a credencial imediatamente no serviço de origem.</li>
+                                <li><strong>Rotacionar</strong> gerando nova credencial e atualizando configurações.</li>
+                                <li><strong>Reescrever histórico</strong> do Git (se aplicável) com <code>git filter-branch</code> ou BFG.</li>
+                                <li><strong>Notificar</strong> a equipe de segurança via ticket/e-mail.</li>
+                                <li><strong>Auditar</strong> logs de acesso para verificar uso indevido.</li>
+                            </ol>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

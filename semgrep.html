@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semgrep - PadaONE Security</title>
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/flowcharts.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
+                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                    </button>
+                </div>
+            </div>
+
+            <nav>
+                <div class="nav-group">
+                    <div class="nav-title">Geral</div>
+                    <div class="nav-item" onclick="nav.switchTool('dashboard')">
+                        <i class="ph ph-squares-four"></i> Dashboard
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('logic')">
+                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                    </div>
+                </div>
+
+                <div class="nav-group">
+                    <div class="nav-title">Ferramentas</div>
+                    <div class="nav-item" onclick="nav.switchTool('trivy')">
+                        <i class="ph ph-package"></i> Trivy (SCA)
+                    </div>
+                    <div class="nav-item active" onclick="nav.switchTool('semgrep')">
+                        <i class="ph ph-code"></i> Semgrep (SAST)
+                    </div>
+                    <div class="nav-item" onclick="nav.switchTool('gitleaks')">
+                        <i class="ph ph-key"></i> Gitleaks (Secrets)
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <button id="btn-back" class="back-btn" onclick="nav.goBack()">
+                    <i class="ph ph-caret-left"></i>
+                </button>
+                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Semgrep (SAST)</span>
+            </header>
+
+            <div class="tool-layout">
+                <div class="scroll-area">
+                    <div class="badge-group">
+                        <span class="badge recommend">SAST</span>
+                        <span class="badge">SEMGREP</span>
+                        <span class="badge">MANUAL V1.0</span>
+                    </div>
+                    <h1>Semgrep - Análise Estática de Código</h1>
+                    <p>O Semgrep é uma ferramenta SAST (Static Application Security Testing) que identifica vulnerabilidades, bugs e padrões de código inseguro através de regras customizáveis. Suporta múltiplas linguagens e executa tanto localmente quanto no pipeline.</p>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>1. Visão Geral</h3>
+                        <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">TIPO</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">SAST (Static Analysis)</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGENS</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">30+ (JS, Python, Java, Go, etc.)</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline + IDE</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>2. Instalação e Configuração</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (PYTHON/PIP)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-install')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-install"># Via pip (recomendado)
+pip install semgrep
+
+# Verificar instalação
+semgrep --version
+
+# Atualizar para última versão
+pip install --upgrade semgrep</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (DOCKER)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Docker</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-docker')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-docker"># Pull da imagem oficial
+docker pull returntocorp/semgrep
+
+# Executar scan
+docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config=auto /src</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>3. Execução Local (Desenvolvimento)</h3>
+                        
+                        <div class="pro-tip">
+                            <div class="pro-tip-header"><i class="ph ph-code"></i> Boa Prática</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Execute o Semgrep <strong>antes de cada commit</strong> ou integre ao seu IDE para feedback instantâneo sobre vulnerabilidades no código.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">SCAN BÁSICO</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-basic')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-basic"># Scan com regras automáticas (recomendado)
+semgrep --config=auto .
+
+# Scan apenas vulnerabilidades de segurança
+semgrep --config=p/security-audit .
+
+# Scan específico para linguagem (ex: JavaScript)
+semgrep --config=p/javascript .
+
+# Scan com saída em JSON
+semgrep --config=auto --json --output=semgrep-report.json .</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">RULESETS RECOMENDADOS</h4>
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">RULESET</span>
+                                <span class="col-label">DESCRIÇÃO</span>
+                                <span class="col-label" style="text-align: center;">USO</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-critical); font-weight: 700;">p/security-audit</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Vulnerabilidades OWASP Top 10 e CWE.</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">OBRIGATÓRIO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-gold); font-weight: 700;">p/owasp-top-ten</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Focado nas 10 vulnerabilidades mais críticas.</span>
+                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RECOMENDADO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--primary-blue); font-weight: 700;">p/r2c-best-practices</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Boas práticas de código e padrões.</span>
+                                <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">OPCIONAL</div>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INTEGRAÇÃO COM GIT HOOKS</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.git/hooks/pre-commit</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-hook')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-hook">#!/bin/sh
+# Pre-commit hook para Semgrep
+
+echo "Running Semgrep SAST..."
+semgrep --config=p/security-audit --error --quiet
+
+if [ $? -ne 0 ]; then
+    echo "⚠️  Semgrep detectou vulnerabilidades! Commit bloqueado."
+    exit 1
+fi
+
+echo "✅ Semgrep: Nenhuma vulnerabilidade detectada."
+exit 0</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>4. Integração CI/CD (Pipeline)</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITHUB ACTIONS</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.github/workflows/semgrep.yml</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-github')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-github">name: Semgrep
+
+on: [push, pull_request]
+
+jobs:
+  semgrep:
+    name: SAST Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Semgrep
+        run: semgrep scan --config=auto --error --sarif --output=semgrep.sarif .
+      
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: semgrep.sarif
+        if: always()</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITLAB CI</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.gitlab-ci.yml</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-gitlab')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-gitlab">semgrep:
+  stage: security
+  image: returntocorp/semgrep
+  script:
+    - semgrep --config=auto --json --output=semgrep-report.json .
+  artifacts:
+    reports:
+      sast: semgrep-report.json
+    when: always
+  allow_failure: false</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>5. Regras Customizadas</h3>
+                        
+                        <p>Crie regras específicas para padrões de segurança do seu projeto no arquivo <code>.semgrep.yml</code>.</p>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.semgrep.yml</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-custom')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-custom">rules:
+  - id: hardcoded-secret
+    pattern: |
+      password = "..."
+    message: Senha hardcoded detectada no código
+    severity: ERROR
+    languages: [python, javascript]
+    
+  - id: sql-injection
+    pattern: |
+      execute("SELECT * FROM users WHERE id = " + $VAR)
+    message: Possível SQL Injection detectado
+    severity: ERROR
+    languages: [python, java]
+    
+  - id: eval-usage
+    pattern: eval(...)
+    message: Uso de eval() é inseguro
+    severity: WARNING
+    languages: [javascript, python]</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>6. Tratamento de Resultados</h3>
+                        
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">SUPRESSÃO DE FALSOS POSITIVOS</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Código com Comentário</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-suppress')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-suppress">// JavaScript/TypeScript
+eval(userInput); // nosemgrep: eval-usage
+
+# Python
+password = "default123"  # nosemgrep: hardcoded-secret
+
+/* Múltiplas linhas */
+// nosemgrep
+const query = "SELECT * FROM " + table;
+// nosemgrep-end</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ARQUIVO .semgrepignore</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>.semgrepignore</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-ignore')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-ignore"># Ignorar diretórios
+node_modules/
+dist/
+build/
+.venv/
+
+# Ignorar arquivos de teste
+**/test/**
+**/*.test.js
+**/*.spec.ts
+
+# Arquivos gerados
+**/*.min.js
+**/*.bundle.js</code></pre>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>7. Categorização de Vulnerabilidades</h3>
+                        
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">SEVERIDADE</span>
+                                <span class="col-label">AÇÃO IMEDIATA</span>
+                                <span class="col-label" style="text-align: center;">PRAZO</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--status-critical); font-weight: 700;">ERROR (Crítico)</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Correção obrigatória antes do merge.</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">IMEDIATO</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-gold); font-weight: 700;">WARNING (Alto)</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Revisar e corrigir dentro do sprint.</span>
+                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">7 DIAS</div>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--primary-blue); font-weight: 700;">INFO (Baixo)</span>
+                                <span style="font-size: 0.9rem; color: #fff;">Correção recomendada, não bloqueante.</span>
+                                <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">30 DIAS</div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>8. Integração com IDE</h3>
+                        
+                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">VS CODE</span>
+                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Extensão oficial: <strong>Semgrep</strong></p>
+                                <div class="code-block" style="margin: 0;">
+                                    <pre style="padding: 15px;"><code>ext install semgrep.semgrep</code></pre>
+                                </div>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--accent-cyan);">INTELLIJ / PYCHARM</span>
+                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Plugin disponível no Marketplace</p>
+                                <div class="code-block" style="margin: 0;">
+                                    <pre style="padding: 15px;"><code>Settings > Plugins > Semgrep</code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pro-tip" style="margin-top: 30px;">
+                            <div class="pro-tip-header"><i class="ph ph-lightbulb"></i> Feedback em Tempo Real</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Com a extensão do IDE, o Semgrep sublinha vulnerabilidades enquanto você codifica, permitindo correção imediata.</p>
+                        </div>
+                    </section>
+
+                    <section style="margin-bottom: 50px;">
+                        <h3>9. Boas Práticas de Uso</h3>
+                        
+                        <div class="meta-card card-critical">
+                            <span class="meta-label" style="color: var(--status-success);">CHECKLIST DE IMPLEMENTAÇÃO</span>
+                            <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li><strong>Local:</strong> Integrar pre-commit hook para bloquear commits vulneráveis.</li>
+                                <li><strong>IDE:</strong> Instalar extensão para feedback instantâneo.</li>
+                                <li><strong>Pipeline:</strong> Executar no CI/CD com <code>--error</code> para bloquear builds.</li>
+                                <li><strong>Regras:</strong> Começar com <code>p/security-audit</code> e adicionar custom rules.</li>
+                                <li><strong>Baseline:</strong> Documentar falsos positivos no <code>.semgrepignore</code> ou com comentários.</li>
+                                <li><strong>Monitoramento:</strong> Revisar relatórios semanalmente para novas vulnerabilidades.</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/navigation.js"></script>
+</body>
+</html>

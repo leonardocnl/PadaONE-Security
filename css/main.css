@@ -50,13 +50,13 @@ body {
     color: var(--text-muted);
     width: 32px;
     height: 32px;
-    display: none; /* JS ativa */
+    display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 15px;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.2s;
+    transition: all 0.3s ease-in-out;
     border-radius: 0px; /* Sharp */
 }
 
@@ -216,7 +216,7 @@ body {
     font-size: 0.8rem;
     padding-left: 20px;
     display: block;
-    transition: all 0.2s;
+    transition: all 0.3s ease-in-out;
     border-left: 2px solid transparent;
     margin-left: -1px;
     cursor: pointer; /* Links são clicáveis */
@@ -356,7 +356,7 @@ p {
 /* Apenas Cards Clicáveis (Ex: Dashboard) */
 .clickable {
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease-in-out;
 }
 
 .clickable:hover {
@@ -505,5 +505,5 @@ label {
 
 /* Utility Classes */
 .hidden { display: none !important; }
-.btn-copy { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.2s; }
+.btn-copy { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.3s ease-in-out; }
 .btn-copy:hover { color: #fff; }
