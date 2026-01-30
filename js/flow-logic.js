@@ -3,15 +3,32 @@ const flowLogic = {
 
     start: (tool) => {
         flowLogic.currentTool = tool;
-        flowLogic.renderStep('start');
+        // Aguarda para garantir que o container está no DOM
+        setTimeout(() => {
+            flowLogic.renderStep('start');
+        }, 50);
     },
 
     renderStep: (stepId) => {
         const containerId = `flowchart-${flowLogic.currentTool}`;
         const container = document.getElementById(containerId);
-        const stepData = flowSteps[flowLogic.currentTool][stepId];
+        
+        // Verificação de segurança
+        if (!container) {
+            console.warn(`Container não encontrado: ${containerId}. Tentando novamente...`);
+            // Tenta novamente depois de um delay
+            setTimeout(() => {
+                flowLogic.renderStep(stepId);
+            }, 100);
+            return;
+        }
 
-        if (!stepData) return;
+        const stepData = flowSteps[flowLogic.currentTool] && flowSteps[flowLogic.currentTool][stepId];
+
+        if (!stepData) {
+            console.warn(`Passo não encontrado: ${flowLogic.currentTool}.${stepId}`);
+            return;
+        }
 
         let html = `
             <div class="flow-step ${stepData.status || ''}">
@@ -24,8 +41,8 @@ const flowLogic = {
             stepData.options.forEach(opt => {
                 html += `<button class="btn-option ${opt.primary ? 'primary' : ''}" onclick="flowLogic.renderStep('${opt.next}')">${opt.label}</button>`;
             });
-        } else if (stepData.action) {
-             html += `<button class="btn-start" onclick="flowLogic.start('${flowLogic.currentTool}')">Reiniciar</button>`;
+        } else {
+            html += `<button class="btn-start" onclick="flowLogic.start('${flowLogic.currentTool}')">Reiniciar</button>`;
         }
 
         html += `</div></div>`;

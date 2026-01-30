@@ -54,25 +54,28 @@
                         const doc = parser.parseFromString(html, 'text/html');
                         appRoot.innerHTML = doc.body.innerHTML;
                         
-                        // Reexecuta scripts carregados
-                        const scripts = doc.body.querySelectorAll('script');
-                        scripts.forEach(script => {
-                            const newScript = document.createElement('script');
-                            if (script.src) {
-                                newScript.src = script.src;
-                            } else {
-                                newScript.textContent = script.textContent;
-                            }
-                            document.body.appendChild(newScript);
-                        });
+                        // Aguarda o DOM ser renderizado
+                        setTimeout(() => {
+                            // Reexecuta scripts carregados
+                            const scripts = doc.body.querySelectorAll('script');
+                            scripts.forEach(script => {
+                                const newScript = document.createElement('script');
+                                if (script.src) {
+                                    newScript.src = script.src;
+                                } else {
+                                    newScript.textContent = script.textContent;
+                                }
+                                document.body.appendChild(newScript);
+                            });
 
-                        // Inicializar âncoras internas após carregar
-                        if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
-                            utils.initAnchorLinks();
-                        }
-                        
-                        // Fade in
-                        appRoot.classList.remove('fade-out');
+                            // Inicializar âncoras internas após carregar
+                            if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
+                                utils.initAnchorLinks();
+                            }
+                            
+                            // Fade in
+                            appRoot.classList.remove('fade-out');
+                        }, 300);
                     })
                     .catch(error => {
                         console.error('Erro ao carregar página:', error);

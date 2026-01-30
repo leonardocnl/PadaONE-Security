@@ -54,17 +54,31 @@ const nav = {
                 }
             });
 
-            // Iniciar fluxogramas se necessário
-            if (toolId === 'semgrep' && typeof flowLogic !== 'undefined') {
-                flowLogic.start('sast');
-            }
-            if (toolId === 'gitleaks' && typeof flowLogic !== 'undefined') {
-                flowLogic.start('secrets');
-            }
-            if (toolId === 'logic' && typeof flowLogic !== 'undefined') {
-                flowLogic.start('sca');
-            }
-        }, 100);
+            // Iniciar fluxogramas se necessário - aguarda scripts serem carregados
+            setTimeout(() => {
+                if (toolId === 'semgrep' && typeof flowLogic !== 'undefined') {
+                    try {
+                        flowLogic.start('sast');
+                    } catch (e) {
+                        console.error('Erro ao iniciar fluxograma SAST:', e);
+                    }
+                }
+                if (toolId === 'gitleaks' && typeof flowLogic !== 'undefined') {
+                    try {
+                        flowLogic.start('secrets');
+                    } catch (e) {
+                        console.error('Erro ao iniciar fluxograma Secrets:', e);
+                    }
+                }
+                if (toolId === 'logic' && typeof flowLogic !== 'undefined') {
+                    try {
+                        flowLogic.start('sca');
+                    } catch (e) {
+                        console.error('Erro ao iniciar fluxograma SCA:', e);
+                    }
+                }
+            }, 400);
+        }, 150);
     },
 
     goBack: () => {
