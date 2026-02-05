@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <div class="app-container">
@@ -52,11 +53,16 @@
 
         <main class="main-content">
             <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
+                    <i class="ph ph-list"></i>
+                </button>
                 <button id="btn-back" class="back-btn" onclick="nav.goBack()">
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Semgrep (SAST)</span>
             </header>
+
+            <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
 
             <div class="tool-layout">
                 <div class="scroll-area">
@@ -395,6 +401,44 @@ build/
         </main>
     </div>
 
+    <script>
+        // Função para toggle do sidebar em mobile
+        function toggleMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Função para fechar o sidebar
+        function closeMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Fechar sidebar ao clicar em um item de navegação
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', closeMobileSidebar);
+            });
+        });
+
+        // Fechar sidebar ao redimensionar para desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileSidebar();
+            }
+        });
+    </script>
     <script src="js/utils.js"></script>
     <script src="js/navigation.js"></script>
 </body>

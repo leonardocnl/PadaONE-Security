@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
     <div class="app-container">
@@ -52,8 +53,13 @@
 
         <main class="main-content">
             <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
+                    <i class="ph ph-list"></i>
+                </button>
                 <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Dashboard</span>
             </header>
+
+            <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
 
             <div class="tool-layout">
                 <div class="scroll-area">
@@ -96,33 +102,33 @@
                         <i class="ph ph-shield-check" style="margin-right: 10px; color: var(--primary-blue);"></i>Ferramentas Principais
                     </h3>
                     <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr); margin: 0 0 40px 0;">
-                        <div class="meta-card clickable" onclick="nav.switchTool('trivy')">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue);"></i>
-                                <span class="meta-label" style="color: var(--primary-blue); margin: 0;">TRIVY (SCA)</span>
+                        <div class="meta-card clickable" onclick="nav.switchTool('trivy')" style="border-left: 3px solid var(--primary-blue);">
+                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                                <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue); flex-shrink: 0;"></i>
+                                <span class="meta-label" style="color: var(--primary-blue); margin: 0;">TRIVY<br>(SCA)</span>
                             </div>
-                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Software Composition Analysis e scan de vulnerabilidades</p>
-                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 1px;">
+                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1;">Software Composition Analysis e scan de vulnerabilidades</p>
+                            <div style="font-size: 0.75rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
                                 Ver Documentação →
                             </div>
                         </div>
-                        <div class="meta-card clickable" onclick="nav.switchTool('semgrep')">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan);"></i>
-                                <span class="meta-label" style="color: var(--accent-cyan); margin: 0;">SEMGREP (SAST)</span>
+                        <div class="meta-card clickable" onclick="nav.switchTool('semgrep')" style="border-left: 3px solid var(--accent-cyan);">
+                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                                <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan); flex-shrink: 0;"></i>
+                                <span class="meta-label" style="color: var(--accent-cyan); margin: 0;">SEMGREP<br>(SAST)</span>
                             </div>
-                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Análise estática de código e detecção de padrões inseguros</p>
-                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px;">
+                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1;">Análise estática de código e detecção de padrões inseguros</p>
+                            <div style="font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
                                 Ver Documentação →
                             </div>
                         </div>
-                        <div class="meta-card clickable" onclick="nav.switchTool('gitleaks')">
-                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-                                <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold);"></i>
-                                <span class="meta-label" style="color: var(--accent-gold); margin: 0;">GITLEAKS (SECRETS)</span>
+                        <div class="meta-card clickable" onclick="nav.switchTool('gitleaks')" style="border-left: 3px solid var(--accent-gold);">
+                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                                <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold); flex-shrink: 0;"></i>
+                                <span class="meta-label" style="color: var(--accent-gold); margin: 0;">GITLEAKS<br>(SECRETS)</span>
                             </div>
-                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">Detecção de credenciais e secrets comprometidos no código</p>
-                            <div style="margin-top: 12px; font-size: 0.75rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px;">
+                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; flex: 1;">Detecção de credenciais e secrets comprometidos no código</p>
+                            <div style="font-size: 0.75rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
                                 Ver Documentação →
                             </div>
                         </div>
@@ -132,28 +138,28 @@
                         <h3 style="margin-bottom: 30px; color: var(--text-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
                             <i class="ph ph-list-numbers" style="margin-right: 10px; color: var(--primary-blue);"></i>Fases do Pipeline
                         </h3>
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                            <div style="background: rgba(132, 94, 247, 0.05); border-left: 3px solid #845EF7; padding: 20px;">
-                                <div style="font-weight: 700; color: #845EF7; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
-                                    Fase 1: Estação de Trabalho
+                        <div class="phases-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div style="background: rgba(132, 94, 247, 0.05); border-left: 4px solid #845EF7; padding: 24px; display: flex; flex-direction: column;">
+                                <div style="font-weight: 700; color: #845EF7; margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
+                                    Fase 1:<br>Estação de Trabalho
                                 </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
                                     Configuração do ambiente, análise de bibliotecas e execução de ferramentas de segurança locais antes do commit.
                                 </p>
                             </div>
-                            <div style="background: rgba(239, 68, 68, 0.05); border-left: 3px solid #EF4444; padding: 20px;">
-                                <div style="font-weight: 700; color: #EF4444; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
-                                    Fase 2: Pipeline CI/CD
+                            <div style="background: rgba(239, 68, 68, 0.05); border-left: 4px solid #EF4444; padding: 24px; display: flex; flex-direction: column;">
+                                <div style="font-weight: 700; color: #EF4444; margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
+                                    Fase 2:<br>Pipeline CI/CD
                                 </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
                                     Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no pipeline de integração.
                                 </p>
                             </div>
-                            <div style="background: rgba(64, 192, 87, 0.05); border-left: 3px solid #40C057; padding: 20px;">
-                                <div style="font-weight: 700; color: #40C057; margin-bottom: 10px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">
-                                    Fase 3: Auditoria Manual
+                            <div style="background: rgba(64, 192, 87, 0.05); border-left: 4px solid #40C057; padding: 24px; display: flex; flex-direction: column;">
+                                <div style="font-weight: 700; color: #40C057; margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
+                                    Fase 3:<br>Auditoria Manual
                                 </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
                                     Triagem de escopo, pentest com Burp Suite, coleta de evidências e geração de relatório final com sign-off.
                                 </p>
                             </div>
@@ -164,6 +170,45 @@
 
         </main>
     </div>
+
+    <script>
+        // Função para toggle do sidebar em mobile
+        function toggleMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        // Função para fechar o sidebar
+        function closeMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Fechar sidebar ao clicar em um item de navegação
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', closeMobileSidebar);
+            });
+        });
+
+        // Fechar sidebar ao redimensionar para desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileSidebar();
+            }
+        });
+    </script>
 
     <script src="js/utils.js"></script>
     <script src="js/navigation.js"></script>

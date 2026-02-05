@@ -22,6 +22,12 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- Scripts globais que precisam estar sempre disponíveis -->
+    <script src="js/navigation.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/mobile-menu.js"></script>
 </head>
 <body>
     <div id="app-root"></div>
@@ -56,16 +62,15 @@
                         
                         // Aguarda o DOM ser renderizado
                         setTimeout(() => {
-                            // Reexecuta scripts carregados
+                            // Reexecuta apenas scripts inline (não os que vêm de src)
                             const scripts = doc.body.querySelectorAll('script');
                             scripts.forEach(script => {
-                                const newScript = document.createElement('script');
-                                if (script.src) {
-                                    newScript.src = script.src;
-                                } else {
+                                // Pula scripts que vêm de arquivo externo
+                                if (!script.src) {
+                                    const newScript = document.createElement('script');
                                     newScript.textContent = script.textContent;
+                                    document.body.appendChild(newScript);
                                 }
-                                document.body.appendChild(newScript);
                             });
 
                             // Inicializar âncoras internas após carregar
