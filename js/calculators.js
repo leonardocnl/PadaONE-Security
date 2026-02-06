@@ -1,5 +1,5 @@
 const calculators = {
-    calculateEffort: () => {
+    calculateEffortHours: () => {
         const tA = parseFloat(document.getElementById('time-analysis').value) || 0;
         const tI = parseFloat(document.getElementById('time-implementation').value) || 0;
         const tV = parseFloat(document.getElementById('time-validation').value) || 0;

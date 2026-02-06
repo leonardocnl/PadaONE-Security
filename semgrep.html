@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Semgrep - PadaONE Security</title>
-    
+    <title>Semgrep - PADAONE Security</title>    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/WhiteOL.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png">    
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <link rel="stylesheet" href="css/variables.css">
@@ -20,7 +21,7 @@
             <div class="sidebar-header">
                 <div class="logo-area">
                     <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
-                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                        <img src="assets/images/PADAONE-Security Dark.png" alt="PADAONE Security" style="height: 80px; width: 100%; object-fit: contain;">
                     </button>
                 </div>
             </div>
@@ -357,7 +358,7 @@ build/
                     <section style="margin-bottom: 50px;">
                         <h3>8. Integração com IDE</h3>
                         
-                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px;">
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">VS CODE</span>
                                 <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Extensão oficial: <strong>Semgrep</strong></p>
@@ -402,7 +403,6 @@ build/
     </div>
 
     <script>
-        // Função para toggle do sidebar em mobile
         function toggleMobileSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -413,7 +413,6 @@ build/
             overlay.classList.toggle('active');
         }
 
-        // Função para fechar o sidebar
         function closeMobileSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.getElementById('sidebarOverlay');
@@ -424,7 +423,6 @@ build/
             overlay.classList.remove('active');
         }
 
-        // Fechar sidebar ao clicar em um item de navegação
         document.addEventListener('DOMContentLoaded', function() {
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
@@ -432,14 +430,11 @@ build/
             });
         });
 
-        // Fechar sidebar ao redimensionar para desktop
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) {
                 closeMobileSidebar();
             }
         });
     </script>
-    <script src="js/utils.js"></script>
-    <script src="js/navigation.js"></script>
 </body>
 </html>

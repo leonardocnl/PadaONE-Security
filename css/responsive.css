@@ -1,12 +1,4 @@
-/* ============================================================
-   RESPONSIVE DESIGN - MOBILE FIRST APPROACH
-   ============================================================ */
-
-/* ============================================================
-   MOBILE (320px - 768px)
-   ============================================================ */
 @media (max-width: 768px) {
-    /* Variaveis atualizadas para mobile */
     :root {
         --sidebar-width: 0px;
         --toc-width: 0px;
@@ -17,7 +9,6 @@
         touch-action: pan-y;
     }
 
-    /* Layout Principal */
     body {
         height: 100vh;
         overflow: hidden;
@@ -28,7 +19,6 @@
         height: 100vh;
     }
 
-    /* Sidebar */
     .sidebar {
         position: fixed;
         left: 0;
@@ -57,7 +47,6 @@
         height: 60px;
     }
 
-    /* Top Bar */
     .top-bar {
         height: 56px;
         padding: 0 12px;
@@ -73,7 +62,6 @@
         pointer-events: auto;
     }
 
-    /* Menu Hamburger */
     .menu-toggle {
         width: 40px;
         height: 40px;
@@ -95,7 +83,6 @@
         color: #fff;
     }
 
-    /* Back Button em Mobile */
     .back-btn {
         flex-shrink: 0;
     }
@@ -109,7 +96,6 @@
         white-space: nowrap;
     }
 
-    /* Main Content */
     .main-content {
         height: 100vh;
         margin-top: 56px;
@@ -123,7 +109,6 @@
         overflow: hidden;
     }
 
-    /* Scroll Area */
     .scroll-area {
         padding: 24px 16px 100px 16px;
         flex: 1;
@@ -132,17 +117,14 @@
         -webkit-overflow-scrolling: touch;
     }
 
-    /* Garantir que elementos clicáveis funcionem durante scroll */
     .scroll-area * {
         pointer-events: auto;
     }
 
-    /* TOC - Ocultar em Mobile */
     .right-toc {
         display: none;
     }
 
-    /* Tipografia */
     h1 {
         font-size: 1.5rem;
         margin-bottom: 16px;
@@ -163,7 +145,6 @@
         margin-bottom: 16px;
     }
 
-    /* Badges */
     .badge-group {
         flex-wrap: wrap;
         margin-bottom: 20px;
@@ -174,7 +155,6 @@
         padding: 4px 8px;
     }
 
-    /* Meta Grid */
     .meta-grid {
         grid-template-columns: 1fr !important;
         gap: 12px;
@@ -182,7 +162,6 @@
         padding-bottom: 20px;
     }
 
-    /* Cards */
     .meta-card {
         padding: 16px;
         display: flex;
@@ -195,23 +174,19 @@
         transform: scale(0.98);
     }
 
-    /* Icones em cards */
     .meta-card i {
         flex-shrink: 0;
     }
 
-    /* Descrição do card */
     .meta-card p {
         flex: 1;
     }
 
-    /* Link "Ver Documentação" */
     .meta-card > div:last-child {
         align-self: flex-start;
         margin-top: auto;
     }
 
-    /* Fases do Pipeline */
     .phases-grid {
         grid-template-columns: 1fr !important;
     }
@@ -226,7 +201,6 @@
         font-size: 0.8rem !important;
     }
 
-    /* Diagrama */
     .diagram-container {
         padding: 20px;
         margin: 20px 0;
@@ -238,7 +212,6 @@
         height: auto;
     }
 
-    /* Flowchart */
     .flowchart-container {
         padding: 30px;
         min-height: 300px;
@@ -276,7 +249,6 @@
         font-size: 0.85rem;
     }
 
-    /* CVSS Table */
     .cvss-table {
         border: none;
     }
@@ -288,14 +260,13 @@
         border-bottom: 1px solid var(--border-subtle);
     }
 
-    /* Forms */
     .form-grid {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
     input, select {
-        font-size: 16px; /* Evita zoom em input no iOS */
+        font-size: 16px;
         padding: 12px;
     }
 
@@ -304,13 +275,11 @@
         font-size: 0.8rem;
     }
 
-    /* Back Button */
     .back-btn {
         width: 40px;
         height: 40px;
     }
 
-    /* Code Blocks */
     .code-block {
         margin: 16px 0;
     }
@@ -321,7 +290,6 @@
         overflow-x: auto;
     }
 
-    /* Pro Tip */
     .pro-tip {
         padding: 16px;
         margin: 20px 0;
@@ -332,9 +300,6 @@
     }
 }
 
-/* ============================================================
-   TABLET (768px - 1024px)
-   ============================================================ */
 @media (min-width: 769px) and (max-width: 1024px) {
     :root {
         --sidebar-width: 200px;
@@ -352,7 +317,6 @@
         transform: none;
     }
 
-    /* Ocultar TOC em tablet */
     .right-toc {
         display: none;
     }
@@ -369,19 +333,16 @@
         margin-left: 0;
     }
 
-    /* Meta Grid - 2 colunas */
     .meta-grid {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px;
     }
 
-    /* Cards em tablet */
     .meta-card {
         padding: 20px;
         min-height: 160px;
     }
 
-    /* Fases em tablet */
     .phases-grid {
         grid-template-columns: repeat(2, 1fr) !important;
     }
@@ -391,12 +352,10 @@
         min-height: 140px;
     }
 
-    /* Scroll Area */
     .scroll-area {
         padding: 40px 30px;
     }
 
-    /* Tipografia */
     h1 {
         font-size: 1.8rem;
     }
@@ -405,20 +364,15 @@
         font-size: 1.2rem;
     }
 
-    /* Diagrama */
     .diagram-container {
         padding: 30px;
     }
 
-    /* Forms */
     .form-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* ============================================================
-   DESKTOP (1025px+)
-   ============================================================ */
 @media (min-width: 1025px) {
     :root {
         --sidebar-width: 260px;
@@ -426,18 +380,15 @@
         --header-height: 64px;
     }
 
-    /* Meta Grid - 4 colunas */
     .meta-grid {
         grid-template-columns: repeat(4, 1fr) !important;
     }
 
-    /* Cards em desktop */
     .meta-card {
         padding: 24px;
         min-height: 180px;
     }
 
-    /* Fases em desktop - volta para 3 colunas */
     .phases-grid {
         grid-template-columns: repeat(3, 1fr) !important;
     }
@@ -461,11 +412,6 @@
     }
 }
 
-/* ============================================================
-   UTILIDADES RESPONSIVAS
-   ============================================================ */
-
-/* Overlay para o menu mobile */
 .sidebar-overlay {
     display: none;
     position: fixed;
@@ -491,14 +437,12 @@
     }
 }
 
-/* Ajustes de imagens responsivas */
 .manual-img, .diagram-svg {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* Esconder elementos em mobile se necessário */
 .hide-mobile {
     display: none;
 }
@@ -509,7 +453,6 @@
     }
 }
 
-/* Mostrar elementos apenas em mobile */
 .show-mobile {
     display: block;
 }
@@ -520,7 +463,6 @@
     }
 }
 
-/* Melhorar áreas clicáveis em mobile (mínimo 44x44px) */
 @media (max-width: 768px) {
     button, .nav-item, .clickable {
         min-height: 44px;
@@ -530,7 +472,6 @@
     }
 }
 
-/* Melhorar espaço entre elementos em mobile */
 @media (max-width: 768px) {
     .nav-item {
         padding: 14px 16px;
@@ -541,7 +482,6 @@
     }
 }
 
-/* Ajustes de viewport para melhor experiência */
 @supports (padding: max(0px)) {
     .app-container {
         padding-left: max(0px, env(safe-area-inset-left));

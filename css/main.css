@@ -2,7 +2,16 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Scrollbar Invisível mas Funcional */
+:target {
+    background-color: transparent !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+:target * {
+    background-color: transparent !important;
+}
+
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -23,7 +32,6 @@ body {
     height: 100%;
 }
 
-/* Área Central */
 .main-content {
     flex: 1;
     display: flex;
@@ -32,7 +40,6 @@ body {
     position: relative;
 }
 
-/* Top Bar */
 .top-bar {
     height: var(--header-height);
     display: flex;
@@ -43,7 +50,6 @@ body {
     z-index: 10;
 }
 
-/* BOTÃO DE VOLTAR */
 .back-btn {
     background: transparent;
     border: 1px solid var(--border-subtle);
@@ -73,7 +79,6 @@ body {
     letter-spacing: 1px;
 }
 
-/* Layout Interno */
 .tool-layout {
     display: flex;
     height: calc(100vh - var(--header-height));
@@ -81,7 +86,6 @@ body {
     position: relative;
 }
 
-/* Container do Diagrama SVG - Dashboard */
 .diagram-container {
     background: var(--bg-panel);
     border: 1px solid var(--border-subtle);
@@ -112,7 +116,6 @@ body {
     display: block;
 }
 
-/* Animação para o diagrama SVG */
 @keyframes fadeInDiagram {
     from {
         opacity: 0;
@@ -137,7 +140,6 @@ body {
     cursor: grabbing;
 }
 
-/* Scrollbar personalizado */
 .diagram-container::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -149,7 +151,6 @@ body {
 
 .diagram-container::-webkit-scrollbar-thumb {
     background: var(--primary-blue);
-    border-radius: 4px;
 }
 
 .diagram-container::-webkit-scrollbar-thumb:hover {
@@ -159,31 +160,51 @@ body {
 .scroll-area {
     flex: 1;
     overflow-y: auto;
-    padding: 60px 80px;
-    padding-bottom: 150px;
+    padding: 20px;
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--primary-blue) transparent;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
-.scroll-area::-webkit-scrollbar {
-    width: 8px;
+.scroll-area section {
+    padding-left: 0;
+    padding-right: 0;
+    scroll-margin-top: 80px;
 }
 
-.scroll-area::-webkit-scrollbar-track {
+section:target,
+section:target *,
+div:target,
+div:target *,
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+    outline: none !important;
+    background-color: transparent !important;
+    animation: none !important;
+}
+
+section::selection,
+div::selection {
     background: transparent;
 }
 
-.scroll-area::-webkit-scrollbar-thumb {
-    background: var(--primary-blue);
-    border-radius: 4px;
+*:focus {
+    outline: none;
 }
 
-.scroll-area::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-cyan);
+*::selection {
+    background: rgba(99, 102, 241, 0.3);
+    color: inherit;
 }
 
-/* Menu Direito (TOC) */
+.scroll-area::-webkit-scrollbar {
+    display: none;
+}
+
 .right-toc {
     width: var(--toc-width);
     border-left: 1px solid var(--border-subtle);
@@ -219,7 +240,7 @@ body {
     transition: all 0.3s ease-in-out;
     border-left: 2px solid transparent;
     margin-left: -1px;
-    cursor: pointer; /* Links são clicáveis */
+    cursor: pointer;
 }
 
 .toc-item a:hover, .toc-item a.active {
@@ -227,7 +248,6 @@ body {
     border-left-color: var(--accent-cyan);
 }
 
-/* TIPOGRAFIA */
 h1 { 
     font-size: 2.2rem; 
     font-weight: 700; 
@@ -262,10 +282,8 @@ p {
     margin-bottom: 20px; 
     font-size: 1rem; 
     line-height: 1.7;
-    max-width: 800px; 
 }
 
-/* Badges e Tags */
 .badge-group { 
     display: flex; 
     gap: 10px; 
@@ -291,7 +309,6 @@ p {
     border-color: var(--status-success);
 }
 
-/* Tabela CVSS */
 .cvss-table {
     display: flex;
     flex-direction: column;
@@ -301,10 +318,10 @@ p {
 
 .cvss-row {
     display: grid;
-    grid-template-columns: 120px 1fr 160px;
-    gap: 20px;
-    padding: 20px;
-    align-items: center;
+    grid-template-columns: 160px 400px 1fr;
+    gap: 40px;
+    padding: 20px 25px;
+    align-items: start;
     border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -330,30 +347,26 @@ p {
     font-size: 0.8rem;
     text-transform: uppercase;
     background: rgba(0, 0, 0, 0.2);
-    cursor: default; /* Não clicável */
+    cursor: default;
 }
 
 .col-label { font-family: var(--font-code); }
 
-/* Meta Grid e Cards */
 .meta-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin: 30px 0;
     padding-bottom: 30px;
     border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Card Padrão (ESTÁTICO - SEM HOVER) */
 .meta-card {
     background: var(--bg-panel);
     border: 1px solid var(--border-subtle);
-    padding: 24px;
     border-radius: 0px;
 }
 
-/* Apenas Cards Clicáveis (Ex: Dashboard) */
 .clickable {
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -364,7 +377,6 @@ p {
     background-color: var(--bg-hover);
 }
 
-/* Alertas Estáticos (SEM HOVER) */
 .card-critical {
     border: 1px solid var(--status-critical);
     background: rgba(239, 68, 68, 0.03);
@@ -385,7 +397,6 @@ p {
 }
 .meta-value { font-size: 0.9rem; color: #fff; font-weight: 500; }
 
-/* Dica Pro */
 .pro-tip {
     background: linear-gradient(90deg, rgba(245, 158, 11, 0.03) 0%, transparent 100%);
     border: 1px solid rgba(245, 158, 11, 0.3);
@@ -405,7 +416,6 @@ p {
     letter-spacing: 0.5px;
 }
 
-/* Code Blocks */
 .code-block {
     background: var(--bg-code);
     border: 1px solid var(--border-subtle);
@@ -433,7 +443,6 @@ pre {
     line-height: 1.6;
 }
 
-/* Inputs e Botões */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -494,16 +503,37 @@ label {
 .result-box.allowed { border-color: var(--status-success); color: var(--status-success); background: rgba(16, 185, 129, 0.05); }
 .result-box.blocked { border-color: var(--status-critical); color: var(--status-critical); background: rgba(239, 68, 68, 0.05); }
 
-/* ESTILO PARA IMAGENS DO MANUAL (Centralizado) */
 .manual-img {
     max-width: 100%;
     border: 1px solid var(--border-subtle);
-    margin: 25px auto; /* Centraliza a imagem */
-    display: block;    /* Garante que o margin auto funcione */
+    margin: 25px auto;
+    display: block;
     opacity: 0.9;
 }
 
-/* Utility Classes */
 .hidden { display: none !important; }
 .btn-copy { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.3s ease-in-out; }
 .btn-copy:hover { color: #fff; }
+
+.app-footer {
+    margin-top: 80px;
+    padding: 24px 20px 0 20px;
+    text-align: right;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+}
+
+.app-footer p {
+    margin: 0;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.app-footer:hover p {
+    opacity: 0.8;
+}

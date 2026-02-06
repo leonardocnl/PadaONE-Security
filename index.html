@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PadaONE Security</title>
-    
+    <title>PADAONE Security</title>    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/WhiteOL.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png">    
     <style>
         #app-root {
             transition: filter 0.2s ease-in-out;
@@ -21,10 +22,8 @@
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/flowcharts.css">
     <link rel="stylesheet" href="css/responsive.css">
 
-    <!-- Scripts globais que precisam estar sempre disponíveis -->
     <script src="js/navigation.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/mobile-menu.js"></script>
@@ -33,7 +32,6 @@
     <div id="app-root"></div>
 
     <script>
-        // Mapa de páginas disponíveis
         const pages = {
             'dashboard': 'dashboard.html',
             'logic': 'bibliotecas.html',
@@ -42,44 +40,54 @@
             'gitleaks': 'gitleaks.html'
         };
 
-        // Função para carregar página dinamicamente
         function loadPage(pageName) {
             const filePath = pages[pageName] || 'dashboard.html';
             const appRoot = document.getElementById('app-root');
             
-            // Fade out
             appRoot.classList.add('fade-out');
             
-            // Espera o fade out completar antes de trocar conteúdo
             setTimeout(() => {
                 fetch(filePath)
                     .then(response => response.text())
                     .then(html => {
-                        // Extrai apenas o conteúdo do body
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(html, 'text/html');
                         appRoot.innerHTML = doc.body.innerHTML;
                         
-                        // Aguarda o DOM ser renderizado
                         setTimeout(() => {
-                            // Reexecuta apenas scripts inline (não os que vêm de src)
                             const scripts = doc.body.querySelectorAll('script');
-                            scripts.forEach(script => {
-                                // Pula scripts que vêm de arquivo externo
-                                if (!script.src) {
-                                    const newScript = document.createElement('script');
-                                    newScript.textContent = script.textContent;
-                                    document.body.appendChild(newScript);
-                                }
-                            });
-
-                            // Inicializar âncoras internas após carregar
-                            if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
-                                utils.initAnchorLinks();
-                            }
+                            let loadedCount = 0;
+                            const totalScripts = scripts.length;
                             
-                            // Fade in
-                            appRoot.classList.remove('fade-out');
+                            const finishLoading = () => {
+                                loadedCount++;
+                                if (loadedCount === totalScripts) {
+                                    if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
+                                        utils.initAnchorLinks();
+                                    }
+                                    
+                                    appRoot.classList.remove('fade-out');
+                                }
+                            };
+                            
+                            if (totalScripts === 0) {
+                                appRoot.classList.remove('fade-out');
+                            } else {
+                                scripts.forEach(script => {
+                                    const newScript = document.createElement('script');
+                                    
+                                    if (script.src) {
+                                        newScript.src = script.src;
+                                        newScript.onload = finishLoading;
+                                        newScript.onerror = finishLoading;
+                                    } else {
+                                        newScript.textContent = script.textContent;
+                                        setTimeout(finishLoading, 0);
+                                    }
+                                    
+                                    document.body.appendChild(newScript);
+                                });
+                            }
                         }, 300);
                     })
                     .catch(error => {
@@ -90,12 +98,10 @@
             }, 200);
         }
 
-        // Carrega a página inicial
         window.addEventListener('load', () => {
             loadPage('dashboard');
         });
 
-        // Monitora mudanças de hash para navegação
         window.addEventListener('hashchange', () => {
             const page = window.location.hash.slice(1) || 'dashboard';
             loadPage(page);
