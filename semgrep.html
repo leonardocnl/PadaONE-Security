@@ -63,330 +63,521 @@
                     <div class="badge-group">
                         <span class="badge recommend">SAST</span>
                         <span class="badge">SEMGREP</span>
-                        <span class="badge">MANUAL V1.0</span>
+                        <span class="badge">PROJETO IMA</span>
                     </div>
-                    <h1>Semgrep - Análise Estática de Código</h1>
-                    <p>O Semgrep é uma ferramenta SAST (Static Application Security Testing) que identifica vulnerabilidades, bugs e padrões de código inseguro através de regras customizáveis. Suporta múltiplas linguagens e executa tanto localmente quanto no pipeline.</p>
+                    <h1>Semgrep - Manuais</h1>
 
-                    <section style="margin-bottom: 50px;">
-                        <h3>1. Visão Geral</h3>
-                        <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">TIPO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">SAST (Static Analysis)</p>
-                            </div>
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGENS</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">30+ (JS, Python, Java, Go, etc.)</p>
-                            </div>
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline + IDE</p>
-                            </div>
+                    <div class="meta-card" style="margin-bottom: 40px;">
+                        <h3 style="margin: 0 0 15px 0; color: var(--accent-cyan);">Sumário</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 10px;">
+                            <a href="#o-que-e" style="padding: 12px 15px; background: rgba(0, 255, 255, 0.1); border-left: 3px solid var(--accent-cyan); color: var(--accent-cyan); text-decoration: none; border-radius: 4px; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(0, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(0, 255, 255, 0.1)'">
+                                <i class="ph ph-info" style="margin-right: 8px;"></i>O que é o Semgrep
+                            </a>
+                            <a href="#manual-instalacao" style="padding: 12px 15px; background: rgba(0, 255, 255, 0.1); border-left: 3px solid var(--accent-cyan); color: var(--accent-cyan); text-decoration: none; border-radius: 4px; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(0, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(0, 255, 255, 0.1)'">
+                                <i class="ph ph-download" style="margin-right: 8px;"></i>Manual de Instalação
+                            </a>
+                            <a href="#manual-utilizacao" style="padding: 12px 15px; background: rgba(0, 255, 255, 0.1); border-left: 3px solid var(--accent-cyan); color: var(--accent-cyan); text-decoration: none; border-radius: 4px; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(0, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(0, 255, 255, 0.1)'">
+                                <i class="ph ph-play" style="margin-right: 8px;"></i>Manual de Utilização
+                            </a>
+                            <a href="#manual-triagem" style="padding: 12px 15px; background: rgba(0, 255, 255, 0.1); border-left: 3px solid var(--accent-cyan); color: var(--accent-cyan); text-decoration: none; border-radius: 4px; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(0, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(0, 255, 255, 0.1)'">
+                                <i class="ph ph-check-square" style="margin-right: 8px;"></i>Manual de Triagem
+                            </a>
+                            <a href="#fluxogramas" style="padding: 12px 15px; background: rgba(0, 255, 255, 0.1); border-left: 3px solid var(--accent-cyan); color: var(--accent-cyan); text-decoration: none; border-radius: 4px; transition: all 0.3s; display: block;" onmouseover="this.style.background='rgba(0, 255, 255, 0.2)'" onmouseout="this.style.background='rgba(0, 255, 255, 0.1)'">
+                                <i class="ph ph-flow-arrow" style="margin-right: 8px;"></i>Fluxogramas de Decisão
+                            </a>
                         </div>
-                    </section>
+                    </div>
 
-                    <section style="margin-bottom: 50px;">
-                        <h3>2. Instalação e Configuração</h3>
+                    <section id="o-que-e" style="margin-bottom: 50px;">
+                        <h3 style="font-size: 1.8rem; color: #fff; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.05)); padding: 20px; border-left: 5px solid var(--accent-cyan); border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+                            <i class="ph ph-info" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                            O que é o Semgrep
+                        </h3>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">O Semgrep (Semantic Grep) é uma ferramenta de <strong>SAST (Static Application Security Testing)</strong>, ou seja, ela realiza a análise de segurança em código estático.</p>
                         
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (PYTHON/PIP)</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Terminal</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-install')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-install"># Via pip (recomendado)
-pip install semgrep
-
-# Verificar instalação
-semgrep --version
-
-# Atualizar para última versão
-pip install --upgrade semgrep</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (DOCKER)</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Docker</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-docker')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-docker"># Pull da imagem oficial
-docker pull returntocorp/semgrep
-
-# Executar scan
-docker run --rm -v "${PWD}:/src" returntocorp/semgrep semgrep --config=auto /src</code></pre>
+                        <div class="meta-card">
+                            <p style="margin: 0 0 10px 0; font-size: 0.9rem; color: #fff;">A principal diferença do Semgrep para ferramentas de busca tradicionais (como o comando grep ou um Ctrl+F) é que ele <strong>não analisa apenas texto; ele compreende a semântica e a lógica do código</strong>. Isso significa que ele consegue diferenciar, por exemplo, uma variável chamada "password" de uma senha real escrita diretamente no código (hardcoded).</p>
                         </div>
                     </section>
 
                     <section style="margin-bottom: 50px;">
-                        <h3>3. Execução Local (Desenvolvimento)</h3>
-                        
-                        <div class="pro-tip">
-                            <div class="pro-tip-header"><i class="ph ph-code"></i> Boa Prática</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Execute o Semgrep <strong>antes de cada commit</strong> ou integre ao seu IDE para feedback instantâneo sobre vulnerabilidades no código.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">SCAN BÁSICO</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Terminal</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-basic')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-basic"># Scan com regras automáticas (recomendado)
-semgrep --config=auto .
-
-# Scan apenas vulnerabilidades de segurança
-semgrep --config=p/security-audit .
-
-# Scan específico para linguagem (ex: JavaScript)
-semgrep --config=p/javascript .
-
-# Scan com saída em JSON
-semgrep --config=auto --json --output=semgrep-report.json .</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">RULESETS RECOMENDADOS</h4>
-                        <div class="cvss-table">
-                            <div class="cvss-row cvss-header">
-                                <span class="col-label">RULESET</span>
-                                <span class="col-label">DESCRIÇÃO</span>
-                                <span class="col-label" style="text-align: center;">USO</span>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--status-critical); font-weight: 700;">p/security-audit</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Vulnerabilidades OWASP Top 10 e CWE.</span>
-                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">OBRIGATÓRIO</div>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--accent-gold); font-weight: 700;">p/owasp-top-ten</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Focado nas 10 vulnerabilidades mais críticas.</span>
-                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RECOMENDADO</div>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--primary-blue); font-weight: 700;">p/r2c-best-practices</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Boas práticas de código e padrões.</span>
-                                <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">OPCIONAL</div>
-                            </div>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INTEGRAÇÃO COM GIT HOOKS</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>.git/hooks/pre-commit</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-hook')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-hook">#!/bin/sh
-# Pre-commit hook para Semgrep
-
-echo "Running Semgrep SAST..."
-semgrep --config=p/security-audit --error --quiet
-
-if [ $? -ne 0 ]; then
-    echo "⚠️  Semgrep detectou vulnerabilidades! Commit bloqueado."
-    exit 1
-fi
-
-echo "✅ Semgrep: Nenhuma vulnerabilidade detectada."
-exit 0</code></pre>
-                        </div>
-                    </section>
-
-                    <section style="margin-bottom: 50px;">
-                        <h3>4. Integração CI/CD (Pipeline)</h3>
-                        
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITHUB ACTIONS</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>.github/workflows/semgrep.yml</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-github')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-github">name: Semgrep
-
-on: [push, pull_request]
-
-jobs:
-  semgrep:
-    name: SAST Scan
-    runs-on: ubuntu-latest
-    container:
-      image: returntocorp/semgrep
-    
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Run Semgrep
-        run: semgrep scan --config=auto --error --sarif --output=semgrep.sarif .
-      
-      - name: Upload SARIF
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: semgrep.sarif
-        if: always()</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GITLAB CI</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>.gitlab-ci.yml</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-gitlab')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-gitlab">semgrep:
-  stage: security
-  image: returntocorp/semgrep
-  script:
-    - semgrep --config=auto --json --output=semgrep-report.json .
-  artifacts:
-    reports:
-      sast: semgrep-report.json
-    when: always
-  allow_failure: false</code></pre>
-                        </div>
-                    </section>
-
-                    <section style="margin-bottom: 50px;">
-                        <h3>5. Regras Customizadas</h3>
-                        
-                        <p>Crie regras específicas para padrões de segurança do seu projeto no arquivo <code>.semgrep.yml</code>.</p>
-
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>.semgrep.yml</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-custom')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-custom">rules:
-  - id: hardcoded-secret
-    pattern: |
-      password = "..."
-    message: Senha hardcoded detectada no código
-    severity: ERROR
-    languages: [python, javascript]
-    
-  - id: sql-injection
-    pattern: |
-      execute("SELECT * FROM users WHERE id = " + $VAR)
-    message: Possível SQL Injection detectado
-    severity: ERROR
-    languages: [python, java]
-    
-  - id: eval-usage
-    pattern: eval(...)
-    message: Uso de eval() é inseguro
-    severity: WARNING
-    languages: [javascript, python]</code></pre>
-                        </div>
-                    </section>
-
-                    <section style="margin-bottom: 50px;">
-                        <h3>6. Tratamento de Resultados</h3>
-                        
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">SUPRESSÃO DE FALSOS POSITIVOS</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Código com Comentário</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-suppress')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-suppress">// JavaScript/TypeScript
-eval(userInput); // nosemgrep: eval-usage
-
-# Python
-password = "default123"  # nosemgrep: hardcoded-secret
-
-/* Múltiplas linhas */
-// nosemgrep
-const query = "SELECT * FROM " + table;
-// nosemgrep-end</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ARQUIVO .semgrepignore</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>.semgrepignore</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-ignore')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-ignore"># Ignorar diretórios
-node_modules/
-dist/
-build/
-.venv/
-
-# Ignorar arquivos de teste
-**/test/**
-**/*.test.js
-**/*.spec.ts
-
-# Arquivos gerados
-**/*.min.js
-**/*.bundle.js</code></pre>
-                        </div>
-                    </section>
-
-                    <section style="margin-bottom: 50px;">
-                        <h3>7. Categorização de Vulnerabilidades</h3>
-                        
-                        <div class="cvss-table">
-                            <div class="cvss-row cvss-header">
-                                <span class="col-label">SEVERIDADE</span>
-                                <span class="col-label">AÇÃO IMEDIATA</span>
-                                <span class="col-label" style="text-align: center;">PRAZO</span>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--status-critical); font-weight: 700;">ERROR (Crítico)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Correção obrigatória antes do merge.</span>
-                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">IMEDIATO</div>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--accent-gold); font-weight: 700;">WARNING (Alto)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Revisar e corrigir dentro do sprint.</span>
-                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">7 DIAS</div>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--primary-blue); font-weight: 700;">INFO (Baixo)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Correção recomendada, não bloqueante.</span>
-                                <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">30 DIAS</div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section style="margin-bottom: 50px;">
-                        <h3>8. Integração com IDE</h3>
+                        <h3>Por que ele é utilizado (Contexto Shift Left)?</h3>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">No contexto do GEDAI e do projeto, o Semgrep foi escolhido para viabilizar a estratégia de <strong>Shift Left</strong>, trazendo a segurança para o início da esteira de desenvolvimento (IDE).</p>
                         
                         <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
                             <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">VS CODE</span>
-                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Extensão oficial: <strong>Semgrep</strong></p>
-                                <div class="code-block" style="margin: 0;">
-                                    <pre style="padding: 15px;"><code>ext install semgrep.semgrep</code></pre>
-                                </div>
+                                <span class="meta-label" style="color: var(--accent-cyan);">AGILIDADE</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #fff;">Ele roda em segundos na máquina do desenvolvedor, permitindo correções antes mesmo do Code Review.</p>
                             </div>
                             <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">INTELLIJ / PYCHARM</span>
-                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Plugin disponível no Marketplace</p>
-                                <div class="code-block" style="margin: 0;">
-                                    <pre style="padding: 15px;"><code>Settings > Plugins > Semgrep</code></pre>
-                                </div>
+                                <span class="meta-label" style="color: var(--accent-cyan);">ABRANGÊNCIA</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: #fff;">Verifica o código completo, tanto Backend quanto Frontend.</p>
                             </div>
-                        </div>
-
-                        <div class="pro-tip" style="margin-top: 30px;">
-                            <div class="pro-tip-header"><i class="ph ph-lightbulb"></i> Feedback em Tempo Real</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Com a extensão do IDE, o Semgrep sublinha vulnerabilidades enquanto você codifica, permitindo correção imediata.</p>
                         </div>
                     </section>
 
                     <section style="margin-bottom: 50px;">
-                        <h3>9. Boas Práticas de Uso</h3>
-                        
-                        <div class="meta-card card-critical">
-                            <span class="meta-label" style="color: var(--status-success);">CHECKLIST DE IMPLEMENTAÇÃO</span>
+                        <h3>Como ele funciona na prática?</h3>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">O Semgrep opera através de linhas de comando no terminal ou via configurações definidas em arquivos <code>.yaml</code> (regras). Ele escaneia o código fonte em busca de padrões que correspondam a vulnerabilidades conhecidas.</p>
+                    </section>
+
+                    <section id="manual-instalacao" style="margin-bottom: 50px;">
+                        <h3 style="font-size: 1.8rem; color: #fff; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.05)); padding: 20px; border-left: 5px solid var(--accent-cyan); border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+                            <i class="ph ph-download" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                            Manual de Instalação via Terminal
+                        </h3>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PRÉ-REQUISITOS</h4>
+                        <div class="meta-card">
                             <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
-                                <li><strong>Local:</strong> Integrar pre-commit hook para bloquear commits vulneráveis.</li>
-                                <li><strong>IDE:</strong> Instalar extensão para feedback instantâneo.</li>
-                                <li><strong>Pipeline:</strong> Executar no CI/CD com <code>--error</code> para bloquear builds.</li>
-                                <li><strong>Regras:</strong> Começar com <code>p/security-audit</code> e adicionar custom rules.</li>
-                                <li><strong>Baseline:</strong> Documentar falsos positivos no <code>.semgrepignore</code> ou com comentários.</li>
-                                <li><strong>Monitoramento:</strong> Revisar relatórios semanalmente para novas vulnerabilidades.</li>
+                                <li>Sistema Operacional Linux (Ubuntu, Debian, Kali, Fedora, etc.).</li>
+                                <li>Python 3 instalado (versão 3.7 ou superior).</li>
+                                <li>Acesso ao terminal com permissões de superusuário (sudo) para instalação de dependências básicas.</li>
                             </ul>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">MÉTODO 1: INSTALAÇÃO VIA PIPX (RECOMENDADO)</h4>
+                        <div class="pro-tip" style="margin-bottom: 20px;">
+                            <div class="pro-tip-header"><i class="ph ph-star"></i> Método Oficial Recomendado</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Este é o método oficial recomendado para distribuições Linux modernas. O uso do pipx cria um ambiente virtual isolado para o Semgrep, evitando conflitos com bibliotecas do sistema e o erro "externally-managed-environment" comum no Kali Linux e Debian.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1: ATUALIZAR OS REPOSITÓRIOS</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ddd;">Antes de iniciar, garanta que suas listas de pacotes estejam atualizadas.</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('update-repos')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="update-repos">sudo apt update</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 2: INSTALAR O GERENCIADOR PIPX</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ddd;">Se você ainda não possui o pipx, instale-o utilizando o gerenciador de pacotes da sua distribuição.</p>
+                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: #fff;"><strong>Para Debian/Ubuntu/Kali:</strong></p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('install-pipx')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="install-pipx">sudo apt install -y pipx</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 3: CONFIGURAR O PATH DO PIPX</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ddd;">Após a instalação, é necessário garantir que os executáveis instalados pelo pipx estejam acessíveis no seu terminal.</p>
+                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: #fff;">Execute o comando abaixo:</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('pipx-path')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="pipx-path">pipx ensurepath</code></pre>
+                        </div>
+                        <div class="pro-tip" style="margin-top: 15px;">
+                            <div class="pro-tip-header"><i class="ph ph-info"></i> Nota Importante</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Após executar este comando, é recomendável fechar e abrir o terminal novamente para que as alterações surtam efeito.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 4: INSTALAR O SEMGREP</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: #ddd;">Agora realize a instalação da ferramenta.</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('install-semgrep')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="install-semgrep">pipx install semgrep</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="manual-utilizacao" style="margin-bottom: 50px;">
+                        <h3 style="font-size: 1.8rem; color: #fff; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.05)); padding: 20px; border-left: 5px solid var(--accent-cyan); border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+                            <i class="ph ph-play" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                            Manual de Utilização
+                        </h3>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">CRIAÇÃO DE CONTA E AUTENTICAÇÃO (OBRIGATÓRIO)</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Para desbloquear a Pro Engine (que reduz falsos positivos) e realizar a análise de dependências (SCA), é necessário vincular o terminal a uma conta Semgrep.</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1.1: CRIAR A CONTA</h4>
+                        <div class="meta-card">
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li>Acesse <a href="https://semgrep.dev/login" target="_blank" style="color: var(--accent-cyan);">https://semgrep.dev/login</a>.</li>
+                                <li>Escolha a opção "Continue with GitHub" (ou GitLab).
+                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
+                                        <li><strong>Recomendação:</strong> Use a mesma conta que você utiliza para acessar os repositórios da empresa.</li>
+                                    </ul>
+                                </li>
+                                <li>Siga as instruções na tela para autorizar o acesso básico.</li>
+                            </ol>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1.2: AUTENTICAR NO TERMINAL</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('semgrep-login')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="semgrep-login">semgrep login</code></pre>
+                        </div>
+                        <p style="margin-top: 15px; font-size: 0.9rem; color: #ddd;">Se o navegador não abrir ou ocorrer erro, utilize o método de Login via Token abaixo.</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">LOGIN VIA TOKEN</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Gere um token manualmente seguindo os passos abaixo:</p>
+                        <div class="meta-card">
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li>Acesse a página inicial (você deve estar logado).</li>
+                                <li>Clique em <strong>Settings</strong> no menu lateral esquerdo.</li>
+                                <li>Clique em <strong>tokens</strong> no menu superior.</li>
+                                <li>Clique no botão azul "<strong>Create new token</strong>".</li>
+                                <li>Preencha os campos:
+                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
+                                        <li><strong>Name:</strong> Coloque o nome da sua máquina (ex: terminal-linux-gustavo).</li>
+                                        <li><strong>Token Scopes:</strong> Marque a opção <strong>Agent (CI)</strong> (Esta opção é essencial para baixar as regras Pro).</li>
+                                    </ul>
+                                </li>
+                                <li>Clique em <strong>Save</strong>.</li>
+                                <li>Copie o código que aparecerá (começa com <code>sk_</code> ou <code>st_</code>).</li>
+                                <li>No seu terminal, execute o comando abaixo (colando o seu token):</li>
+                            </ol>
+                        </div>
+
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('export-token')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="export-token">export SEMGREP_APP_TOKEN=cole_seu_token_aqui</code></pre>
+                        </div>
+
+                        <div class="pro-tip" style="margin-top: 15px;">
+                            <div class="pro-tip-header"><i class="ph ph-lightbulb"></i> Dica de Persistência</div>
+                            <p style="margin: 0 0 10px 0; font-size: 0.9rem;">Para não precisar repetir esse passo toda vez que abrir o terminal, adicione a linha acima ao final do seu arquivo de configuração do shell (~/.bashrc ou ~/.zshrc).</p>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;"><strong>Comando para automatizar a persistência:</strong></p>
+                            <div class="code-block" style="margin-top: 10px;">
+                                <div class="code-header">
+                                    <span>Bash</span>
+                                    <button class="btn-copy" onclick="utils.copyCode('persist-token')"><i class="ph ph-copy"></i></button>
+                                </div>
+                                <pre><code id="persist-token">echo 'export SEMGREP_APP_TOKEN=cole_seu_token_aqui' >> ~/.bashrc</code></pre>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">EXECUTANDO A PRIMEIRA ANÁLISE</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Agora que você está logado, utilize os comandos abaixo para verificar vulnerabilidades no código:</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PARA BACKEND:</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('backend-scan')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="backend-scan">semgrep scan \
+  --config="p/java" \
+  --config="p/owasp-top-ten" \
+  --config="p/cwe-top-25" \
+  --config="p/findsecbugs" \
+  --config="p/r2c-security-audit" \
+  --config="p/secrets" \
+  --config="p/sql-injection" \
+  --config="p/command-injection" \
+  --config="p/xss" \
+  --config="p/jwt" \
+  --config="p/insecure-transport" \
+  --output=relatorio_full_owasp.txt</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PARA FRONTEND:</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Bash</span>
+                                <button class="btn-copy" onclick="utils.copyCode('frontend-scan')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="frontend-scan">semgrep scan \
+  --config=auto \
+  --config=p/supply-chain \
+  --config=p/secrets \
+  --config=p/owasp-top-ten \
+  --config="p/cwe-top-25" \
+  --config="p/owasp-top-ten" \
+  --config="p/r2c-security-audit" \
+  --config="p/supply-chain" \
+  --config="p/secrets" \
+  --config="p/xss" \
+  --config="p/jwt" \
+  --config="p/nodejsscan" \
+  --config="p/javascript" \
+  --config="p/typescript" \
+  --config="p/insecure-transport" \
+  --config="p/react" \
+  --output=relatorio_maximo.txt</code></pre>
+                        </div>
+                    </section>
+
+                    <section id="manual-triagem" style="margin-bottom: 50px;">
+                        <h3 style="font-size: 1.8rem; color: #fff; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.05)); padding: 20px; border-left: 5px solid var(--accent-cyan); border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+                            <i class="ph ph-check-square" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                            Manual de Triagem e Correção de Vulnerabilidades (SAST)
+                        </h3>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Este documento estabelece o fluxo obrigatório para análise, correção e gestão de exceções (Waivers) para vulnerabilidades detectadas no código-fonte após realizar a execução da ferramenta.</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">1. TABELA DE DECISÃO RÁPIDA</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Utilize esta matriz para determinar a urgência da correção assim que o Semgrep reportar um problema. A classificação baseia-se na severidade da regra violada.</p>
+                        
+                        <div style="overflow-x: auto; margin: 20px 0;">
+                            <table style="width: 100%; border-collapse: collapse; background: #1a1a2e; border-radius: 8px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--accent-cyan); color: #000;">
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Severidade (Semgrep)</th>
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Plano de Ação Imediato</th>
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Condição para Waiver (Aceite de Risco)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: var(--status-critical); font-weight: 600;">
+                                            CRÍTICA / ERROR<br>
+                                            <span style="color: #aaa; font-size: 0.85rem; font-weight: 400;">(Ex: Hardcoded Secrets, SQL Injection)</span>
+                                        </td>
+                                        <td style="padding: 15px; color: #fff;">
+                                            <strong>Bloqueio Obrigatório.</strong><br>
+                                            O Pull Request não pode ser mergeado, ou o deploy deve ser cancelado até a correção.
+                                        </td>
+                                        <td style="padding: 15px; color: #fff;">
+                                            Apenas se:<br>
+                                            1. For comprovadamente um Falso Positivo.<br>
+                                            2. O código for inativo (morto) e impossível de ser executado.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 15px; color: var(--status-warning); font-weight: 600;">
+                                            MÉDIA / WARNING<br>
+                                            <span style="color: #aaa; font-size: 0.85rem; font-weight: 400;">(Ex: Falta de HttpOnly, Configurações de Log)</span>
+                                        </td>
+                                        <td style="padding: 15px; color: #fff;">
+                                            <strong>Correção Programada.</strong><br>
+                                            Deve entrar no backlog da Sprint atual ou próxima. Monitorar se não houver tempo hábil.
+                                        </td>
+                                        <td style="padding: 15px; color: #fff;">
+                                            Permitido se:<br>
+                                            O tempo/custo técnico da refatoração for desproporcional ao risco residual (baixo impacto).
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">2. DIFERENCIAÇÃO DE CONTEXTO (ONDE ESTÁ O ERRO?)</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Antes de iniciar a correção, identifique a localização do arquivo afetado. O rigor da análise muda dependendo do ambiente.</p>
+                        
+                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--status-critical);">CÓDIGO DE PRODUÇÃO (RIGOR MÁXIMO)</span>
+                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;"><strong>Pastas:</strong></p>
+                                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #ddd;">src/main, controllers/, repository/, arquivos de configuração (application.yaml, Dockerfile).</p>
+                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;"><strong>Impacto:</strong></p>
+                                <p style="margin: 0; font-size: 0.85rem; color: #ddd;">Afeta diretamente o usuário final ou a segurança do servidor. Vulnerabilidades aqui têm prioridade absoluta.</p>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label" style="color: var(--status-warning);">CÓDIGO DE DESENVOLVIMENTO/TESTE (RIGOR MODERADO)</span>
+                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;"><strong>Pastas:</strong></p>
+                                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: #ddd;">src/test, mock/, scripts de automação local.</p>
+                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;"><strong>Impacto:</strong></p>
+                                <p style="margin: 0; font-size: 0.85rem; color: #ddd;">O risco principal é comprometer a esteira de CI/CD (ex: vazar credenciais de teste). Injeções de SQL em testes mocks, por exemplo, geralmente são ignoradas.</p>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">3. PLANO DE AÇÃO: PASSO A PASSO DO DESENVOLVEDOR</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Ao receber um alerta do Semgrep, siga este fluxo lógico antes de escrever qualquer código.</p>
+
+                        <div class="meta-card" style="margin-bottom: 20px;">
+                            <span class="meta-label" style="color: var(--accent-cyan);">PASSO 1: ANÁLISE DE VERACIDADE (É REAL?)</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;">Diferente de bibliotecas, ferramentas de código geram "Falsos Positivos".</p>
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li>Leia a mensagem de erro do Semgrep e olhe a linha de código.</li>
+                                <li>Pergunte-se: "O Semgrep achou um erro de sintaxe ou um erro de lógica?"
+                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
+                                        <li><strong>Exemplo:</strong> O Semgrep alerta sobre concatenação de SQL (+), mas você está concatenando apenas constantes seguras, não input de usuário.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Resultado:</strong> Se for Falso Positivo, pule para a seção de Waivers. Se for real, siga para o Passo 2.</li>
+                            </ol>
+                        </div>
+
+                        <div class="meta-card" style="margin-bottom: 20px;">
+                            <span class="meta-label" style="color: var(--accent-cyan);">PASSO 2: ANÁLISE DE ALCANCE (REACHABILITY)</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;">O código vulnerável é realmente acessível por um atacante?</p>
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li><strong>Rastreie a entrada (Source):</strong> O dado vem de um Controller, API, Formulário ou Parâmetro de URL?</li>
+                                <li><strong>Rastreie a saída (Sink):</strong> O dado chega até a função perigosa sem tratamento?</li>
+                                <li><strong>Decisão:</strong>
+                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
+                                        <li>Se a função nunca é chamada ou o dado é interno (hardcoded seguro), a vulnerabilidade é classificada como <strong>Não Afetada</strong>.</li>
+                                        <li>Documente isso no código e encerre o fluxo.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="meta-card" style="margin-bottom: 20px;">
+                            <span class="meta-label" style="color: var(--accent-cyan);">PASSO 3: AVALIAÇÃO DE ESFORÇO (A REGRA DAS 16 HORAS)</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;">Estime quanto tempo levará para refatorar o código, testar e implantar.</p>
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li><strong>Esforço &lt; 16 horas:</strong> A correção ou refatoração é obrigatória e imediata.</li>
+                                <li><strong>Esforço &gt; 16 horas:</strong> Se a correção exigir reescrever arquitetura (ex: mudar de JDBC puro para JPA/Hibernate em todo o projeto), o desenvolvedor está autorizado a solicitar um Waiver temporário.</li>
+                            </ol>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">4. GESTÃO DE WAIVERS E JUSTIFICATIVAS</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Se você decidiu não corrigir o código agora (seja por Falso Positivo ou Esforço Elevado), você deve oficializar essa decisão. Não basta ignorar o alerta.</p>
+
+                        <div class="meta-card" style="margin-bottom: 20px;">
+                            <span class="meta-label" style="color: var(--accent-cyan);">A. NO CÓDIGO (OBRIGATÓRIO)</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;">Use o comentário de supressão do Semgrep na linha acima do erro:</p>
+                            <div class="code-block" style="margin-top: 15px;">
+                                <div class="code-header">
+                                    <span>Java</span>
+                                    <button class="btn-copy" onclick="utils.copyCode('waiver-code')"><i class="ph ph-copy"></i></button>
+                                </div>
+                                <pre><code id="waiver-code">// nosemgrep: [ID-DA-REGRA]
+// Motivo: [Waiver de Segurança] - O input já é sanitizado pelo filtro XSS global.
+String query = "SELECT ... " + input;</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="meta-card" style="margin-bottom: 20px;">
+                            <span class="meta-label" style="color: var(--accent-cyan);">B. NO COMMIT E TICKET</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: #fff;">Todo Waiver exige uma justificativa formal. Use este modelo:</p>
+                            <div class="code-block" style="margin-top: 15px;">
+                                <div class="code-header">
+                                    <span>Modelo de Waiver</span>
+                                    <button class="btn-copy" onclick="utils.copyCode('waiver-template')"><i class="ph ph-copy"></i></button>
+                                </div>
+                                <pre><code id="waiver-template">Waiver de Segurança: [ID da Regra ou CVE]
+Justificativa Técnica: [Ex: Falso Positivo validado / Risco de negócio baixo / Custo de migração > 16h].
+Status: Função devidamente isolada ou protegida por WAF.
+Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">5. ESCALONAMENTO CRÍTICO</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Este é o mecanismo de governança para riscos altos que não serão corrigidos imediatamente.</p>
+                        
+                        <div class="meta-card">
+                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                                <li><strong>Gatilho:</strong> Ativado sempre que a severidade for CRÍTICA (ERROR) e o desenvolvedor solicitar um Waiver.</li>
+                                <li><strong>Revisão Obrigatória:</strong> O Waiver não entra em vigor sozinho. Um Desenvolvedor Sênior ou o Time de Segurança deve revisar sua análise.</li>
+                                <li><strong>Critérios para Aprovação do Revisor:</strong>
+                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
+                                        <li>Confirmação de que a vulnerabilidade não é explorável no contexto atual (Reachability).</li>
+                                        <li>Validação de que não há uma solução simples (alternativa viável) que custe menos de 16 horas.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Conclusão:</strong> O Waiver só é válido após o "De Acordo" do revisor no sistema de gestão (OpenProject).</li>
+                            </ol>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">6. ORGANIZAÇÃO DO WAIVER NO OPENPROJECT</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: #fff;">Para garantir a auditoria futura, todo débito técnico de segurança deve ser registrado seguindo a tabela abaixo:</p>
+                        
+                        <div style="overflow-x: auto; margin: 20px 0;">
+                            <table style="width: 100%; border-collapse: collapse; background: #1a1a2e; border-radius: 8px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: var(--accent-cyan); color: #000;">
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Campo no OpenProject</th>
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Conteúdo Obrigatório</th>
+                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Finalidade de Auditoria</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Tipo de Item</td>
+                                        <td style="padding: 15px; color: #fff;">Tarefa ou Bug</td>
+                                        <td style="padding: 15px; color: #ddd;">Classificação correta.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Assunto</td>
+                                        <td style="padding: 15px; color: #fff;">[WAIVER] - [SAST] - [NOME_DO_ARQUIVO]</td>
+                                        <td style="padding: 15px; color: #ddd;">Padronização visual para busca rápida.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Descrição</td>
+                                        <td style="padding: 15px; color: #fff;">Justificativa técnica detalhada + Análise de Alcance (por que não é perigoso agora?)</td>
+                                        <td style="padding: 15px; color: #ddd;">Justificar o risco aceito perante auditoria.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Versão/Local</td>
+                                        <td style="padding: 15px; color: #fff;">Caminho do arquivo (src/.../Classe.java)</td>
+                                        <td style="padding: 15px; color: #ddd;">Controle de inventário de código.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Atribuído a</td>
+                                        <td style="padding: 15px; color: #fff;">Desenvolvedor responsável pela análise</td>
+                                        <td style="padding: 15px; color: #ddd;">Responsabilidade técnica.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #2a2a3e;">
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Tags</td>
+                                        <td style="padding: 15px; color: #fff;">Segurança, Waiver, SAST</td>
+                                        <td style="padding: 15px; color: #ddd;">Filtros de relatório.</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 15px; color: #fff; font-weight: 600;">Data Finalização</td>
+                                        <td style="padding: 15px; color: #fff;">Data para reavaliação (Máx. 60 dias)</td>
+                                        <td style="padding: 15px; color: #ddd;">Evitar que o waiver seja esquecido (Obsolescência).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="fluxogramas" style="margin-bottom: 50px;">
+                        <h3 style="font-size: 1.8rem; color: #fff; background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 255, 255, 0.05)); padding: 20px; border-left: 5px solid var(--accent-cyan); border-radius: 8px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px;">
+                            <i class="ph ph-flow-arrow" style="font-size: 1.6rem; color: var(--accent-cyan);"></i>
+                            Fluxogramas de Decisão
+                        </h3>
+                        <p>Utilize estes fluxogramas visuais para navegar pelo processo de triagem e correção de vulnerabilidades detectadas pelo Semgrep.</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">FLUXO COMPLETO: LOCALIZAÇÃO E ANÁLISE INICIAL</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma1.png" alt="Fluxograma 1: Localização e Análise Inicial" style="width: 100%; max-width: 1120px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Início do Processo:</strong> Ao detectar uma vulnerabilidade, primeiro identifique se está no código de <em>Aplicação</em> ou <em>Infraestrutura</em>. Se for Infra, repasse para o time responsável. Se for Aplicação, prossiga para validar a incidência.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1: ANÁLISE DE VERACIDADE</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma2.png" alt="Fluxograma 2: Análise de Veracidade" style="width: 100%; max-width: 1180px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Passo 1:</strong> Determine se o alerta é um <em>Erro Real</em> ou <em>Falso Positivo</em>. Se for real, valide o escopo da vulnerabilidade e prossiga para o Passo 2. Se a vulnerabilidade não nos afeta (código inativo/seguro), documente como "Não Afetado" e encerre o processo.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 2: ANÁLISE DE ALCANCE E ESFORÇO</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma3.png" alt="Fluxograma 3: Análise de Alcance e Esforço" style="width: 100%; max-width: 1300px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Passo 2:</strong> Se a vulnerabilidade nos afeta, estime o esforço de correção. Aplique a <em>Regra das 16 horas</em> no Passo 3. Se o esforço for <strong>menor que 16h</strong>, a correção é <strong>obrigatória e imediata</strong>. Se for <strong>maior que 16h</strong>, solicite um Waiver.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 3: AVALIAÇÃO DE SEVERIDADE</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma4.png" alt="Fluxograma 4: Avaliação de Severidade" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Passo 3:</strong> Se o esforço for <strong>maior que 16h</strong>, analise a severidade. Se for <em>WARNING</em> (média), você pode registrar um Waiver diretamente no código e ticket. Se for <em>CRÍTICA (ERROR)</em>, prossiga para o Escalonamento Crítico obrigatório.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ESCALONAMENTO CRÍTICO</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma5.png" alt="Fluxograma 5: Escalonamento Crítico" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Escalonamento:</strong> Para vulnerabilidades <em>CRÍTICAS</em>, é obrigatória a <strong>Revisão por Desenvolvedor Sênior ou Time de Segurança</strong>. A criação do Waiver deve ser aprovada formalmente. Se não aprovada, a correção é obrigatória e imediata.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">APROVAÇÃO E REGISTRO DE WAIVER</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma6.png" alt="Fluxograma 6: Aprovação e Registro de Waiver" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: #ddd; text-align: center;"><strong>Decisão Final:</strong> Se o Waiver for <em>aprovado</em>, registre-o no código (comentário nosemgrep) e no OpenProject. Se <em>não aprovado</em>, realize a correção obrigatória. Em ambos os casos, finalize com a codificação/commit.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">FINALIZAÇÃO DO PROCESSO</h4>
+                        <div style="background: #1a1a2e; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/semgrep fluxograma7.png" alt="Fluxograma 7: Finalização do Processo" style="width: 100%; max-width: 900px; display: block; margin: 0 auto;">
+                        <div class="pro-tip">
+                            <div class="pro-tip-header"><i class="ph ph-flow-arrow"></i> Navegação pelos Fluxogramas</div>
+                            <p style="margin: 0; font-size: 0.9rem;">Siga os fluxogramas em ordem sequencial. Cada decisão tomada (losango amarelo) direciona você para o próximo passo apropriado. Processos em <span style="color: var(--status-critical);">vermelho</span> exigem atenção especial e aprovação formal.</p>
                         </div>
                     </section>
                 </div>
