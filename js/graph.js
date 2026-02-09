@@ -136,30 +136,25 @@ const dashboardGraph = {
 
                 elements: {
                     nodes: [
-                        // Início e Fim
                         { data: { id: 'Start', label: 'Início' }, classes: 'start_stop' },
                         { data: { id: 'Fim', label: 'Fim' }, classes: 'start_stop' },
                         { data: { id: 'Commit', label: 'Commit' }, classes: 'start_stop' },
                         
-                        // FASE 1: Setup
                         { data: { id: 'Ambiente', label: 'Configurar\nAmbiente' }, classes: 'process' },
                         { data: { id: 'VSCode', label: 'Instalar\nVS Code' }, classes: 'process' },
                         { data: { id: 'Sonar', label: 'SonarQube\nfor IDE' }, classes: 'process' },
                         
-                        // FASE 1: Lógica de Bibliotecas
                         { data: { id: 'LibCheck', label: 'Nova Lib?' }, classes: 'alert clickable' },
                         { data: { id: 'Deps', label: 'Consultar\ndeps.dev' }, classes: 'alert clickable' },
                         { data: { id: 'VulnCheck', label: 'Vulnerável?' }, classes: 'alert' },
                         { data: { id: 'Alternativa', label: 'Buscar\nAlternativa' }, classes: 'alert' },
                         
-                        // FASE 1: Codificação e Ferramentas
                         { data: { id: 'Codar', label: 'Codificação' }, classes: 'process' },
                         { data: { id: 'GitleaksL', label: 'Gitleaks\nLocal' }, classes: 'gate clickable' },
                         { data: { id: 'TrivyL', label: 'Trivy\nLocal' }, classes: 'gate clickable' },
                         { data: { id: 'SemgrepL', label: 'Semgrep\nLocal' }, classes: 'gate clickable' },
                         { data: { id: 'QuebraL', label: 'Falha\nLocal' }, classes: 'gate' },
                         
-                        // FASE 2: Pipeline
                         { data: { id: 'Push', label: 'Push de\nCódigo' }, classes: 'start_stop' },
                         { data: { id: 'GitleaksP', label: 'Gitleaks:\nSegredos' }, classes: 'gate clickable' },
                         { data: { id: 'TrivyP', label: 'Trivy:\nSCA' }, classes: 'gate clickable' },
@@ -168,12 +163,10 @@ const dashboardGraph = {
                         { data: { id: 'AnaliseFalha', label: 'Análise da Falha\n[Time Segurança]' }, classes: 'alert' },
                         { data: { id: 'DAST', label: 'DAST:\nOWASP ZAP' }, classes: 'gate' },
                         
-                        // FASE 2: Monitoramento
                         { data: { id: 'Staging', label: 'Staging\nValidado' }, classes: 'success' },
                         { data: { id: 'Syft', label: 'Syft:\nSBOM' }, classes: 'monitor' },
                         { data: { id: 'DT', label: 'Dependency\nTrack' }, classes: 'monitor' },
                         
-                        // FASE 3: Auditoria
                         { data: { id: 'TriagemEscopo', label: 'Triagem de\nEscopo' }, classes: 'alert' },
                         { data: { id: 'Burp', label: 'Pentest:\nBurp Suite' }, classes: 'process' },
                         { data: { id: 'Evidencias', label: 'Coleta de\nEvidências' }, classes: 'monitor' },
@@ -182,13 +175,11 @@ const dashboardGraph = {
                         { data: { id: 'SignOff', label: 'Sign-off' }, classes: 'success' }
                     ],
                     edges: [
-                        // Fluxo principal Fase 1
                         { data: { source: 'Start', target: 'Ambiente' } },
                         { data: { source: 'Ambiente', target: 'VSCode' } },
                         { data: { source: 'VSCode', target: 'Sonar' } },
                         { data: { source: 'Sonar', target: 'LibCheck' } },
                         
-                        // Lógica de Bibliotecas
                         { data: { source: 'LibCheck', target: 'Deps' } },
                         { data: { source: 'Deps', target: 'VulnCheck' } },
                         { data: { source: 'VulnCheck', target: 'Alternativa' } },
@@ -196,19 +187,16 @@ const dashboardGraph = {
                         { data: { source: 'VulnCheck', target: 'Codar' } },
                         { data: { source: 'LibCheck', target: 'Codar' } },
                         
-                        // Ferramentas locais
                         { data: { source: 'Codar', target: 'GitleaksL' } },
                         { data: { source: 'GitleaksL', target: 'TrivyL' } },
                         { data: { source: 'TrivyL', target: 'SemgrepL' } },
                         { data: { source: 'SemgrepL', target: 'Commit' } },
                         
-                        // Falhas locais (tracejado)
                         { data: { source: 'GitleaksL', target: 'QuebraL' }, classes: 'failure' },
                         { data: { source: 'TrivyL', target: 'QuebraL' }, classes: 'failure' },
                         { data: { source: 'SemgrepL', target: 'QuebraL' }, classes: 'failure' },
                         { data: { source: 'QuebraL', target: 'Codar' } },
                         
-                        // Fase 2: Pipeline
                         { data: { source: 'Commit', target: 'Push' } },
                         { data: { source: 'Push', target: 'GitleaksP' } },
                         { data: { source: 'Push', target: 'TrivyP' } },
@@ -218,7 +206,6 @@ const dashboardGraph = {
                         { data: { source: 'TrivyP', target: 'DAST' } },
                         { data: { source: 'SemgrepP', target: 'DAST' } },
                         
-                        // Falhas pipeline (tracejado)
                         { data: { source: 'GitleaksP', target: 'Quebra' }, classes: 'failure' },
                         { data: { source: 'TrivyP', target: 'Quebra' }, classes: 'failure' },
                         { data: { source: 'SemgrepP', target: 'Quebra' }, classes: 'failure' },
@@ -226,13 +213,11 @@ const dashboardGraph = {
                         { data: { source: 'AnaliseFalha', target: 'Codar' } },
                         { data: { source: 'AnaliseFalha', target: 'TriagemF' }, classes: 'failure' },
                         
-                        // Monitoramento
                         { data: { source: 'DAST', target: 'Staging' } },
                         { data: { source: 'DAST', target: 'TriagemF' }, classes: 'failure' },
                         { data: { source: 'Staging', target: 'Syft' } },
                         { data: { source: 'Syft', target: 'DT' } },
                         
-                        // Fase 3: Auditoria
                         { data: { source: 'DT', target: 'TriagemEscopo' } },
                         { data: { source: 'TriagemEscopo', target: 'Burp' } },
                         { data: { source: 'TriagemEscopo', target: 'Relatorio' } },
@@ -243,7 +228,6 @@ const dashboardGraph = {
                         { data: { source: 'Relatorio', target: 'SignOff' } },
                         { data: { source: 'SignOff', target: 'Fim' } },
                         
-                        // Knowledge Base (tracejado)
                         { data: { source: 'SignOff', target: 'Codar' }, classes: 'failure' }
                     ]
                 },
@@ -260,7 +244,6 @@ const dashboardGraph = {
                 }
             });
 
-            // Interatividade
             dashboardGraph.cy.on('tap', 'node', function(evt){
                 const node = evt.target;
                 const id = node.id();
@@ -284,7 +267,6 @@ const dashboardGraph = {
                 document.body.style.cursor = 'default';
             });
 
-            // Ajustar zoom inicial
             setTimeout(() => {
                 dashboardGraph.cy.fit(null, 30);
             }, 100);
@@ -301,7 +283,7 @@ const dashboardGraph = {
                             <i class="ph ph-warning-circle" style="font-size: 3rem; margin-bottom: 15px; display: block;"></i>
                             <div style="font-size: 1.1rem; margin-bottom: 10px;">Erro ao carregar o Pipeline DevSecOps</div>
                             <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">Verifique o console (F12) para mais detalhes</div>
-                            <button onclick="location.reload()" style="background: var(--primary-blue); color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-family: inherit; border-radius: 4px;">
+                            <button onclick="location.reload()" style="background: var(--primary-blue); color: #fff; border: none; padding: 10px 20px; cursor: pointer; font-family: inherit;">
                                 Recarregar Página
                             </button>
                         </div>

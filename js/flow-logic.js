@@ -1,9 +1,11 @@
-const flowLogic = {
+window.flowLogic = window.flowLogic || {
     currentTool: null,
+    retryCount: 0,
+    maxRetries: 3,
 
     start: (tool) => {
         flowLogic.currentTool = tool;
-        // Aguarda para garantir que o container está no DOM
+        flowLogic.retryCount = 0;
         setTimeout(() => {
             flowLogic.renderStep('start');
         }, 50);
@@ -13,15 +15,20 @@ const flowLogic = {
         const containerId = `flowchart-${flowLogic.currentTool}`;
         const container = document.getElementById(containerId);
         
-        // Verificação de segurança
         if (!container) {
-            console.warn(`Container não encontrado: ${containerId}. Tentando novamente...`);
-            // Tenta novamente depois de um delay
-            setTimeout(() => {
-                flowLogic.renderStep(stepId);
-            }, 100);
+            flowLogic.retryCount++;
+            if (flowLogic.retryCount <= flowLogic.maxRetries) {
+                console.warn(`Container não encontrado: ${containerId}. Tentativa ${flowLogic.retryCount}/${flowLogic.maxRetries}...`);
+                setTimeout(() => {
+                    flowLogic.renderStep(stepId);
+                }, 100);
+            } else {
+                console.error(`Container ${containerId} não encontrado após ${flowLogic.maxRetries} tentativas. Abortando.`);
+            }
             return;
         }
+
+        flowLogic.retryCount = 0;
 
         const stepData = flowSteps[flowLogic.currentTool] && flowSteps[flowLogic.currentTool][stepId];
 

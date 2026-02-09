@@ -1,0 +1,276 @@
+/**
+ * Accessibility Styles
+ * Estilos para melhorar a acessibilidade do site
+ */
+
+/* Skip Link - Permite pular para o conteúdo principal */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--primary-blue);
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 10000;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--accent-cyan);
+    outline-offset: 2px;
+}
+
+/* Focus Visible - Melhor visibilidade do foco do teclado */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+.nav-item:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Remove outline padrão apenas quando não está usando teclado */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible),
+.nav-item:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Melhorar estilo dos nav-items quando são buttons */
+.nav-item {
+    background: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+    background: var(--bg-hover);
+}
+
+.nav-item:focus-visible {
+    background: var(--bg-hover);
+    outline: 2px solid var(--primary-blue);
+    outline-offset: -2px;
+}
+
+/* Melhorar contraste em modo de alto contraste */
+@media (prefers-contrast: high) {
+    .nav-item:focus-visible {
+        outline-width: 3px;
+    }
+    
+    button:focus-visible {
+        outline-width: 3px;
+    }
+    
+    .skip-link:focus {
+        outline-width: 4px;
+    }
+}
+
+/* Suporte para prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .skip-link,
+    .nav-item,
+    button,
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Melhorar affordance dos botões interativos */
+button,
+.nav-item,
+.triage-btn,
+.back-btn,
+.menu-toggle,
+.theme-toggle {
+    cursor: pointer;
+    position: relative;
+}
+
+button:disabled,
+.nav-item:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Indicador visual para elementos interativos */
+.nav-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: var(--primary-blue);
+    transition: height 0.2s ease;
+    border-radius: 0 2px 2px 0;
+}
+
+.nav-item:focus-visible::before,
+.nav-item.active::before {
+    height: 60%;
+}
+
+/* Melhorar visibilidade de links */
+a:not(.skip-link):not(.nav-item) {
+    position: relative;
+}
+
+a:not(.skip-link):not(.nav-item):focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    text-decoration: underline;
+}
+
+/* Garantir que ícones decorativos não sejam lidos */
+[aria-hidden="true"] {
+    pointer-events: none;
+}
+
+/* Melhorar visibilidade dos estados do triage */
+.triage-btn:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    transform: translateY(-1px);
+}
+
+.triage-btn:hover:not(:disabled) {
+    border-color: var(--primary-blue);
+    background: var(--bg-hover);
+    transform: translateY(-1px);
+}
+
+.triage-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Melhorar botões do header */
+.menu-toggle:focus-visible,
+.back-btn:focus-visible,
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+/* Garantir que live regions sejam anunciadas */
+[aria-live] {
+    position: relative;
+}
+
+/* Melhorar tabelas para screen readers */
+[role="table"] {
+    display: block;
+}
+
+/* Garantir que overlays sejam ignorados por screen readers quando não visíveis */
+.sidebar-overlay:not(.active) {
+    display: none;
+}
+
+/* Indicador de página atual */
+[aria-current="page"] {
+    position: relative;
+    font-weight: 600;
+}
+
+[aria-current="page"]::after {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--primary-blue);
+    border-radius: 50%;
+}
+
+/* Melhorar contraste do breadcrumb */
+[aria-label="Breadcrumb"] span {
+    position: relative;
+}
+
+/* Suporte para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Garantir ordem de tabulação lógica */
+.app-container {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Melhorar affordance de elementos clicáveis */
+button,
+.nav-item,
+[role="menuitem"],
+[role="button"] {
+    -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Zoom e acessibilidade de texto */
+@media (min-width: 1400px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Garantir que elementos focáveis sejam grandes o suficiente em mobile */
+    button,
+    .nav-item,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-item {
+        padding: 12px 20px;
+    }
+}
+
+/* Garantir que elementos desabilitados não sejam focáveis */
+[disabled],
+[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+}

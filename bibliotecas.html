@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lógica de Bibliotecas - PadaONE Security</title>
+    <title>Triagem de Bibliotecas - PADAONE Security</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/WhiteOL.png" media="(prefers-color-scheme: dark)">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png">
     
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
@@ -11,6 +14,9 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/theme.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -19,7 +25,8 @@
             <div class="sidebar-header">
                 <div class="logo-area">
                     <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
-                        <img src="assets/images/Logo PadaONE-Security Dark.jpg" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                        <img src="assets/images/PADAONE-Security Dark.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                        <img src="assets/images/PADAONE-Security Light.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
                     </button>
                 </div>
             </div>
@@ -31,7 +38,7 @@
                         <i class="ph ph-squares-four"></i> Dashboard
                     </div>
                     <div class="nav-item active" onclick="nav.switchTool('logic')">
-                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                        <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
                     </div>
                 </div>
 
@@ -52,188 +59,607 @@
 
         <main class="main-content">
             <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
+                    <i class="ph ph-list"></i>
+                </button>
                 <button id="btn-back" class="back-btn" onclick="nav.goBack()">
                     <i class="ph ph-caret-left"></i>
                 </button>
-                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Lógica de Bibliotecas</span>
+                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Triagem de Bibliotecas</span>
+                <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
+                    <i class="ph ph-sun"></i>
+                </button>
             </header>
+
+            <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
 
             <div class="tool-layout">
                 <div class="scroll-area">
-                    <div class="badge-group">
-                        <span class="badge recommend">GOVERNANÇA</span>
-                        <span class="badge">SCA</span>
-                        <span class="badge">MANUAL V1.0</span>
+                    <h1 style="margin-bottom: 10px;">Triagem de Bibliotecas</h1>
+                    <div style="display: flex; gap: 12px; cursor: default; pointer-events: none; user-select: none; margin-bottom: 20px; font-size: 0.95rem; color: var(--text-muted); font-weight: 700;">
+                        <span>GOVERNANÇA</span>
+                        <span>•</span>
+                        <span>SCA</span>
                     </div>
-                    <h1>Lógica de Bibliotecas</h1>
-                    <p>Este fluxo fornece as diretrizes para que o desenvolvedor decida, de forma autônoma, entre a correção imediata de uma biblioteca, sua substituição ou o aceite de riscos residuais. O objetivo é proteger a Supply Chain.</p>
+                    <p>Este manual fornece as diretrizes para que o desenvolvedor decida, de forma autônoma e fundamentada, entre a correção imediata de uma biblioteca, sua substituição por alternativas saudáveis ou o aceite temporário de riscos residuais. O objetivo central é proteger a Supply Chain contra vulnerabilidades herdadas [provenientes de dependências de terceiros] e minimizar o acúmulo de débito técnico.</p>
 
-                    <section id="logic-quick" style="margin-bottom: 50px;">
+                    <section id="logic-quick" style="margin-bottom: 30px;">
                         <h3>1. Tabela de Decisão Rápida</h3>
-                        <p>Utilize esta tabela como filtro inicial ao identificar uma vulnerabilidade no Trivy ou deps.dev.</p>
+                        <p>Filtro inicial ao identificar uma vulnerabilidade no Trivy ou deps.dev:</p>
                         
-                        <div class="cvss-table">
-                            <div class="cvss-row cvss-header">
-                                <span class="col-label">SEVERIDADE</span>
-                                <span class="col-label">PLANO DE AÇÃO IMEDIATO</span>
-                                <span class="col-label" style="text-align: center;">WAIVER</span>
+                        <div class="cvss-table" style="margin-bottom: 30px;">
+                            <div class="cvss-row cvss-header" style="grid-template-columns: 180px 1fr 200px;">
+                                <span class="col-label">CENÁRIO IDENTIFICADO</span>
+                                <span class="col-label">CONDIÇÃO TÉCNICA</span>
+                                <span class="col-label">AÇÃO OBRIGATÓRIA</span>
                             </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--status-critical); font-weight: 700;">ALTA/CRÍTICA (7.0+)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Bloqueio imediato ou update obrigatório se for alcançável.</span>
-                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">RESTRITO</div>
+                            <div class="cvss-row" style="grid-template-columns: 180px 1fr 200px;">
+                                <span style="color: var(--status-success); font-weight: 700;">Biblioteca Saudável</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Sem vulnerabilidades no deps.dev e manutenção ativa nos últimos 12 meses.</span>
+                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">EXECUTAR TAREFA</div>
                             </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--status-success); font-weight: 700;">MÉDIA/BAIXA (<6.9)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Update se houver versão estável; caso contrário, monitorar.</span>
-                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">PERMITIDO</div>
+                            <div class="cvss-row" style="grid-template-columns: 180px 1fr 200px;">
+                                <span style="color: var(--accent-gold); font-weight: 700;">Biblioteca Obsoleta</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Sem manutenção ativa nos últimos 12 meses</span>
+                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">BUSCAR ALTERNATIVA</div>
+                            </div>
+                            <div class="cvss-row" style="grid-template-columns: 180px 1fr 200px;">
+                                <span style="color: var(--primary-blue); font-weight: 700;">Vulnerabilidade c/ Patch</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Existe correção oficial sem Breaking Changes</span>
+                                <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">UPDATE IMEDIATO</div>
+                            </div>
+                            <div class="cvss-row" style="grid-template-columns: 180px 1fr 200px;">
+                                <span style="color: var(--status-critical); font-weight: 700;">Vulnerabilidade Crítica</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">CVSS maior que 9.0 e função alcançável</span>
+                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">ESCALONAMENTO</div>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">Triagem Interativa</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 20px;">Use a ferramenta abaixo para navegar passo a passo pela decisão:</p>
+                        <div id="interactive-triage" style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 30px;">
+                            <div id="triage-question" style="margin-bottom: 30px;">
+                                <h5 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1rem; font-weight: 600;">A biblioteca possui vulnerabilidades conhecidas?</h5>
+                                <div style="display: flex; gap: 12px;">
+                                    <button class="triage-btn" onclick="triageFlow('vuln-yes')" style="flex: 1; padding: 12px 20px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-main); font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 0.9rem;">SIM, possui vulnerabilidades</button>
+                                    <button class="triage-btn" onclick="triageFlow('vuln-no')" style="flex: 1; padding: 12px 20px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-main); font-weight: 500; cursor: pointer; transition: all 0.2s; font-size: 0.9rem;">NÃO, sem vulnerabilidades</button>
+                                </div>
+                            </div>
+                            
+                            <div id="triage-breadcrumb" style="display: none; padding: 15px; background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); margin-bottom: 20px; font-size: 0.85rem; color: var(--text-muted);">
+                                <strong style="color: var(--accent-purple);">Caminho:</strong> <span id="breadcrumb-text"></span>
+                            </div>
+                            
+                            <div id="triage-result" style="display: none; padding: 20px; border: 1px solid;">
+                                <h5 style="color: var(--primary-blue); margin-bottom: 15px;">Resultado da Triagem</h5>
+                                <p id="result-text" style="margin-bottom: 15px; font-size: 0.95rem; line-height: 1.6;"></p>
+                                <button onclick="resetTriage()" style="padding: 10px 20px; background: var(--primary-blue); border: none; color: #ffffff; font-weight: 600; cursor: pointer;">Reiniciar Triagem</button>
                             </div>
                         </div>
                     </section>
 
-                    <section id="logic-cvss" style="margin-bottom: 50px;">
-                        <h3>2. Entenda a Métrica CVSS v4.0</h3>
-                        <p>A pontuação define a autonomia do desenvolvedor.</p>
+                    <section id="logic-severity-vs-risk" style="margin-bottom: 30px;">
+                        <h3>2. Diferenciação: Severidade vs. Risco</h3>
                         
-                        <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">COMPOSIÇÃO</span>
-                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Base, Ameaça, Ambiental e Suplementar.</p>
-                            </div>
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">STRING VETORIAL</span>
-                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Ex: <code>CVSS:4.0/AV:N...</code></p>
-                            </div>
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--accent-cyan);">GATILHO</span>
-                                <p style="margin: 0; font-size: 0.8rem; color: #fff;">Nota 9.0+ exige revisão Sênior.</p>
-                            </div>
+                        <div style="background: var(--bg-critical-lighter); border-left: 4px solid var(--status-critical); padding: 15px; margin-bottom: 15px;">
+                            <strong style="color: var(--status-critical);">SEVERIDADE</strong>
+                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                <strong>Valor fixo</strong> do NVD ou deps.dev que indica o quão perigosa a falha é <strong>teoricamente</strong>. Independente do contexto de uso.
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--bg-critical-lighter); border-left: 4px solid var(--accent-gold); padding: 15px; margin-bottom: 15px;">
+                            <strong style="color: var(--accent-gold);">RISCO (REAL)</strong>
+                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                <strong>Valor variável</strong> confirmado apenas na <strong>Análise de Alcance</strong>. Uma vulnerabilidade HIGH só é risco se a função vulnerável for efetivamente importada no código.
+                            </p>
                         </div>
 
-                        <div class="cvss-table">
-                            <div class="cvss-row cvss-header">
+                        <div style="background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); padding: 20px; margin-top: 20px;">
+                            <strong style="color: var(--accent-purple);">Exemplo Prático:</strong>
+                            <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: var(--text-main);">Uma biblioteca tem CVE HIGH (7.5). Mas se a função vulnerável não for importada no seu código, o risco real é <strong>ZERO</strong>. Status: not_affected.</p>
+                        </div>
+                    </section>
+
+                    <section id="logic-cvss" style="margin-bottom: 30px;">
+                        <h3>3. Entenda a Métrica CVSS v4.0</h3>
+                        <p>Sistema padrão de quantificação de severidade em escala de 0 a 10:</p>
+                        
+                        <div class="cvss-table" style="margin-top: 20px; margin-bottom: 30px;">
+                            <div class="cvss-row cvss-header" style="grid-template-columns: 160px 200px 1fr;">
                                 <span class="col-label">PONTUAÇÃO</span>
+                                <span class="col-label">RISCO INTRÍNSECO</span>
                                 <span class="col-label">AÇÃO DE GOVERNANÇA</span>
-                                <span class="col-label" style="text-align: center;">AUTONOMIA</span>
                             </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--status-critical); font-weight: 700;">9.0 - 10.0</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Escalonamento Crítico Obrigatório.</span>
-                                <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">NENHUMA</div>
-                            </div>
-                            <div class="cvss-row">
-                                <span style="color: var(--accent-gold); font-weight: 700;">7.0 - 8.9</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Waiver exige busca comprovada de alternativas.</span>
-                                <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RESTRITA</div>
-                            </div>
-                            <div class="cvss-row">
+                            <div class="cvss-row" style="grid-template-columns: 160px 200px 1fr;">
                                 <span style="color: var(--status-success); font-weight: 700;">0.0 - 6.9</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Waiver permitido se Esforço > 16h.</span>
-                                <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">TOTAL</div>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Baixo/Médio</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Atualizar conforme ciclo ordinário.</span>
+                            </div>
+                            <div class="cvss-row" style="grid-template-columns: 160px 200px 1fr;">
+                                <span style="color: var(--accent-gold); font-weight: 700;">7.0 - 8.9</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Alto</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Waiver exige busca obrigatória de alternativa (socket.dev).</span>
+                            </div>
+                            <div class="cvss-row" style="grid-template-columns: 160px 200px 1fr;">
+                                <span style="color: var(--status-critical); font-weight: 700;">9.0 - 10.0</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Crítico</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);"><strong>Escalonamento Crítico OBRIGATÓRIO</strong> para Time de Segurança.</span>
                             </div>
                         </div>
-                    </section>
 
-                    <section id="logic-context" style="margin-bottom: 50px;">
-                        <h3>3. Diferenciação de Contexto</h3>
-                        <p>O rigor da análise depende da natureza da dependência.</p>
-                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
-                            <div class="meta-card card-critical">
-                                <span class="meta-label" style="color: var(--status-critical);">DEPENDENCIES (PRODUÇÃO)</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Rigor Máximo.</p>
-                            </div>
-                            <div class="meta-card card-warning">
-                                <span class="meta-label" style="color: var(--accent-gold);">DEVDEPENDENCIES (BUILD)</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Foco em Supply Chain.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="logic-steps" style="margin-bottom: 50px;">
-                        <h3>4. Fluxo de Decisão e Triagem</h3>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">COMPOSIÇÃO DA MÉTRICA CVSS</h4>
+                        <p style="margin-bottom: 20px;">A pontuação CVSS é dividida em 4 pilares de análise:</p>
                         
-                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 1: IDENTIFICAÇÃO</h4>
-                        <p style="font-size: 0.9rem;">Identifique a vulnerabilidade via Trivy ou deps.dev.</p>
-                        <img src="assets/images/deps-dev.png" class="manual-img" style="max-width: 100%;" alt="Relatório Trivy">
-                        
-                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 2: TRIAGEM INTERATIVA</h4>
-                        <div id="flowchart-sca" class="flowchart-container" style="margin-bottom: 30px;"></div>
-
-                        <h4 style="color: var(--accent-cyan); margin-bottom: 10px;">PASSO 3: BUSCA POR ALTERNATIVAS</h4>
-                        <p style="font-size: 0.9rem;">Se a correção for inviável, busque alternativas no Snyk Advisor.</p>
-                        <img src="assets/images/snyk-advisor.png" class="manual-img" style="max-width: 500px; margin: 20px auto;" alt="Snyk Advisor">
-                    </section>
-
-                    <section id="logic-calc" style="margin-bottom: 50px;">
-                        <h3>5. Avaliação de Esforço (Regra das 16h)</h3>
-                        <p>O esforço total (E = Ta + Ti + Tv) contempla todo o ciclo.</p>
-                        
-                        <div class="pro-tip">
-                            <div class="pro-tip-header"><i class="ph ph-function"></i> Regra das 16 Horas</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Se a correção custar menos de 16h, ela é <strong>OBRIGATÓRIA</strong>.</p>
-                        </div>
-
-                        <div style="background: var(--bg-panel); padding: 24px; border: 1px solid var(--border-subtle);">
-                            <div class="form-grid">
-                                <div>
-                                    <label>TEMPO ANÁLISE (Ta)</label>
-                                    <input type="number" id="time-analysis" placeholder="Horas">
-                                </div>
-                                <div>
-                                    <label>TEMPO IMPLEMENTAÇÃO (Ti)</label>
-                                    <input type="number" id="time-implementation" placeholder="Horas">
-                                </div>
-                                <div>
-                                    <label>TEMPO VALIDAÇÃO (Tv)</label>
-                                    <input type="number" id="time-validation" placeholder="Horas">
-                                </div>
+                        <div class="meta-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div class="meta-card" style="display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-align: center; display: block;">MÉTRICAS DE BASE</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.85rem; color: var(--text-main); text-align: justify;">Qualidades intrínsecas constantes ao longo do tempo e entre ambientes.</p>
                             </div>
-                            <button class="action-btn" onclick="calculators.calculateEffort()">Calcular Elegibilidade</button>
-                            <div id="effort-result" class="result-box hidden"></div>
-                        </div>
-                    </section>
-
-                    <section id="logic-waiver" style="margin-bottom: 50px;">
-                        <h3>6. Gestão de Waivers e Templates</h3>
-                        <h4 style="margin-top: 30px; font-size: 0.9rem; color: #fff;">NO GIT (MENSAGEM DE COMMIT)</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Template</span>
-                                <button class="btn-copy" onclick="utils.copyCode('waiver-git')"><i class="ph ph-copy"></i></button>
+                            <div class="meta-card" style="display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-align: center; display: block;">MÉTRICAS DE AMEAÇA</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.85rem; color: var(--text-main); text-align: justify;">Probabilidade de exploração com base em atividade real de exploits.</p>
                             </div>
-                            <pre><code id="waiver-git">Waiver de Segurança: [CVE-ID]
-Justificativa: [Motivo Técnico]
-Status: Função isolada.
-Prazo: 10 dias.</code></pre>
+                            <div class="meta-card" style="display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-align: center; display: block;">MÉTRICAS AMBIENTAIS</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.85rem; color: var(--text-main); text-align: justify;">Ajusta pontuação com base nos controles de segurança e implementação específica.</p>
+                            </div>
+                            <div class="meta-card" style="display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--accent-cyan); font-size: 0.8rem; font-weight: 700; text-align: center; display: block;">MÉTRICAS SUPLEMENTARES</span>
+                                <p style="margin: 10px 0 0 0; font-size: 0.85rem; color: var(--text-main); text-align: justify;">Atributos adicionais que não impactam a nota final, mas auxiliam a decisão.</p>
+                            </div>
                         </div>
 
-                        <h4 style="margin-top: 30px; font-size: 0.9rem; color: #fff;">NO OPENPROJECT</h4>
-                        <img src="assets/images/open-project.png" class="manual-img" style="max-width: 600px; margin: 20px auto;" alt="OpenProject">
-                    </section>
-
-                    <section id="logic-escalation" style="margin-bottom: 50px;">
-                        <h3>7. Escalonamento Crítico</h3>
-                        <div class="meta-card card-critical">
-                            <span class="meta-label" style="color: var(--status-critical);">PROCEDIMENTO (CVSS > 9.0)</span>
-                            <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem;">
-                                <li>Alterar status para <strong>[Em Revisão]</strong>.</li>
-                                <li>Solicitar revisão de Sênior/Sec.</li>
-                                <li>Aguardar "De Acordo" no ticket.</li>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">STRING VETORIAL CVSS (QUANDO DISPONÍVEL)</h4>
+                        <p style="font-size: 0.9rem; margin-bottom: 15px;">A String Vetorial CVSS é uma representação técnica das <strong>métricas de severidade</strong>. Quando disponível, deve ser incluída nas justificativas de Waiver para auditoria detalhada.</p>
+                        
+                        <div style="background: var(--bg-critical-lighter); border-left: 4px solid var(--accent-gold); padding: 15px; margin-bottom: 20px;">
+                            <strong style="color: var(--accent-gold);">⚠️ ATENÇÃO:</strong>
+                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                Nem todas as vulnerabilidades possuem String Vetorial, especialmente as mais antigas. Se não houver String Vetorial disponível, inclua no Waiver apenas o <strong>CVE/GHSA ID</strong> e o <strong>Score numérico</strong> (ex: CVE-2019-10744, Score: 9.1 CRITICAL).
+                            </p>
+                        </div>
+                        
+                        <div style="background: var(--bg-indigo-subtle); border: 1px solid var(--border-indigo); padding: 20px; margin-bottom: 20px;">
+                            <strong style="color: var(--primary-blue); font-size: 0.9rem;">ONDE PROCURAR A STRING VETORIAL:</strong>
+                            <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.8;">
+                                <li><strong>Trivy:</strong> Campo "CVSS Vector" na saída do relatório</li>
+                                <li><strong>NVD (nvd.nist.gov):</strong> Página do CVE → seção "CVSS Metrics" → campo "Vector String"</li>
+                                <li><strong>deps.dev:</strong> Clique no advisory → procure por "Vector" (nem sempre disponível)</li>
+                                <li><strong>Se não encontrar:</strong> Use apenas o score numérico no Waiver</li>
                             </ul>
                         </div>
+
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Exemplo de String Vetorial (quando disponível):</p>
+                        <div class="code-block">
+                            <pre style="padding: 15px; margin: 0;"><code>CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</code></pre>
+                        </div>
                     </section>
+
+                    <section id="logic-context" style="margin-bottom: 30px;">
+                        <h3>4. Diferenciação de Contexto [Ambiente]</h3>
+                        <p>O rigor da análise depende da natureza da dependência:</p>
+                        
+                        <div style="display: flex; gap: 20px; width: 100%;">
+                            <div class="meta-card card-critical" style="flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--status-critical); font-size: 0.95rem; font-weight: 600;">DEPENDENCIES (PRODUÇÃO)</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.5;">
+                                    <strong>Contexto:</strong> Enviadas ao servidor/usuário final<br>
+                                    <strong>Rigor Máximo:</strong> Score manutenção > 85 (socket.dev) + remediação imediata de vulnerabilidades.
+                                </p>
+                            </div>
+                            <div class="meta-card card-warning" style="flex: 1; padding: 15px; display: flex; flex-direction: column; justify-content: center;">
+                                <span class="meta-label" style="color: var(--accent-gold); font-size: 0.95rem; font-weight: 600;">DEVDEPENDENCIES (DESENVOLVIMENTO)</span>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.5;">
+                                    <strong>Contexto:</strong> Ferramentas de build/teste (Tailwind, Jest, etc.)<br>
+                                    <strong>Proteção Supply Chain:</strong> Foco em prevenir comprometimento do ambiente de desenvolvimento.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-resources" style="margin-bottom: 30px;">
+                        <h3>5. Recursos de Consulta Obrigatórios</h3>
+                        <p>Utilize estas plataformas para análise técnica de bibliotecas durante o processo de triagem:</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px;">
+                            <a href="https://deps.dev/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                                <div class="meta-card" style="border: 2px solid var(--primary-blue); transition: all 0.3s; cursor: pointer; height: 100%;">
+                                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                        <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue);"></i>
+                                        <span class="meta-label" style="color: var(--primary-blue); font-size: 1.1rem;">deps.dev</span>
+                                    </div>
+                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                        <strong>Uso:</strong> Consulta de vulnerabilidades (CVEs), versões corrigidas e análise de dependências transitivas.<br>
+                                        <strong>Foco:</strong> Security Advisories + Patch availability
+                                    </p>
+                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-muted);">
+                                        <i class="ph ph-arrow-square-out"></i> Abrir deps.dev
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="https://socket.dev/" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                                <div class="meta-card" style="border: 2px solid var(--accent-cyan); transition: all 0.3s; cursor: pointer; height: 100%;">
+                                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                                        <i class="ph ph-shield-check" style="font-size: 2rem; color: var(--accent-cyan);"></i>
+                                        <span class="meta-label" style="color: var(--accent-cyan); font-size: 1.1rem;">socket.dev</span>
+                                    </div>
+                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                        <strong>Uso:</strong> Score de manutenção (deve ser > 85), busca de alternativas viáveis e análise de Supply Chain.<br>
+                                        <strong>Foco:</strong> Maintenance score + Security health
+                                    </p>
+                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-muted);">
+                                        <i class="ph ph-arrow-square-out"></i> Abrir socket.dev
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div style="background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); padding: 15px;">
+                            <strong style="color: var(--accent-purple);"><i class="ph ph-lightbulb"></i> DICA DE USO:</strong>
+                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                Ao identificar uma vulnerabilidade no Trivy, copie o nome da biblioteca e pesquise em ambas as plataformas. O deps.dev fornecerá informações sobre patches disponíveis, enquanto o socket.dev indicará o score de manutenção e alternativas saudáveis.
+                            </p>
+                        </div>
+                    </section>
+
+                    <section id="logic-steps" style="margin-bottom: 30px;">
+                        <h3>6. Fluxo de Decisão: Passo a Passo</h3>
+                        <p>Siga esta sequência metodológica ao identificar uma biblioteca com vulnerabilidades ou obsolescência:</p>
+                        
+                        <div style="display: grid; gap: 20px; margin-top: 20px;">
+                            <!-- PASSO 1 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">1</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Consulta de Saúde e Segurança</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    Realize a consulta da biblioteca no <strong>deps.dev</strong> para verificar a versão atual e existência de vulnerabilidades conhecidas. Utilize o <strong>socket.dev</strong> para validar o score de manutenção.
+                                </p>
+                                <div style="margin: 0 0 0 48px; background: var(--bg-panel); padding: 15px;  border: 1px solid var(--primary-blue);">
+                                    <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">O que verificar:</p>
+                                    <ul style="margin: 0; padding-left: 20px; color: var(--text-on-colored); font-size: 0.85rem; line-height: 1.8;">
+                                        <li><strong>deps.dev:</strong> Presença de Security Advisories (CVEs/GHSAs) e versões disponíveis</li>
+                                        <li><strong>socket.dev:</strong> Maintenance Score ≥ 85</li>
+                                        <li><strong>Atividade:</strong> Manutenção ativa nos últimos 12 meses</li>
+                                    </ul>
+                                </div>
+                                <div style="margin: 15px 0 0 48px; padding: 12px 15px; background: var(--bg-warning-medium); border-left: 3px solid var(--accent-gold); font-size: 0.85rem;">
+                                    <strong style="color: var(--accent-gold);"><i class="ph ph-warning"></i> ATENÇÃO:</strong>
+                                    <span style="color: var(--text-on-colored);"> Se a biblioteca NÃO for vulnerável mas estiver sem manutenção (> 12 meses), pule para o <strong>Passo 4</strong>.</span>
+                                </div>
+                            </div>
+
+                            <!-- PASSO 2 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">2</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Verificação de Patch e Remediação</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    Caso a biblioteca seja vulnerável, busque um <strong>Patch de Correção</strong> no deps.dev. Acesse a aba <strong>Security Advisories</strong> para identificar a versão mínima que mitiga a falha.
+                                </p>
+                                <div style="margin: 0 0 0 48px; background: var(--bg-panel); padding: 15px;  border: 1px solid var(--primary-blue);">
+                                    <p style="margin: 0 0 12px 0; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Decisões possíveis:</p>
+                                    <div style="display: grid; gap: 12px; font-size: 0.85rem;">
+                                        <div style="display: flex; gap: 10px; align-items: start; padding: 10px; background: var(--bg-success-subtle); ">
+                                            <span style="color: var(--status-success); font-weight: 700; font-size: 1.1rem; min-width: 24px;">✓</span>
+                                            <div style="flex: 1;">
+                                                <strong style="color: var(--status-success);">Versão estável sem Breaking Changes</strong>
+                                                <p style="margin: 4px 0 0 0; color: var(--text-on-colored);">Execute a atualização <strong>IMEDIATAMENTE</strong></p>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; gap: 10px; align-items: start; padding: 10px; background: var(--bg-warning-subtle); ">
+                                            <span style="color: var(--accent-gold); font-weight: 700; font-size: 1.1rem; min-width: 24px;">⚠</span>
+                                            <div style="flex: 1;">
+                                                <strong style="color: var(--accent-gold);">Requer Breaking Changes (major)</strong>
+                                                <p style="margin: 4px 0 0 0; color: var(--text-on-colored);">Prossiga para <strong>Passo 3</strong></p>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; gap: 10px; align-items: start; padding: 10px; background: var(--bg-critical-subtle); ">
+                                            <span style="color: var(--status-critical); font-weight: 700; font-size: 1.1rem; min-width: 24px;">✕</span>
+                                            <div style="flex: 1;">
+                                                <strong style="color: var(--status-critical);">Sem patch disponível</strong>
+                                                <p style="margin: 4px 0 0 0; color: var(--text-on-colored);">Prossiga para <strong>Passo 3</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PASSO 3 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">3</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Análise de Alcance (Reachability)</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    <strong>Determine se a função especificamente vulnerável é importada ou executada no código do projeto.</strong> Esta é a etapa crítica para diferenciar severidade teórica de risco real.
+                                </p>
+                                <div style="margin: 0 0 15px 48px; background: var(--bg-panel); padding: 15px;  border: 1px solid var(--primary-blue);">
+                                    <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Como verificar:</p>
+                                    <ul style="margin: 0; padding-left: 20px; color: var(--text-on-colored); font-size: 0.85rem; line-height: 1.8;">
+                                        <li>Busque imports/usages da <strong>função específica</strong> mencionada no CVE</li>
+                                        <li>Use análise estática: grep, IDE search, Trivy</li>
+                                        <li>Verifique se a função é <strong>efetivamente executada</strong></li>
+                                    </ul>
+                                </div>
+                                <div style="margin: 0 0 0 48px; display: grid; gap: 10px;">
+                                    <div style="background: var(--bg-success-subtle); border-left: 4px solid var(--status-success); padding: 12px 15px; ">
+                                        <strong style="color: var(--status-success); font-size: 0.9rem;">Função NÃO importada + CVSS < 7.0</strong>
+                                        <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: var(--text-on-colored);">Status: <code style="background: var(--code-success-bg); color: var(--status-success); padding: 2px 8px;  font-weight: 600;">not_affected</code> → <strong>Finalize o processo</strong></p>
+                                    </div>
+                                    <div style="background: var(--bg-warning-subtle); border-left: 4px solid var(--accent-gold); padding: 12px 15px; ">
+                                        <strong style="color: var(--accent-gold); font-size: 0.9rem;">Função NÃO importada + CVSS ≥ 7.0</strong>
+                                        <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: var(--text-on-colored);">Status: <code style="background: var(--code-warning-bg); color: var(--accent-gold); padding: 2px 8px;  font-weight: 600;">not_affected</code> → <strong>Waiver OBRIGATÓRIO</strong></p>
+                                    </div>
+                                    <div style="background: var(--bg-critical-subtle); border-left: 4px solid var(--status-critical); padding: 12px 15px; ">
+                                        <strong style="color: var(--status-critical); font-size: 0.9rem;">Função IMPORTADA e EXECUTADA</strong>
+                                        <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: var(--text-on-colored);">Risco confirmado → Prossiga para <strong>Passo 4</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PASSO 4 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">4</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Viabilidade de Alternativas</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    Para bibliotecas inativas ou vulneráveis com funções alcançáveis, busque substitutas no <strong>socket.dev</strong>. Score de manutenção > 85 é <strong>obrigatório</strong>.
+                                </p>
+                                <div style="margin: 0 0 15px 48px; background: var(--bg-panel); padding: 15px;  border: 1px solid var(--primary-blue);">
+                                    <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Critérios de avaliação:</p>
+                                    <ul style="margin: 0; padding-left: 20px; color: var(--text-on-colored); font-size: 0.85rem; line-height: 1.8;">
+                                        <li><strong>Maintenance Score > 85</strong> (obrigatório)</li>
+                                        <li>Paridade funcional (API compatível)</li>
+                                        <li>Sem vulnerabilidades conhecidas</li>
+                                        <li>Atividade recente (< 6 meses)</li>
+                                        <li>Adoção pela comunidade</li>
+                                    </ul>
+                                </div>
+                                <div style="margin: 0 0 0 48px; display: grid; gap: 10px;">
+                                    <div style="background: var(--bg-success-subtle); border-left: 4px solid var(--status-success); padding: 10px 15px; font-size: 0.85rem; ">
+                                        <strong style="color: var(--status-success);">Alternativa encontrada:</strong>
+                                        <span style="color: var(--text-on-colored);"> Retorne ao <strong>Passo 1</strong> com o novo pacote</span>
+                                    </div>
+                                    <div style="background: var(--bg-critical-subtle); border-left: 4px solid var(--status-critical); padding: 10px 15px; font-size: 0.85rem; ">
+                                        <strong style="color: var(--status-critical);">Nenhuma alternativa:</strong>
+                                        <span style="color: var(--text-on-colored);"> Prossiga para <strong>Passo 5</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PASSO 5 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">5</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Avaliação de Esforço</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    Calcule o <strong>esforço total estimado</strong> para a correção técnica ou migração completa da biblioteca.
+                                </p>
+                                <div style="margin: 0 0 15px 48px; background: var(--bg-panel); padding: 15px;  border: 1px solid var(--primary-blue);">
+                                    <p style="margin: 0 0 12px 0; font-size: 0.85rem; color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Estimativa de esforço:</p>
+                                    <div style="display: grid; gap: 10px; font-size: 0.85rem;">
+                                        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px; background: var(--bg-success-subtle);  align-items: center;">
+                                            <span style="color: var(--status-success); font-weight: 700; font-size: 0.9rem;">< 4 horas</span>
+                                            <span style="color: var(--text-on-colored);">Update simples sem Breaking Changes</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px; background: var(--bg-warning-subtle);  align-items: center;">
+                                            <span style="color: var(--accent-gold); font-weight: 700; font-size: 0.9rem;">4 - 16 horas</span>
+                                            <span style="color: var(--text-on-colored);">Migração + refatoração moderada</span>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: 140px 1fr; gap: 12px; padding: 10px; background: var(--bg-critical-subtle);  align-items: center;">
+                                            <span style="color: var(--status-critical); font-weight: 700; font-size: 0.9rem;">> 16 horas</span>
+                                            <span style="color: var(--text-on-colored);">Reescrita + testes extensivos</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin: 0 0 0 48px; display: grid; gap: 10px;">
+                                    <div style="background: var(--bg-success-subtle); border-left: 4px solid var(--status-success); padding: 10px 15px; font-size: 0.85rem; ">
+                                        <strong style="color: var(--status-success);">Esforço < 16h:</strong>
+                                        <span style="color: var(--text-on-colored);"> Execução <strong>IMEDIATA</strong></span>
+                                    </div>
+                                    <div style="background: var(--bg-critical-subtle); border-left: 4px solid var(--status-critical); padding: 10px 15px; font-size: 0.85rem; ">
+                                        <strong style="color: var(--status-critical);">Esforço > 16h:</strong>
+                                        <span style="color: var(--text-on-colored);"> Prossiga para <strong>Passo 6</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- PASSO 6 -->
+                            <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); padding: 20px; ">
+                                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                    <div style="background: var(--primary-blue); color: #FFFFFF; font-weight: 700; width: 36px; height: 36px;  display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">6</div>
+                                    <strong style="color: var(--primary-blue); font-size: 1.05rem;">Triagem de Severidade Final</strong>
+                                </div>
+                                <p style="margin: 0 0 15px 48px; font-size: 0.9rem; color: var(--text-main); line-height: 1.6;">
+                                    Avalie o impacto final com base no <strong>CVSS</strong> para definir o nível de governança adequado.
+                                </p>
+                                <div style="margin: 0 0 0 48px;">
+                                    <div style="display: grid; gap: 15px;">
+                                        <div style="background: var(--bg-success-subtle); border: 2px solid var(--status-success); padding: 18px; ">
+                                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                                <div style="background: var(--status-success); width: 6px; height: 6px; "></div>
+                                                <strong style="color: var(--status-success); font-size: 0.95rem;">CVSS 0.0 - 6.9 (BAIXO/MÉDIO)</strong>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-on-colored); line-height: 1.7; padding-left: 16px;">
+                                                <strong>Ação:</strong> Waiver permitido se esforço > 16h<br>
+                                                <strong>Governança:</strong> OpenProject com tags "Segurança" e "Waiver"<br>
+                                                <strong>Prazo:</strong> Reavaliação em <strong>10 dias</strong>
+                                            </p>
+                                        </div>
+                                        <div style="background: var(--bg-warning-subtle); border: 2px solid var(--accent-gold); padding: 18px; ">
+                                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                                <div style="background: var(--accent-gold); width: 6px; height: 6px; "></div>
+                                                <strong style="color: var(--accent-gold); font-size: 0.95rem;">CVSS 7.0 - 8.9 (ALTO)</strong>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-on-colored); line-height: 1.7; padding-left: 16px;">
+                                                <strong>Ação:</strong> Waiver exige <strong>comprovação de busca</strong> no socket.dev<br>
+                                                <strong>Governança:</strong> OpenProject + Git + evidências de pesquisa<br>
+                                                <strong>Prazo:</strong> Reavaliação em <strong>10 dias</strong>
+                                            </p>
+                                        </div>
+                                        <div style="background: var(--bg-critical-subtle); border: 2px solid var(--status-critical); padding: 18px; ">
+                                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                                                <div style="background: var(--status-critical); width: 6px; height: 6px; "></div>
+                                                <strong style="color: var(--status-critical); font-size: 0.95rem;">CVSS > 9.0 (CRÍTICO)</strong>
+                                            </div>
+                                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-on-colored); line-height: 1.7; padding-left: 16px;">
+                                                <strong>Ação:</strong> <strong>ESCALONAMENTO CRÍTICO OBRIGATÓRIO</strong><br>
+                                                <strong>Governança:</strong> Status [Em Revisão] + Aprovação de revisor<br>
+                                                <strong>Workflow:</strong> Waiver válido após comentário do revisor
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-waiver" style="margin-bottom: 30px;">
+                        <h3>7. Gestão de Waivers: Templates Obrigatórios</h3>
+                        <p>Toda biblioteca vulnerável mantida exige justificativa formal em Git e OpenProject com tag Segurança.</p>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">NO GIT (COMMIT MESSAGE)</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Template - Waiver Temporário</span>
+                                <button class="btn-copy" onclick="utils.copyCode('waiver-git-temp')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="waiver-git-temp">Waiver de Segurança: [CVE-ID ou Obsolescência]
+
+Justificativa: [Vulnerabilidade de baixo impacto / Custo de migração elevado / Falta de alternativa viável]
+Status: Função não exposta ou isolada
+Prazo de Reavaliação: Máximo 10 dias</code></pre>
+                        </div>
+
+                        <div class="code-block" style="margin-top: 20px;">
+                            <div class="code-header">
+                                <span>Template - Not Affected</span>
+                                <button class="btn-copy" onclick="utils.copyCode('waiver-git-na')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="waiver-git-na">Waiver de Segurança: [CVE-ID]
+
+Justificativa: Biblioteca mantida por ser inalcançável no contexto atual
+Status: not_affected (Função não importada)
+String Vetorial: [ex: CVSS:4.0/AV:N/...]
+Registro obrigatório para checagem periódica
+Prazo de Reavaliação: Máximo 10 dias</code></pre>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">NO OPENPROJECT (RASTREABILIDADE)</h4>
+                        <div style="background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); padding: 20px;">
+                            <p style="margin: 0 0 15px 0; font-size: 0.9rem;"><strong>Criar Work Package com:</strong></p>
+                            <ul style="margin: 0 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.8;">
+                                <li><strong>Tipo:</strong> Tarefa ou Bug</li>
+                                <li><strong>Assunto:</strong> [WAIVER] - [NOME_BIBLIOTECA] - [CVE-ID]</li>
+                                <li><strong>Descrição:</strong> Justificativa técnica + Análise de Alcance + Link commit Git</li>
+                                <li><strong>Categoria:</strong> Adicionar "Segurança" ou "Waiver"</li>
+                                <li><strong>Prazo:</strong> Não superior a 10 dias</li>
+                                <li><strong>Custom Field:</strong> Link para commit no Git</li>
+                            </ul>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">TABELA DE CAMPOS WAIVER</h4>
+                        <div class="cvss-table">
+                            <div class="cvss-row cvss-header">
+                                <span class="col-label">CAMPO</span>
+                                <span class="col-label">CONTEÚDO OBRIGATÓRIO</span>
+                                <span class="col-label">FINALIDADE</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem;">Descrição</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Justificativa técnica + Análise de Alcance</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Justificar risco aceito</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem;">Versão</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Versão atual da biblioteca vulnerável</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Controle de inventário</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem;">Atribuído a</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Desenvolvedor responsável pela análise</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Responsabilidade técnica</span>
+                            </div>
+                            <div class="cvss-row">
+                                <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem;">Link Git</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">URL do commit no repositório</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Rastreabilidade do código</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="logic-escalation" style="margin-bottom: 30px;">
+                        <h3>8. Escalonamento Crítico (CVSS > 9.0)</h3>
+                        <p>Processo de trava de governança para riscos de alta severidade:</p>
+
+                        <div style="background: var(--bg-critical-lighter); border-left: 4px solid var(--status-critical); padding: 15px; margin-bottom: 20px;">
+                            <strong style="color: var(--status-critical);">GATILHO DE ATIVAÇÃO</strong>
+                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
+                                Este processo é <strong>obrigatório</strong> quando a <strong>severidade for maior que 9.0</strong> (CVSS crítico) ou quando a <strong>obsolescência afetar bibliotecas centrais</strong> do projeto.
+                            </p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 15px;">WORKFLOW OBRIGATÓRIO</h4>
+                        <ol style="margin: 0 0 20px 20px; padding-left: 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
+                            <li>Alterar status no OpenProject para <strong>[Em Revisão]</strong></li>
+                            <li>Aguardar revisão obrigatória do <strong>Time de Segurança</strong></li>
+                            <li>Revisor valida: Análise de Alcance + Cálculo Esforço + Alternativas</li>
+                            <li>Publicar comentário de aprovação conforme template</li>
+                            <li>Waiver só é válido após aprovação do revisor</li>
+                        </ol>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0;">TEMPLATE DE COMENTÁRIO DE APROVAÇÃO</h4>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span>Revisor: Copiar e Preencher</span>
+                                <button class="btn-copy" onclick="utils.copyCode('escalation-approval')"><i class="ph ph-copy"></i></button>
+                            </div>
+                            <pre><code id="escalation-approval">Parecer Técnico de Escalonamento Crítico
+
+Validação de Alcance:
+Confirmo que a análise de Reachability foi executada e a função 
+vulnerável é de fato inativa ou isolada no contexto do projeto.
+Detalhes: [descrever análise realizada]
+
+Validação de Esforço:
+O cálculo de esforço estimado em [X] horas foi auditado e considerado 
+condizente com a complexidade técnica da remediação.
+Detalhes: [refatoração, testes, etc.]
+
+Análise de Alternativas:
+Validei a inexistência de Alternativas Viáveis com paridade funcional 
+imediata no socket.dev (score > 85).
+Detalhes: [quais alternativas foram descartadas e por quê]
+
+Decisão: ✅ APROVADO para uso temporário sob regime de Waiver
+Prazo de Reavaliação: 10 dias
+Revisor: [Nome] | Data: [Data]</code></pre>
+                        </div>
+                    </section>
+
+                    <footer class="app-footer">
+                        <p>© 2026 PadaONE Security · Todos os direitos reservados</p>
+                    </footer>
                 </div>
 
                 <aside class="right-toc">
                     <div class="toc-header">Nesta Página</div>
                     <ul class="toc-list">
                         <li class="toc-item"><a href="#logic-quick">Decisão Rápida</a></li>
-                        <li class="toc-item"><a href="#logic-cvss">Métrica CVSS</a></li>
-                        <li class="toc-item"><a href="#logic-context">Contexto</a></li>
-                        <li class="toc-item"><a href="#logic-steps">Fluxo e Triagem</a></li>
-                        <li class="toc-item"><a href="#logic-calc">Calculadora</a></li>
+                        <li class="toc-item"><a href="#logic-severity-vs-risk">Severidade vs. Risco</a></li>
+                        <li class="toc-item"><a href="#logic-cvss">Métrica CVSS v4.0</a></li>
+                        <li class="toc-item"><a href="#logic-context">Contexto (Deps/DevDeps)</a></li>
+                        <li class="toc-item"><a href="#logic-resources">Recursos de Consulta</a></li>
+                        <li class="toc-item"><a href="#logic-steps">Fluxo de Decisão</a></li>
                         <li class="toc-item"><a href="#logic-waiver">Templates Waiver</a></li>
-                        <li class="toc-item"><a href="#logic-escalation">Escalonamento</a></li>
+                        <li class="toc-item"><a href="#logic-escalation">Escalonamento Crítico</a></li>
                     </ul>
                 </aside>
             </div>
@@ -241,9 +667,44 @@ Prazo: 10 dias.</code></pre>
         </main>
     </div>
 
-    <script src="js/utils.js"></script>
-    <script src="js/calculators.js"></script>
-    <script src="js/flow-logic.js"></script>
+    <script>
+        function toggleMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeMobileSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            if (!sidebar || !overlay) return;
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', closeMobileSidebar);
+            });
+        });
+
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileSidebar();
+            }
+        });
+    </script>
+
     <script src="js/navigation.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/flow-logic.js"></script>
+    <script src="js/triage.js"></script>
 </body>
 </html>
