@@ -1,4 +1,4 @@
-const nav = {
+window.nav = window.nav || {
     history: [],
     currentPage: 'dashboard',
 

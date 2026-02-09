@@ -21,6 +21,24 @@
     width: 100%;
 }
 
+.logo-area img {
+    transition: opacity 0.3s ease;
+}
+
+/* Hide light logo by default (dark theme) */
+.logo-area img[src*="Light"] {
+    display: none;
+}
+
+/* Show light logo in light theme */
+[data-theme="light"] .logo-area img[src*="Dark"] {
+    display: none;
+}
+
+[data-theme="light"] .logo-area img[src*="Light"] {
+    display: block;
+}
+
 .logo-box { 
     width: 40px; 
     height: 40px; 
@@ -60,12 +78,12 @@
 
 .nav-item:hover { 
     background: var(--bg-hover); 
-    color: #fff; 
+    color: var(--text-main); 
 }
 
 .nav-item.active { 
     background: var(--bg-hover); 
-    color: #fff; 
+    color: var(--text-main); 
     border-left: 2px solid var(--primary-blue); 
 }
 

@@ -1,4 +1,4 @@
-const utils = {
+window.utils = window.utils || {
     copyCode: async (elementId) => {
         const codeElement = document.getElementById(elementId);
         if (!codeElement) return;

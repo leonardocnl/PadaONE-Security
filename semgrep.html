@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
     <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/theme.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -22,6 +24,7 @@
                 <div class="logo-area">
                     <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
                         <img src="assets/images/PADAONE-Security Dark.png" alt="PADAONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                        <img src="assets/images/PADAONE-Security Light.png" alt="PADAONE Security" style="height: 80px; width: 100%; object-fit: contain;">
                     </button>
                 </div>
             </div>
@@ -61,6 +64,9 @@
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Semgrep (SAST)</span>
+                <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
+                    <i class="ph ph-sun"></i>
+                </button>
             </header>
 
             <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
@@ -80,15 +86,15 @@
                         <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">TIPO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">SAST (Static Analysis)</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">SAST (Static Analysis)</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGENS</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">30+ (JS, Python, Java, Go, etc.)</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">30+ (JS, Python, Java, Go, etc.)</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline + IDE</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Local + Pipeline + IDE</p>
                             </div>
                         </div>
                     </section>
@@ -162,17 +168,17 @@ semgrep --config=auto --json --output=semgrep-report.json .</code></pre>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--status-critical); font-weight: 700;">p/security-audit</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Vulnerabilidades OWASP Top 10 e CWE.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Vulnerabilidades OWASP Top 10 e CWE.</span>
                                 <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">OBRIGATÓRIO</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--accent-gold); font-weight: 700;">p/owasp-top-ten</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Focado nas 10 vulnerabilidades mais críticas.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Focado nas 10 vulnerabilidades mais críticas.</span>
                                 <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RECOMENDADO</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--primary-blue); font-weight: 700;">p/r2c-best-practices</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Boas práticas de código e padrões.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Boas práticas de código e padrões.</span>
                                 <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">OPCIONAL</div>
                             </div>
                         </div>
@@ -339,17 +345,17 @@ build/
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--status-critical); font-weight: 700;">ERROR (Crítico)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Correção obrigatória antes do merge.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Correção obrigatória antes do merge.</span>
                                 <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">IMEDIATO</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--accent-gold); font-weight: 700;">WARNING (Alto)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Revisar e corrigir dentro do sprint.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Revisar e corrigir dentro do sprint.</span>
                                 <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">7 DIAS</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--primary-blue); font-weight: 700;">INFO (Baixo)</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Correção recomendada, não bloqueante.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Correção recomendada, não bloqueante.</span>
                                 <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue);">30 DIAS</div>
                             </div>
                         </div>
@@ -361,14 +367,14 @@ build/
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 900px;">
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">VS CODE</span>
-                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Extensão oficial: <strong>Semgrep</strong></p>
+                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main);">Extensão oficial: <strong>Semgrep</strong></p>
                                 <div class="code-block" style="margin: 0;">
                                     <pre style="padding: 15px;"><code>ext install semgrep.semgrep</code></pre>
                                 </div>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">INTELLIJ / PYCHARM</span>
-                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: #fff;">Plugin disponível no Marketplace</p>
+                                <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main);">Plugin disponível no Marketplace</p>
                                 <div class="code-block" style="margin: 0;">
                                     <pre style="padding: 15px;"><code>Settings > Plugins > Semgrep</code></pre>
                                 </div>
@@ -386,7 +392,7 @@ build/
                         
                         <div class="meta-card card-critical">
                             <span class="meta-label" style="color: var(--status-success);">CHECKLIST DE IMPLEMENTAÇÃO</span>
-                            <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                            <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
                                 <li><strong>Local:</strong> Integrar pre-commit hook para bloquear commits vulneráveis.</li>
                                 <li><strong>IDE:</strong> Instalar extensão para feedback instantâneo.</li>
                                 <li><strong>Pipeline:</strong> Executar no CI/CD com <code>--error</code> para bloquear builds.</li>
