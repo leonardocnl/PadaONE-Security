@@ -1,4 +1,4 @@
-const flowLogic = {
+window.flowLogic = window.flowLogic || {
     currentTool: null,
     retryCount: 0,
     maxRetries: 3,

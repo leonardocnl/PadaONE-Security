@@ -2,6 +2,15 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* Smooth theme transitions */
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
 :target {
     background-color: transparent !important;
     outline: none !important;
@@ -46,8 +55,36 @@ body {
     align-items: center;
     padding: 0 40px;
     border-bottom: 1px solid var(--border-subtle);
-    background-color: rgba(2, 4, 8, 0.98);
+    background-color: var(--bg-app);
     z-index: 10;
+    gap: 10px;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+    border-radius: 0px;
+}
+
+.theme-toggle:hover {
+    background: var(--bg-hover);
+    color: var(--primary-blue);
+    border-color: var(--primary-blue);
+    transform: rotate(20deg);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95) rotate(20deg);
 }
 
 .back-btn {
@@ -68,7 +105,7 @@ body {
 
 .back-btn:hover {
     background: var(--bg-hover);
-    color: #fff;
+    color: var(--text-main);
     border-color: var(--text-muted);
 }
 
@@ -132,6 +169,20 @@ body {
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
 
+/* Hide light mode SVG by default (dark theme) */
+.diagram-svg[src*="LM"] {
+    display: none;
+}
+
+/* Show light mode SVG in light theme */
+[data-theme="light"] .diagram-svg[src*="DM"] {
+    display: none;
+}
+
+[data-theme="light"] .diagram-svg[src*="LM"] {
+    display: block;
+}
+
 .diagram-container {
     cursor: grab;
 }
@@ -146,7 +197,7 @@ body {
 }
 
 .diagram-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--bg-panel);
 }
 
 .diagram-container::-webkit-scrollbar-thumb {
@@ -253,7 +304,7 @@ h1 {
     font-weight: 700; 
     letter-spacing: -1px; 
     margin-bottom: 20px; 
-    color: #fff; 
+    color: var(--text-main); 
 }
 
 h2 { 
@@ -261,7 +312,7 @@ h2 {
     font-weight: 700; 
     margin-top: 60px; 
     margin-bottom: 25px; 
-    color: #fff; 
+    color: var(--text-main); 
     scroll-margin-top: 100px; 
     border-bottom: 1px solid var(--border-subtle); 
     padding-bottom: 10px;
@@ -328,7 +379,7 @@ p {
 .cvss-row:last-child { border-bottom: none; }
 
 .cvss-header {
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: var(--bg-hover);
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -346,7 +397,7 @@ p {
     font-weight: 700;
     font-size: 0.8rem;
     text-transform: uppercase;
-    background: rgba(0, 0, 0, 0.2);
+    background: var(--bg-panel);
     cursor: default;
 }
 
@@ -365,6 +416,15 @@ p {
     background: var(--bg-panel);
     border: 1px solid var(--border-subtle);
     border-radius: 0px;
+    padding: 20px;
+}
+
+a .meta-card .meta-label {
+    transition: text-decoration 0.2s ease;
+}
+
+a .meta-card:hover .meta-label {
+    text-decoration: underline;
 }
 
 .clickable {
@@ -395,7 +455,7 @@ p {
     font-weight: 700;
     letter-spacing: 1px;
 }
-.meta-value { font-size: 0.9rem; color: #fff; font-weight: 500; }
+.meta-value { font-size: 0.9rem; color: var(--text-main); font-weight: 500; }
 
 .pro-tip {
     background: linear-gradient(90deg, rgba(245, 158, 11, 0.03) 0%, transparent 100%);
@@ -438,7 +498,7 @@ p {
 pre { 
     padding: 25px; 
     overflow-x: auto; 
-    color: #e2e8f0; 
+    color: var(--text-main); 
     font-size: 0.85rem; 
     line-height: 1.6;
 }
@@ -454,7 +514,7 @@ input, select {
     font-family: var(--font-code);
     background: var(--bg-app);
     border: 1px solid var(--border-subtle);
-    color: #fff;
+    color: var(--text-main);
     padding: 12px;
     border-radius: 0px !important;
     width: 100%;
@@ -477,7 +537,7 @@ label {
 .action-btn {
     font-family: var(--font-code);
     background: var(--primary-blue);
-    color: #fff;
+    color: #FFFFFF;
     border: 1px solid var(--primary-blue);
     padding: 14px;
     border-radius: 0px !important;
@@ -513,27 +573,22 @@ label {
 
 .hidden { display: none !important; }
 .btn-copy { background: none; border: none; color: var(--text-muted); cursor: pointer; transition: color 0.3s ease-in-out; }
-.btn-copy:hover { color: #fff; }
+.btn-copy:hover { color: var(--text-main); }
 
 .app-footer {
     margin-top: 80px;
-    padding: 24px 20px 0 20px;
+    padding: 20px;
     text-align: right;
-    border-top: 1px solid rgba(255, 255, 255, 0.03);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-panel);
 }
 
 .app-footer p {
     margin: 0;
     font-size: 0.7rem;
     color: var(--text-muted);
-    opacity: 0.5;
+    opacity: 0.8;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-weight: 500;
-    transition: opacity 0.3s ease;
-}
-
-.app-footer:hover p {
-    opacity: 0.8;
 }

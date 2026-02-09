@@ -170,14 +170,33 @@ function showQuestion(flow) {
     flow.options.forEach((option, index) => {
         buttonsHTML += `
             <button class="triage-btn" onclick="triageFlow('${option.next}')" 
+                aria-label="${option.text}"
                 style="flex: 1; padding: 12px 20px; background: transparent; 
-                border: 1px solid var(--border-subtle); color: #fff; 
+                border: 1px solid var(--border-subtle); color: var(--text-main); 
                 font-weight: 500; cursor: pointer; 
                 transition: all 0.2s; font-size: 0.9rem;">
                 ${option.text}
             </button>
         `;
     });
+    
+    questionDiv.innerHTML = `
+        <h5 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1rem; font-weight: 600;" id="triage-question-heading">${flow.question}</h5>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;" role="group" aria-label="Opções de resposta">
+            ${buttonsHTML}
+        </div>
+    `;
+    
+    questionDiv.style.display = 'block';
+    
+    // Focus first button for keyboard users
+    setTimeout(() => {
+        const firstButton = questionDiv.querySelector('.triage-btn');
+        if (firstButton) {
+            firstButton.focus();
+        }
+    }, 100);
+}
     
     questionDiv.innerHTML = `
         <h5 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1rem; font-weight: 600;">${flow.question}</h5>
@@ -213,7 +232,7 @@ function showResult(flow) {
         <div style="font-size: 1.2rem; font-weight: 700; color: ${flow.color}; margin-bottom: 10px;">
             ${flow.title}
         </div>
-        <div style="color: #fff;">
+        <div style="color: var(--text-main);">
             ${flow.message}
         </div>
     `;
@@ -252,18 +271,20 @@ function resetTriage() {
     if (questionDiv) {
         questionDiv.style.display = 'block';
         questionDiv.innerHTML = `
-            <h5 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1rem; font-weight: 600;">A biblioteca possui vulnerabilidades conhecidas?</h5>
-            <div style="display: flex; gap: 12px;">
+            <h5 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 1rem; font-weight: 600;" id="triage-question-heading">A biblioteca possui vulnerabilidades conhecidas?</h5>
+            <div style="display: flex; gap: 12px;" role="group" aria-label="Opções de resposta">
                 <button class="triage-btn" onclick="triageFlow('vuln-yes')" 
+                    aria-label="Sim, a biblioteca possui vulnerabilidades"
                     style="flex: 1; padding: 12px 20px; background: transparent; 
-                    border: 1px solid var(--border-subtle); color: #fff; 
+                    border: 1px solid var(--border-subtle); color: var(--text-main); 
                     font-weight: 500; cursor: pointer; 
                     transition: all 0.2s; font-size: 0.9rem;">
                     SIM, possui vulnerabilidades
                 </button>
                 <button class="triage-btn" onclick="triageFlow('vuln-no')" 
+                    aria-label="Não, a biblioteca não possui vulnerabilidades"
                     style="flex: 1; padding: 12px 20px; background: transparent; 
-                    border: 1px solid var(--border-subtle); color: #fff; 
+                    border: 1px solid var(--border-subtle); color: var(--text-main); 
                     font-weight: 500; cursor: pointer; 
                     transition: all 0.2s; font-size: 0.9rem;">
                     NÃO, sem vulnerabilidades
@@ -275,6 +296,12 @@ function resetTriage() {
     const resultDiv = document.getElementById('triage-result');
     if (resultDiv) {
         resultDiv.style.display = 'none';
+    }
+    
+    // Announce reset to screen readers
+    const interactiveTriage = document.getElementById('interactive-triage');
+    if (interactiveTriage) {
+        interactiveTriage.setAttribute('aria-live', 'polite');
     }
 }
 
@@ -288,8 +315,13 @@ function resetTriage() {
     style.id = 'triage-hover-styles';
     style.textContent = `
         .triage-btn:hover {
-            background: rgba(255, 255, 255, 0.05) !important;
+            background: rgba(99, 102, 241, 0.2) !important;
             border-color: var(--primary-blue) !important;
+        }
+        .triage-btn:focus-visible {
+            outline: 2px solid var(--primary-blue) !important;
+            outline-offset: 2px !important;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2) !important;
         }
     `;
     document.head.appendChild(style);

@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="css/sidebar.css">
     <link rel="stylesheet" href="css/flowcharts.css">
     <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/theme.js"></script>
 </head>
 <body>
     <div class="app-container">
@@ -22,6 +24,7 @@
                 <div class="logo-area">
                     <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
                         <img src="assets/images/PADAONE-Security Dark.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
+                        <img src="assets/images/PADAONE-Security Light.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
                     </button>
                 </div>
             </div>
@@ -61,6 +64,9 @@
                     <i class="ph ph-caret-left"></i>
                 </button>
                 <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Gitleaks (Secrets)</span>
+                <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
+                    <i class="ph ph-sun"></i>
+                </button>
             </header>
 
             <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
@@ -80,15 +86,15 @@
                         <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr);">
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">TIPO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Secrets Detection</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Secrets Detection</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGEM</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Agnóstico (All)</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Agnóstico (All)</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Local + Pipeline</p>
                             </div>
                         </div>
                     </section>
@@ -237,7 +243,7 @@ src/test/fixtures/fake-secrets.json
 
                         <div class="meta-card card-warning" style="margin-top: 30px;">
                             <span class="meta-label" style="color: var(--accent-gold);">ATENÇÃO</span>
-                            <p style="margin: 0; font-size: 0.85rem; color: #fff;">Documente sempre a justificativa para ignorar um alerta no <code>.gitleaksignore</code>. Nunca ignore alertas sem validação de segurança.</p>
+                            <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Documente sempre a justificativa para ignorar um alerta no <code>.gitleaksignore</code>. Nunca ignore alertas sem validação de segurança.</p>
                         </div>
                     </section>
 
@@ -252,17 +258,17 @@ src/test/fixtures/fake-secrets.json
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--status-critical); font-weight: 700;">API KEYS / TOKENS</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Revogar imediatamente e rotacionar.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Revogar imediatamente e rotacionar.</span>
                                 <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical);">PROIBIDO</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--accent-gold); font-weight: 700;">SENHAS / CREDENCIAIS</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Alterar senha e validar acessos.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Alterar senha e validar acessos.</span>
                                 <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold);">RESTRITO</div>
                             </div>
                             <div class="cvss-row">
                                 <span style="color: var(--status-success); font-weight: 700;">EXEMPLOS DE TESTE</span>
-                                <span style="font-size: 0.9rem; color: #fff;">Validar que não são credenciais reais.</span>
+                                <span style="font-size: 0.9rem; color: var(--text-main);">Validar que não são credenciais reais.</span>
                                 <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success);">PERMITIDO</div>
                             </div>
                         </div>
@@ -273,7 +279,7 @@ src/test/fixtures/fake-secrets.json
                         
                         <div class="meta-card card-critical">
                             <span class="meta-label" style="color: var(--status-critical);">PROCEDIMENTO EM CASO DE DETECÇÃO</span>
-                            <ol style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                            <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
                                 <li><strong>Revogar</strong> a credencial imediatamente no serviço de origem.</li>
                                 <li><strong>Rotacionar</strong> gerando nova credencial e atualizando configurações.</li>
                                 <li><strong>Reescrever histórico</strong> do Git (se aplicável) com <code>git filter-branch</code> ou BFG.</li>
