@@ -39,6 +39,8 @@ body {
 .app-container {
     display: flex;
     height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .main-content {
@@ -47,6 +49,8 @@ body {
     flex-direction: column;
     background-color: var(--bg-app);
     position: relative;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .top-bar {
@@ -121,6 +125,7 @@ body {
     height: calc(100vh - var(--header-height));
     overflow: hidden;
     position: relative;
+    flex: 1;
 }
 
 .diagram-container {
@@ -211,16 +216,19 @@ body {
 .scroll-area {
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
+    overflow-x: hidden;
+    padding: 40px;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    min-width: 0;
 }
 
 .scroll-area section {
     padding-left: 0;
     padding-right: 0;
     scroll-margin-top: 80px;
+    max-width: 100%;
 }
 
 section:target,
@@ -258,11 +266,22 @@ div::selection {
 
 .right-toc {
     width: var(--toc-width);
+    min-width: var(--toc-width);
+    max-width: var(--toc-width);
     border-left: 1px solid var(--border-subtle);
     padding: 40px 20px;
     background-color: var(--bg-app);
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.right-toc::-webkit-scrollbar {
+    display: none;
 }
 
 .toc-header {
@@ -272,6 +291,7 @@ div::selection {
     text-transform: uppercase;
     letter-spacing: 1.5px;
     margin-bottom: 25px;
+    flex-shrink: 0;
 }
 
 .toc-list {
@@ -280,6 +300,14 @@ div::selection {
     flex-direction: column;
     gap: 15px;
     border-left: 1px solid var(--border-subtle);
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-item {
+    flex-shrink: 0;
 }
 
 .toc-item a {
@@ -292,6 +320,8 @@ div::selection {
     border-left: 2px solid transparent;
     margin-left: -1px;
     cursor: pointer;
+    line-height: 1.4;
+    word-wrap: break-word;
 }
 
 .toc-item a:hover, .toc-item a.active {

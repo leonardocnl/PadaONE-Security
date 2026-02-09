@@ -87,7 +87,7 @@
                             <div class="pro-tip-header" style="color: var(--accent-cyan); font-weight: bold; display: flex; align-items: center; gap: 10px;">
                                 <i class="ph ph-detective" style="font-size: 1.5rem;"></i> TRIVY: O NOSSO DETETIVE
                             </div>
-                            <p style="margin: 10px 0 0 0; font-size: 0.95rem; line-height: 1.6; color: #e0e0e0;">
+                            <p style="margin: 10px 0 0 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
                                 O Trivy atua como um <strong>investigador implacável</strong>: ele vasculha cada camada do projeto para encontrar o crime (vulnerabilidade). 
                                 No entanto, ele apenas reporta os fatos. A sentença final — se vamos atualizar, ignorar ou mitigar — é ditada estritamente pela nossa 
                                 <a href="#" onclick="nav.switchTool('logic'); return false;" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline;">Lógica de Bibliotecas</a>.
@@ -95,7 +95,7 @@
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
+                    <section id="trivy-visao-geral" style="margin-bottom: 50px;">
                         <h3>1. Visão Geral</h3>
                         <div class="meta-grid" style="grid-template-columns: repeat(4, 1fr);">
                             <div class="meta-card">
@@ -104,20 +104,20 @@
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">LINGUAGENS</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">20+ (JS, Python, etc.)</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">20+ (JS, Python, etc.)</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">ALVOS</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Code, Images, IaC</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Code, Images, IaC</p>
                             </div>
                             <div class="meta-card">
                                 <span class="meta-label" style="color: var(--accent-cyan);">EXECUÇÃO</span>
-                                <p style="margin: 0; font-size: 0.85rem; color: #fff;">Local + Pipeline</p>
+                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-main);">Local + Pipeline</p>
                             </div>
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
+                    <section id="trivy-instalacao" style="margin-bottom: 50px;">
                         <h3>2. Instalação e Configuração</h3>
                         
                         <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">INSTALAÇÃO (WINDOWS/LINUX)</h4>
@@ -134,7 +134,7 @@ sudo apt-get install trivy</code></pre>
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
+                    <section id="trivy-comandos" style="margin-bottom: 50px;">
                         <h3>3. Comandos de Uso</h3>
                         
                         <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ESCANEANDO DIRETÓRIOS E IMAGENS</h4>
@@ -168,7 +168,7 @@ trivy fs --format json --output evidencias.json
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
+                    <section id="trivy-trivyignore" style="margin-bottom: 50px;">
                         <h3>4. O Arquivo .trivyignore</h3>
                         <p>O arquivo <code>.trivyignore</code> serve para que o detetive ignore vulnerabilidades específicas que já foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe.</p>
                         
@@ -184,11 +184,11 @@ CVE-2024-5678</code></pre>
                         <p style="font-size: 0.85rem; color: var(--text-muted);">* Toda entrada deve conter um comentário explicando o motivo da supressão.</p>
                     </section>
             
-                    <section style="margin-bottom: 50px;">
+                    <section id="trivy-boas-praticas" style="margin-bottom: 50px;">
                         <h3>5. Boas Práticas</h3>
                         <div class="meta-card card-critical">
                             <span class="meta-label" style="color: var(--status-success);">CHECKLIST DO DETETIVE</span>
-                            <ul style="margin: 10px 0 0 20px; color: #fff; font-size: 0.9rem; line-height: 1.8;">
+                            <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
                                 <li><strong>Pre-commit:</strong> Rode <code>trivy fs</code> antes de cada commit.</li>
                                 <li><strong>Integridade:</strong> Mantenha o <code>.trivyignore</code> sempre atualizado e documentado.</li>
                                 <li><strong>Decisão:</strong> O Trivy acha o erro, a <strong>Lógica de Biblioteca</strong> resolve o erro.</li>
@@ -220,6 +220,15 @@ CVE-2024-5678</code></pre>
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) closeMobileSidebar();
         });
+
+        const utils = {
+            copyCode: function(id) {
+                const code = document.getElementById(id);
+                if (!code) return;
+                navigator.clipboard.writeText(code.innerText);
+                alert('Copiado!');
+            }
+        };
     </script>
 </body>
 </html>
@@ -353,7 +362,19 @@ CVE-2024-5678</code></pre>
                         </div>
                     </section>
                 </div>
+
+                <aside class="right-toc">
+                    <div class="toc-header">Nesta Página</div>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#trivy-visao-geral">Visão Geral</a></li>
+                        <li class="toc-item"><a href="#trivy-instalacao">Instalação e Configuração</a></li>
+                        <li class="toc-item"><a href="#trivy-comandos">Comandos de Uso</a></li>
+                        <li class="toc-item"><a href="#trivy-trivyignore">Arquivo .trivyignore</a></li>
+                        <li class="toc-item"><a href="#trivy-boas-praticas">Boas Práticas</a></li>
+                    </ul>
+                </aside>
             </div>
+
         </main>
     </div>
 
@@ -377,6 +398,17 @@ CVE-2024-5678</code></pre>
         window.addEventListener('resize', function() {
             if (window.innerWidth > 768) closeMobileSidebar();
         });
+
+        const utils = {
+            copyCode: function(id) {
+                const code = document.getElementById(id);
+                if (!code) return;
+                navigator.clipboard.writeText(code.innerText);
+                alert('Copiado!');
+            }
+        };
     </script>
 </body>
 </html>
+
+
