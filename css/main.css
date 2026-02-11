@@ -36,11 +36,19 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+#app-root {
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
 .app-container {
     display: flex;
     height: 100%;
     width: 100%;
     overflow: hidden;
+    flex: 1;
 }
 
 .main-content {
@@ -217,11 +225,12 @@ body {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 40px;
+    padding: 20px;
     scroll-behavior: smooth;
     scrollbar-width: none;
     -ms-overflow-style: none;
     min-width: 0;
+    min-height: 0;
 }
 
 .scroll-area section {
@@ -278,6 +287,7 @@ div::selection {
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    height: 100%;
 }
 
 .right-toc::-webkit-scrollbar {

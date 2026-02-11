@@ -37,7 +37,7 @@
                         <i class="ph ph-squares-four"></i> Dashboard
                     </div>
                     <div class="nav-item" onclick="nav.switchTool('logic')">
-                        <i class="ph ph-tree-structure"></i> Lógica de Bibliotecas
+                        <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
                     </div>
                 </div>
 
@@ -195,43 +195,10 @@ CVE-2024-5678</code></pre>
                             </ul>
                         </div>
                     </section>
-                </div>
-            </div>
-        </main>
-    </div>
 
-    <script>
-        function toggleMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (sidebar && overlay) {
-                sidebar.classList.toggle('active');
-                overlay.classList.toggle('active');
-            }
-        }
-        function closeMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (sidebar && overlay) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-        }
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) closeMobileSidebar();
-        });
-
-        const utils = {
-            copyCode: function(id) {
-                const code = document.getElementById(id);
-                if (!code) return;
-                navigator.clipboard.writeText(code.innerText);
-                alert('Copiado!');
-            }
-        };
-    </script>
-</body>
-</html>
+                    <section id="trivy-severidade" style="margin-bottom: 50px;">
+                        <h3>6. Tabela de Severidade CVSS</h3>
+                        <div class="cvss-table">
                             <div class="cvss-row cvss-header">
                                 <span class="col-label">SEVERIDADE</span>
                                 <span class="col-label">AÇÃO IMEDIATA</span>
@@ -265,8 +232,8 @@ CVE-2024-5678</code></pre>
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
-                        <h3>8. Tipos de Scan Avançados</h3>
+                    <section id="trivy-scan-avancados" style="margin-bottom: 50px;">
+                        <h3>7. Tipos de Scan Avançados</h3>
                         
                         <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
                             <div class="meta-card">
@@ -311,8 +278,8 @@ CVE-2024-5678</code></pre>
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
-                        <h3>9. Integração com deps.dev</h3>
+                    <section id="trivy-deps-dev" style="margin-bottom: 50px;">
+                        <h3>8. Integração com deps.dev</h3>
                         
                         <p>O deps.dev do Google complementa o Trivy com análise de reachability e OpenSSF Scorecard.</p>
 
@@ -343,8 +310,8 @@ CVE-2024-5678</code></pre>
                         </div>
                     </section>
 
-                    <section style="margin-bottom: 50px;">
-                        <h3>10. Boas Práticas de Implementação</h3>
+                    <section id="trivy-implementacao" style="margin-bottom: 50px;">
+                        <h3>9. Boas Práticas de Implementação</h3>
                         
                         <div class="meta-card card-critical">
                             <span class="meta-label" style="color: var(--status-success);">CHECKLIST TRIVY</span>
@@ -357,7 +324,6 @@ CVE-2024-5678</code></pre>
                                 <li><strong>DB Updates:</strong> Atualizar banco de vulnerabilidades diariamente.</li>
                                 <li><strong>SARIF Upload:</strong> Integrar com GitHub/GitLab Security Dashboards.</li>
                                 <li><strong>Waivers:</strong> Documentar todas as exceções no <code>.trivyignore</code> com justificativa.</li>
->>>>>>> bibliotecas
                             </ul>
                         </div>
                     </section>
@@ -371,6 +337,10 @@ CVE-2024-5678</code></pre>
                         <li class="toc-item"><a href="#trivy-comandos">Comandos de Uso</a></li>
                         <li class="toc-item"><a href="#trivy-trivyignore">Arquivo .trivyignore</a></li>
                         <li class="toc-item"><a href="#trivy-boas-praticas">Boas Práticas</a></li>
+                        <li class="toc-item"><a href="#trivy-severidade">Tabela de Severidade</a></li>
+                        <li class="toc-item"><a href="#trivy-scan-avancados">Scans Avançados</a></li>
+                        <li class="toc-item"><a href="#trivy-deps-dev">Integração deps.dev</a></li>
+                        <li class="toc-item"><a href="#trivy-implementacao">Implementação</a></li>
                     </ul>
                 </aside>
             </div>
@@ -378,37 +348,8 @@ CVE-2024-5678</code></pre>
         </main>
     </div>
 
-    <script>
-        function toggleMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (sidebar && overlay) {
-                sidebar.classList.toggle('active');
-                overlay.classList.toggle('active');
-            }
-        }
-        function closeMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            if (sidebar && overlay) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-        }
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) closeMobileSidebar();
-        });
-
-        const utils = {
-            copyCode: function(id) {
-                const code = document.getElementById(id);
-                if (!code) return;
-                navigator.clipboard.writeText(code.innerText);
-                alert('Copiado!');
-            }
-        };
-    </script>
+    <script src="js/navigation.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/utils.js"></script>
 </body>
 </html>
-
-
