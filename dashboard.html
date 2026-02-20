@@ -1,267 +1,467 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - PadaONE Security</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/WhiteOL.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - PADAONE Security</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/BlackOL.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/WhiteOL.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" />
+
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/flowcharts.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/flowcharts.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
     <script src="js/theme.js"></script>
-    
+
     <style>
-        :target,
-        :target *,
-        section:target,
-        section:target *,
-        h1:target,
-        h2:target,
-        h3:target {
-            background-color: transparent !important;
-            background: transparent !important;
-            outline: none !important;
-            box-shadow: none !important;
-        }
+      :target,
+      :target *,
+      section:target,
+      section:target *,
+      h1:target,
+      h2:target,
+      h3:target {
+        background-color: transparent !important;
+        background: transparent !important;
+        outline: none !important;
+        box-shadow: none !important;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app-container">
-        
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-area">
-                    <button style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="nav.switchTool('dashboard')">
-                        <img src="assets/images/PADAONE-Security Dark.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
-                        <img src="assets/images/PADAONE-Security Light.png" alt="PadaONE Security" style="height: 80px; width: 100%; object-fit: contain;">
-                    </button>
-                </div>
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-area">
+            <button
+              style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center"
+              onclick="nav.switchTool('dashboard')"
+            >
+              <img
+                src="assets/images/PADAONE-Security Dark.png"
+                alt="PADAONE Security"
+                style="height: 80px; width: 100%; object-fit: contain"
+              />
+              <img
+                src="assets/images/PADAONE-Security Light.png"
+                alt="PADAONE Security"
+                style="height: 80px; width: 100%; object-fit: contain"
+              />
+            </button>
+          </div>
+        </div>
+
+        <nav>
+          <div class="nav-group">
+            <div class="nav-title">Geral</div>
+            <div class="nav-item active" onclick="nav.switchTool('dashboard')">
+              <i class="ph ph-squares-four"></i> Dashboard
+            </div>
+            <div class="nav-item" onclick="nav.switchTool('logic')">
+              <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-title">Ferramentas</div>
+            <div class="nav-item" onclick="nav.switchTool('trivy')"><i class="ph ph-package"></i> Trivy (SCA)</div>
+            <div class="nav-item" onclick="nav.switchTool('semgrep')"><i class="ph ph-code"></i> Semgrep (SAST)</div>
+            <div class="nav-item" onclick="nav.switchTool('gitleaks')">
+              <i class="ph ph-key"></i> Gitleaks (Secrets)
+            </div>
+          </div>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="nav-item" onclick="nav.switchTool('sobre')"><i class="ph ph-info"></i> Sobre o Projeto</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar">
+          <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
+            <i class="ph ph-list"></i>
+          </button>
+          <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem">Dashboard</span>
+          <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
+            <i class="ph ph-sun"></i>
+          </button>
+        </header>
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+        <div class="tool-layout">
+          <div class="scroll-area">
+            <h1>Pipeline DevSecOps</h1>
+
+            <section id="intro" style="margin-bottom: 40px">
+              <h3 style="color: var(--primary-blue); margin-bottom: 20px">Security by Design</h3>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
+                A implementação deste pipeline de segurança tem como objetivo fundamental realizar o
+                <strong style="color: var(--primary-blue)">Shift Left</strong> na segurança do desenvolvimento, movendo
+                a identificação e correção de vulnerabilidades para as fases mais iniciais do ciclo de vida do software.
+                Ao invés de tratar a segurança como uma etapa final, ela é incorporada desde o primeiro commit.
+              </p>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
+                O conceito de <strong style="color: var(--accent-cyan)">Security by Design</strong> permeia toda a
+                arquitetura deste pipeline: as ferramentas trabalham de forma integrada e automatizada, garantindo que
+                cada linha de código, cada dependência e cada configuração sejam validadas antes de chegarem à produção.
+                Isso reduz drasticamente o custo de correção de vulnerabilidades e aumenta a confiança na entrega
+                contínua de software seguro.
+              </p>
+              <p style="line-height: 1.8; color: var(--text-muted)">
+                Este dashboard apresenta o fluxo integrado de segurança em <strong>3 fases distintas</strong>: Estação
+                de Trabalho, Pipeline CI/CD e Auditoria Manual. O diagrama abaixo representa todo o ciclo de vida de
+                segurança, desde a configuração inicial do ambiente de desenvolvimento até o sign-off final para
+                produção.
+              </p>
+            </section>
+
+            <div
+              style="
+                background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-cyan) 100%);
+                height: 2px;
+                width: 100px;
+                margin: 30px 0;
+              "
+            ></div>
+
+            <div class="diagram-container">
+              <img src="assets/images/Fluxograma-Fase1-DM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
+              <img src="assets/images/Fluxograma-Fase1-LM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
             </div>
 
-            <nav>
-                <div class="nav-group">
-                    <div class="nav-title">Geral</div>
-                    <div class="nav-item active" onclick="nav.switchTool('dashboard')">
-                        <i class="ph ph-squares-four"></i> Dashboard
-                    </div>
-                    <div class="nav-item" onclick="nav.switchTool('logic')">
-                        <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
-                    </div>
+            <section id="fases" style="margin-top: 40px; padding-top: 0px">
+              <h3
+                style="
+                  margin-bottom: 30px;
+                  color: var(--text-main);
+                  font-size: 1rem;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                "
+              >
+                <i class="ph ph-list-numbers" style="margin-right: 10px; color: var(--primary-blue)"></i>Fases do
+                Pipeline
+              </h3>
+              <div class="phases-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px">
+                <div
+                  style="
+                    background: var(--bg-purple-subtle);
+                    border-left: 4px solid var(--accent-purple);
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                  "
+                >
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--accent-purple);
+                      margin-bottom: 16px;
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      line-height: 1.4;
+                    "
+                  >
+                    Fase 1:<br />Estação de Trabalho
+                  </div>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1">
+                    Configuração do ambiente, análise de bibliotecas e execução de ferramentas de segurança locais antes
+                    do commit.
+                  </p>
                 </div>
-
-                <div class="nav-group">
-                    <div class="nav-title">Ferramentas</div>
-                    <div class="nav-item" onclick="nav.switchTool('trivy')">
-                        <i class="ph ph-package"></i> Trivy (SCA)
-                    </div>
-                    <div class="nav-item" onclick="nav.switchTool('semgrep')">
-                        <i class="ph ph-code"></i> Semgrep (SAST)
-                    </div>
-                    <div class="nav-item" onclick="nav.switchTool('gitleaks')">
-                        <i class="ph ph-key"></i> Gitleaks (Secrets)
-                    </div>
+                <div
+                  style="
+                    background: var(--bg-critical-lighter);
+                    border-left: 4px solid var(--status-critical);
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                  "
+                >
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--status-critical);
+                      margin-bottom: 16px;
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      line-height: 1.4;
+                    "
+                  >
+                    Fase 2:<br />Pipeline CI/CD
+                  </div>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1">
+                    Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no pipeline de
+                    integração.
+                  </p>
                 </div>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <header class="top-bar">
-                <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
-                    <i class="ph ph-list"></i>
-                </button>
-                <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem;">Dashboard</span>
-                <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
-                    <i class="ph ph-sun"></i>
-                </button>
-            </header>
-
-            <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
-
-            <div class="tool-layout">
-                <div class="scroll-area">
-                    <h1>Pipeline DevSecOps</h1>
-                    
-                    <section id="intro" style="margin-bottom: 40px;">
-                        <h3 style="color: var(--primary-blue); margin-bottom: 20px;">Segurança Shift Left e Security by Design</h3>
-                        <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px;">
-                            A implementação deste pipeline de segurança tem como objetivo fundamental realizar o <strong style="color: var(--primary-blue);">Shift Left</strong> na segurança do desenvolvimento, movendo a identificação e correção de vulnerabilidades para as fases mais iniciais do ciclo de vida do software. Ao invés de tratar a segurança como uma etapa final, ela é incorporada desde o primeiro commit.
-                        </p>
-                        <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px;">
-                            O conceito de <strong style="color: var(--accent-cyan);">Security by Design</strong> permeia toda a arquitetura deste pipeline: as ferramentas trabalham de forma integrada e automatizada, garantindo que cada linha de código, cada dependência e cada configuração sejam validadas antes de chegarem à produção. Isso reduz drasticamente o custo de correção de vulnerabilidades e aumenta a confiança na entrega contínua de software seguro.
-                        </p>
-                        <p style="line-height: 1.8; color: var(--text-muted);">
-                            Este dashboard apresenta o fluxo integrado de segurança em <strong>3 fases distintas</strong>: Estação de Trabalho, Pipeline CI/CD e Auditoria Manual. O diagrama abaixo representa todo o ciclo de vida de segurança, desde a configuração inicial do ambiente de desenvolvimento até o sign-off final para produção.
-                        </p>
-                    </section>
-
-                    <div style="background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-cyan) 100%); height: 2px; width: 100px; margin: 30px 0;"></div>
-
-                    <div class="diagram-container">
-                        <img src="assets/images/Fluxograma-Fase1-DM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg">
-                        <img src="assets/images/Fluxograma-Fase1-LM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg">
-                    </div>
-
-                    <section id="fases" style="margin-top: 40px; padding-top: 0px;">
-                        <h3 style="margin-bottom: 30px; color: var(--text-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
-                            <i class="ph ph-list-numbers" style="margin-right: 10px; color: var(--primary-blue);"></i>Fases do Pipeline
-                        </h3>
-                        <div class="phases-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                            <div style="background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); padding: 24px; display: flex; flex-direction: column;">
-                                <div style="font-weight: 700; color: var(--accent-purple); margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
-                                    Fase 1:<br>Estação de Trabalho
-                                </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                    Configuração do ambiente, análise de bibliotecas e execução de ferramentas de segurança locais antes do commit.
-                                </p>
-                            </div>
-                            <div style="background: var(--bg-critical-lighter); border-left: 4px solid var(--status-critical); padding: 24px; display: flex; flex-direction: column;">
-                                <div style="font-weight: 700; color: var(--status-critical); margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
-                                    Fase 2:<br>Pipeline CI/CD
-                                </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                    Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no pipeline de integração.
-                                </p>
-                            </div>
-                            <div style="background: var(--bg-green-subtle); border-left: 4px solid var(--status-success); padding: 24px; display: flex; flex-direction: column;">
-                                <div style="font-weight: 700; color: var(--status-success); margin-bottom: 16px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4;">
-                                    Fase 3:<br>Auditoria Manual
-                                </div>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                    Triagem de escopo, pentest com Burp Suite, coleta de evidências e geração de relatório final com sign-off.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="diagrama" style="margin: 40px 0;">
-                        <div style="background: var(--bg-indigo-subtle); border: 1px solid var(--border-indigo); padding: 20px; max-width: 1000px;">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                                <i class="ph ph-info" style="font-size: 1.5rem; color: var(--primary-blue);"></i>
-                                <strong style="color: var(--primary-blue); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Sobre o Diagrama</strong>
-                            </div>
-                            <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
-                                O pipeline representa o fluxo completo de segurança, desde a configuração do ambiente até o sign-off final. Linhas sólidas indicam fluxo principal, linhas tracejadas indicam falhas e loops de feedback.
-                            </p>
-                        </div>
-                    </section>
-
-                    <section id="ferramentas">
-                    <h3 style="margin: 50px 0 20px 0; color: var(--text-main); font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;">
-                        <i class="ph ph-shield-check" style="margin-right: 10px; color: var(--primary-blue);"></i>Ferramentas Principais
-                    </h3>
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 40px 0;">
-                        <div class="meta-card clickable" onclick="nav.switchTool('trivy')" style="border-left: 3px solid var(--primary-blue);">
-                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
-                                <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue); flex-shrink: 0;"></i>
-                                <span class="meta-label" style="color: var(--primary-blue); margin: 0;">TRIVY<br>(SCA)</span>
-                            </div>
-                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                Ferramenta de <strong>Software Composition Analysis</strong> que realiza varredura completa de vulnerabilidades em dependências, bibliotecas de terceiros, imagens Docker e sistemas de arquivos. Identifica CVEs conhecidos através de bancos de dados atualizados diariamente, permitindo a detecção precoce de riscos na Supply Chain. Suporta múltiplos formatos de saída e integração nativa com CI/CD.
-                            </p>
-                            <div style="font-size: 0.75rem; color: var(--primary-blue); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
-                                Ver Documentação →
-                            </div>
-                        </div>
-                        <div class="meta-card clickable" onclick="nav.switchTool('semgrep')" style="border-left: 3px solid var(--accent-cyan);">
-                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
-                                <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan); flex-shrink: 0;"></i>
-                                <span class="meta-label" style="color: var(--accent-cyan); margin: 0;">SEMGREP<br>(SAST)</span>
-                            </div>
-                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                Engine de <strong>análise estática de código</strong> (SAST) que detecta vulnerabilidades, bugs e padrões de código inseguro através de regras customizáveis. Identifica falhas como SQL Injection, XSS, hardcoded secrets e uso de funções inseguras. Suporta mais de 30 linguagens e permite criar regras específicas para os padrões de segurança do projeto, executando tanto localmente quanto no pipeline.
-                            </p>
-                            <div style="font-size: 0.75rem; color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
-                                Ver Documentação →
-                            </div>
-                        </div>
-                        <div class="meta-card clickable" onclick="nav.switchTool('gitleaks')" style="border-left: 3px solid var(--accent-gold);">
-                            <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
-                                <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold); flex-shrink: 0;"></i>
-                                <span class="meta-label" style="color: var(--accent-gold); margin: 0;">GITLEAKS<br>(SECRETS)</span>
-                            </div>
-                            <p style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1;">
-                                Scanner especializado em <strong>detecção de secrets e credenciais</strong> expostos no código-fonte e histórico do Git. Identifica API keys, tokens de autenticação, senhas hardcoded, chaves privadas e outros dados sensíveis através de regex patterns e entropia. Previne vazamentos críticos antes que cheguem aos repositórios remotos, executando via pre-commit hooks e pipeline.
-                            </p>
-                            <div style="font-size: 0.75rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
-                                Ver Documentação →
-                            </div>
-                        </div>
-                    </div>
-                    </section>
-
-                    <footer class="app-footer">
-                        <p>© 2026 PadaONE Security · Todos os direitos reservados</p>
-                    </footer>
+                <div
+                  style="
+                    background: var(--bg-green-subtle);
+                    border-left: 4px solid var(--status-success);
+                    padding: 24px;
+                    display: flex;
+                    flex-direction: column;
+                  "
+                >
+                  <div
+                    style="
+                      font-weight: 700;
+                      color: var(--status-success);
+                      margin-bottom: 16px;
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      line-height: 1.4;
+                    "
+                  >
+                    Fase 3:<br />Auditoria Manual
+                  </div>
+                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1">
+                    Triagem de escopo, pentest com Burp Suite, coleta de evidências e geração de relatório final com
+                    sign-off.
+                  </p>
                 </div>
-            </div>
+              </div>
+            </section>
 
-        </main>
+            <section id="diagrama" style="margin: 40px 0">
+              <div
+                style="
+                  background: var(--bg-indigo-subtle);
+                  border: 1px solid var(--border-indigo);
+                  padding: 20px;
+                  max-width: 1000px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px">
+                  <i class="ph ph-info" style="font-size: 1.5rem; color: var(--primary-blue)"></i>
+                  <strong
+                    style="
+                      color: var(--primary-blue);
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                    "
+                    >Sobre o Diagrama</strong
+                  >
+                </div>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6">
+                  O pipeline representa o fluxo completo de segurança, desde a configuração do ambiente até o sign-off
+                  final. Linhas sólidas indicam fluxo principal, linhas tracejadas indicam falhas e loops de feedback.
+                </p>
+              </div>
+            </section>
+
+            <section id="ferramentas">
+              <h3
+                style="
+                  margin: 50px 0 20px 0;
+                  color: var(--text-main);
+                  font-size: 1rem;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                "
+              >
+                <i class="ph ph-shield-check" style="margin-right: 10px; color: var(--primary-blue)"></i>Ferramentas
+                Principais
+              </h3>
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 40px 0">
+                <div
+                  class="meta-card clickable"
+                  onclick="nav.switchTool('trivy')"
+                  style="border-left: 3px solid var(--primary-blue)"
+                >
+                  <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
+                    <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue); flex-shrink: 0"></i>
+                    <span class="meta-label" style="color: var(--primary-blue); margin: 0">TRIVY<br />(SCA)</span>
+                  </div>
+                  <p
+                    style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
+                  >
+                    Ferramenta de <strong>Software Composition Analysis</strong> que realiza varredura completa de
+                    vulnerabilidades em dependências, bibliotecas de terceiros, imagens Docker e sistemas de arquivos.
+                    Identifica CVEs conhecidos através de bancos de dados atualizados diariamente, permitindo a detecção
+                    precoce de riscos na Supply Chain. Suporta múltiplos formatos de saída e integração nativa com
+                    CI/CD.
+                  </p>
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: var(--primary-blue);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      font-weight: 600;
+                    "
+                  >
+                    Ver Documentação →
+                  </div>
+                </div>
+                <div
+                  class="meta-card clickable"
+                  onclick="nav.switchTool('semgrep')"
+                  style="border-left: 3px solid var(--accent-cyan)"
+                >
+                  <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
+                    <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan); flex-shrink: 0"></i>
+                    <span class="meta-label" style="color: var(--accent-cyan); margin: 0">SEMGREP<br />(SAST)</span>
+                  </div>
+                  <p
+                    style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
+                  >
+                    Engine de <strong>análise estática de código</strong> (SAST) que detecta vulnerabilidades, bugs e
+                    padrões de código inseguro através de regras customizáveis. Identifica falhas como SQL Injection,
+                    XSS, hardcoded secrets e uso de funções inseguras. Suporta mais de 30 linguagens e permite criar
+                    regras específicas para os padrões de segurança do projeto, executando tanto localmente quanto no
+                    pipeline.
+                  </p>
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: var(--accent-cyan);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      font-weight: 600;
+                    "
+                  >
+                    Ver Documentação →
+                  </div>
+                </div>
+                <div
+                  class="meta-card clickable"
+                  onclick="nav.switchTool('gitleaks')"
+                  style="border-left: 3px solid var(--accent-gold)"
+                >
+                  <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
+                    <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold); flex-shrink: 0"></i>
+                    <span class="meta-label" style="color: var(--accent-gold); margin: 0">GITLEAKS<br />(SECRETS)</span>
+                  </div>
+                  <p
+                    style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
+                  >
+                    Scanner especializado em <strong>detecção de secrets e credenciais</strong> expostos no código-fonte
+                    e histórico do Git. Identifica API keys, tokens de autenticação, senhas hardcoded, chaves privadas e
+                    outros dados sensíveis através de regex patterns e entropia. Previne vazamentos críticos antes que
+                    cheguem aos repositórios remotos, executando via pre-commit hooks e pipeline.
+                  </p>
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: var(--accent-gold);
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      font-weight: 600;
+                    "
+                  >
+                    Ver Documentação →
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <footer class="app-footer">
+              <p>© 2026 PADAONE Security · Todos os direitos reservados</p>
+            </footer>
+          </div>
+
+          <aside class="right-toc">
+            <div class="toc-header">Nesta Página</div>
+            <ul class="toc-list">
+              <li class="toc-item">
+                <a href="#intro">Security By Design</a>
+              </li>
+              <li class="toc-item">
+                <a href="#fases">Fases do Pipeline</a>
+              </li>
+              <li class="toc-item">
+                <a href="#diagrama">Sobre o Diagrama</a>
+              </li>
+              <li class="toc-item">
+                <a href="#ferramentas">Ferramentas Principais</a>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </main>
     </div>
 
     <script>
-        function toggleMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            if (!sidebar || !overlay) return;
-            
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+      function toggleMobileSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (!sidebar || !overlay) return;
+
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+      }
+
+      function closeMobileSidebar() {
+        const sidebar = document.querySelector('.sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (!sidebar || !overlay) return;
+
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach((item) => {
+          item.addEventListener('click', closeMobileSidebar);
+        });
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 768) {
+          closeMobileSidebar();
         }
+      });
 
-        function closeMobileSidebar() {
-            const sidebar = document.querySelector('.sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            if (!sidebar || !overlay) return;
-            
-            sidebar.classList.remove('active');
-            overlay.classList.remove('active');
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.addEventListener('click', closeMobileSidebar);
-            });
+      document.addEventListener('DOMContentLoaded', function () {
+        const tocLinks = document.querySelectorAll('.toc-list a');
+        tocLinks.forEach((link) => {
+          link.addEventListener('click', function (e) {
+            setTimeout(() => {
+              document.querySelectorAll('section').forEach((section) => {
+                section.style.backgroundColor = 'transparent';
+                section.style.background = 'transparent';
+              });
+            }, 10);
+          });
         });
 
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768) {
-                closeMobileSidebar();
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const tocLinks = document.querySelectorAll('.toc-list a');
-            tocLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    setTimeout(() => {
-                        document.querySelectorAll('section').forEach(section => {
-                            section.style.backgroundColor = 'transparent';
-                            section.style.background = 'transparent';
-                        });
-                    }, 10);
-                });
+        window.addEventListener('hashchange', function () {
+          setTimeout(() => {
+            document.querySelectorAll('section').forEach((section) => {
+              section.style.backgroundColor = 'transparent';
+              section.style.background = 'transparent';
             });
-
-            window.addEventListener('hashchange', function() {
-                setTimeout(() => {
-                    document.querySelectorAll('section').forEach(section => {
-                        section.style.backgroundColor = 'transparent';
-                        section.style.background = 'transparent';
-                    });
-                }, 10);
-            });
+          }, 10);
         });
+      });
     </script>
-</body>
+  </body>
 </html>

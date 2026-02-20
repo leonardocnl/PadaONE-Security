@@ -1,122 +1,129 @@
 .flowchart-container {
-    background-color: var(--bg-panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 0px;
-    padding: 60px;
-    min-height: 450px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    background-image: var(--grid-pattern);
-    background-size: 40px 40px;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0px;
+  padding: 60px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-image: var(--grid-pattern);
+  background-size: 40px 40px;
 }
 
 .flow-step {
-    background-color: var(--bg-app);
-    border: 1px solid var(--primary-blue);
-    padding: 0;
-    border-radius: 0px;
-    text-align: center;
-    max-width: 600px;
-    width: 100%;
-    animation: slideUp 0.3s ease-out;
-    z-index: 2;
-    position: relative;
-    box-shadow: var(--shadow-md);
-    cursor: default;
+  background-color: var(--bg-app);
+  border: 1px solid var(--primary-blue);
+  padding: 0;
+  border-radius: 0px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  animation: slideUp 0.3s ease-out;
+  z-index: 2;
+  position: relative;
+  box-shadow: var(--shadow-md);
+  cursor: default;
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .flow-step h4 {
-    background-color: var(--primary-blue);
-    color: #FFFFFF;
-    margin: 0;
-    padding: 20px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-family: var(--font-code);
-    border-bottom: 1px solid var(--primary-blue);
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  margin: 0;
+  padding: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: var(--font-code);
+  border-bottom: 1px solid var(--primary-blue);
 }
 
 .flow-step p {
-    color: var(--text-main);
-    padding: 30px 30px 15px 30px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-    font-size: 1rem;
-    font-family: var(--font-primary);
+  color: var(--text-main);
+  padding: 30px 30px 15px 30px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  font-size: 1rem;
+  font-family: var(--font-primary);
 }
 
 .flow-step.critical {
-    border-color: var(--status-critical);
+  border-color: var(--status-critical);
 }
 .flow-step.critical h4 {
-    background-color: var(--status-critical);
-    border-color: var(--status-critical);
+  background-color: var(--status-critical);
+  border-color: var(--status-critical);
 }
 
 .flow-step.success {
-    border-color: var(--status-success);
+  border-color: var(--status-success);
 }
 .flow-step.success h4 {
-    background-color: var(--status-success);
-    border-color: var(--status-success);
+  background-color: var(--status-success);
+  border-color: var(--status-success);
 }
 
 .flow-options {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 0 30px 30px 30px;
-    width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  padding: 0 30px 30px 30px;
+  width: 100%;
 }
 
 .btn-start {
-    background-color: var(--primary-blue);
-    color: white;
-    border: 1px solid var(--primary-blue);
-    padding: 16px 40px;
-    border-radius: 0px;
-    font-weight: 700;
-    cursor: pointer;
-    font-size: 1rem;
-    font-family: var(--font-code);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease-in-out;
+  background-color: var(--primary-blue);
+  color: white;
+  border: 1px solid var(--primary-blue);
+  padding: 16px 40px;
+  border-radius: 0px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: var(--font-code);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease-in-out;
 }
 .btn-start:hover {
-    background-color: #2563EB;
-    color: white;
+  background-color: #2563eb;
+  color: white;
 }
 
 .btn-option {
-    flex: 1;
-    background-color: transparent;
-    border: 1px solid var(--primary-blue);
-    color: var(--primary-blue);
-    padding: 14px 20px;
-    border-radius: 0px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    font-family: var(--font-code);
-    font-weight: 700;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+  flex: 1;
+  background-color: transparent;
+  border: 1px solid var(--primary-blue);
+  color: var(--primary-blue);
+  padding: 14px 20px;
+  border-radius: 0px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-family: var(--font-code);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .btn-option:hover {
-    background-color: var(--primary-blue);
-    color: #FFFFFF;
-    box-shadow: 0 0 15px var(--primary-glow);
+  background-color: var(--primary-blue);
+  color: #ffffff;
+  box-shadow: 0 0 15px var(--primary-glow);
 }
 
-.btn-option.primary {}
+.btn-option.primary {
+}

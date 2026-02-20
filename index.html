@@ -1,112 +1,126 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PADAONE Security</title>    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/WhiteOL.png" media="(prefers-color-scheme: dark)">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png">    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PADAONE Security</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/BlackOL.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/WhiteOL.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" />
     <style>
-        #app-root {
-            transition: filter 0.2s ease-in-out;
-            filter: blur(0px);
-        }
-        #app-root.fade-out {
-            filter: blur(10px);
-            pointer-events: none;
-        }
+      #app-root {
+        transition: filter 0.2s ease-in-out;
+        filter: blur(0px);
+      }
+      #app-root.fade-out {
+        filter: blur(10px);
+        pointer-events: none;
+      }
     </style>
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/sidebar.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
 
     <script src="js/theme.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/mobile-menu.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app-root"></div>
 
     <script>
-        const pages = {
-            'dashboard': 'dashboard.html',
-            'logic': 'bibliotecas.html',
-            'trivy': 'trivy.html',
-            'semgrep': 'semgrep.html',
-            'gitleaks': 'gitleaks.html'
-        };
+      const pages = {
+        dashboard: 'dashboard.html',
+        logic: 'bibliotecas.html',
+        sobre: 'sobre.html',
+        trivy: 'trivy.html',
+        semgrep: 'semgrep.html',
+        gitleaks: 'gitleaks.html',
+      };
 
-        function loadPage(pageName) {
-            const filePath = pages[pageName] || 'dashboard.html';
-            const appRoot = document.getElementById('app-root');
-            
-            appRoot.classList.add('fade-out');
-            
-            setTimeout(() => {
-                fetch(filePath)
-                    .then(response => response.text())
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const doc = parser.parseFromString(html, 'text/html');
-                        appRoot.innerHTML = doc.body.innerHTML;
-                        
-                        setTimeout(() => {
-                            const scripts = doc.body.querySelectorAll('script');
-                            let loadedCount = 0;
-                            const totalScripts = scripts.length;
-                            
-                            const finishLoading = () => {
-                                loadedCount++;
-                                if (loadedCount === totalScripts) {
-                                    if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
-                                        utils.initAnchorLinks();
-                                    }
-                                    
-                                    appRoot.classList.remove('fade-out');
-                                }
-                            };
-                            
-                            if (totalScripts === 0) {
-                                appRoot.classList.remove('fade-out');
-                            } else {
-                                scripts.forEach(script => {
-                                    const newScript = document.createElement('script');
-                                    
-                                    if (script.src) {
-                                        newScript.src = script.src;
-                                        newScript.onload = finishLoading;
-                                        newScript.onerror = finishLoading;
-                                    } else {
-                                        newScript.textContent = script.textContent;
-                                        setTimeout(finishLoading, 0);
-                                    }
-                                    
-                                    document.body.appendChild(newScript);
-                                });
-                            }
-                        }, 300);
-                    })
-                    .catch(error => {
-                        console.error('Erro ao carregar página:', error);
-                        appRoot.innerHTML = '<p>Erro ao carregar a página.</p>';
-                        appRoot.classList.remove('fade-out');
-                    });
-            }, 200);
-        }
+      function loadPage(pageName) {
+        const filePath = pages[pageName] || 'dashboard.html';
+        const appRoot = document.getElementById('app-root');
 
-        window.addEventListener('load', () => {
-            loadPage('dashboard');
-        });
+        appRoot.classList.add('fade-out');
 
-        window.addEventListener('hashchange', () => {
-            const page = window.location.hash.slice(1) || 'dashboard';
-            loadPage(page);
-        });
+        setTimeout(() => {
+          fetch(filePath)
+            .then((response) => response.text())
+            .then((html) => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(html, 'text/html');
+              appRoot.innerHTML = doc.body.innerHTML;
+
+              setTimeout(() => {
+                const scripts = doc.body.querySelectorAll('script');
+                let loadedCount = 0;
+                const totalScripts = scripts.length;
+
+                const finishLoading = () => {
+                  loadedCount++;
+                  if (loadedCount === totalScripts) {
+                    if (typeof utils !== 'undefined' && utils.initAnchorLinks) {
+                      utils.initAnchorLinks();
+                    }
+
+                    appRoot.classList.remove('fade-out');
+                  }
+                };
+
+                if (totalScripts === 0) {
+                  appRoot.classList.remove('fade-out');
+                } else {
+                  scripts.forEach((script) => {
+                    const newScript = document.createElement('script');
+
+                    if (script.src) {
+                      newScript.src = script.src;
+                      newScript.onload = finishLoading;
+                      newScript.onerror = finishLoading;
+                    } else {
+                      newScript.textContent = script.textContent;
+                      setTimeout(finishLoading, 0);
+                    }
+
+                    document.body.appendChild(newScript);
+                  });
+                }
+              }, 300);
+            })
+            .catch((error) => {
+              console.error('Erro ao carregar página:', error);
+              appRoot.innerHTML = '<p>Erro ao carregar a página.</p>';
+              appRoot.classList.remove('fade-out');
+            });
+        }, 200);
+      }
+
+      window.addEventListener('load', () => {
+        loadPage('dashboard');
+      });
+
+      window.addEventListener('hashchange', () => {
+        const page = window.location.hash.slice(1) || 'dashboard';
+        loadPage(page);
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -1,98 +1,108 @@
 :root {
-    /* Dark Theme (Default) */
-    --bg-app: #020408;
-    --bg-sidebar: #05080F;
-    --bg-panel: #0D1117;
-    --bg-hover: #161B22;
-    --bg-code: #000000;
-    
-    --primary-blue: #3B82F6;
-    --primary-glow: rgba(59, 130, 246, 0.15);
-    --accent-cyan: #22D3EE;
-    --accent-gold: #F59E0B;
-    --accent-purple: #845EF7;
-    --border-subtle: #1F2937;
-    
-    --text-main: #F8FAFC;
-    --text-muted: #94A3B8;
-    --text-dark: #64748B;
-    --text-on-colored: rgba(255, 255, 255, 0.95);
-    
-    --status-success: #10B981;
-    --status-critical: #EF4444;
-    
-    --bg-success-subtle: rgba(34, 197, 94, 0.08);
-    --bg-warning-subtle: rgba(245, 158, 11, 0.08);
-    --bg-critical-subtle: rgba(220, 38, 38, 0.08);
-    --bg-critical-lighter: rgba(239, 68, 68, 0.05);
-    --bg-purple-subtle: rgba(132, 94, 247, 0.05);
-    --bg-warning-medium: rgba(245, 158, 11, 0.1);
-    --bg-indigo-subtle: rgba(99, 102, 241, 0.1);
-    --border-indigo: rgba(99, 102, 241, 0.3);
-    --bg-green-subtle: rgba(64, 192, 87, 0.05);
-    
-    --code-success-bg: rgba(34, 197, 94, 0.15);
-    --code-warning-bg: rgba(245, 158, 11, 0.15);
-    --code-critical-bg: rgba(220, 38, 38, 0.15);
-    
-    --shadow-sm: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
-    --shadow-md: 0 20px 50px -20px rgba(0, 0, 0, 0.9);
-    --shadow-sidebar: 2px 0 10px rgba(0, 0, 0, 0.3);
-    --overlay-bg: rgba(0, 0, 0, 0.5);
-    --grid-pattern: radial-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  /* Dark Theme (Default) */
+  --bg-app: #020408;
+  --bg-sidebar: #05080f;
+  --bg-panel: #0d1117;
+  --bg-hover: #161b22;
+  --bg-code: #000000;
 
-    --font-primary: 'Inter', sans-serif;
-    --font-code: 'JetBrains Mono', 'Fira Code', monospace;
-    
-    --sidebar-width: 260px;
-    --toc-width: 240px;
-    --header-height: 64px;
-    
-    --radius-sm: 0px;
-    --radius-md: 0px;
-    --radius-lg: 0px;
+  --primary-blue: #3b82f6;
+  --primary-glow: rgba(59, 130, 246, 0.15);
+  --accent-cyan: #22d3ee;
+  --accent-gold: #f59e0b;
+  --accent-purple: #845ef7;
+  --border-subtle: #1f2937;
+
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dark: #64748b;
+  --text-on-colored: rgba(255, 255, 255, 0.95);
+
+  --status-success: #10b981;
+  --status-critical: #ef4444;
+
+  --bg-success-subtle: rgba(34, 197, 94, 0.08);
+  --bg-warning-subtle: rgba(245, 158, 11, 0.08);
+  --bg-critical-subtle: rgba(220, 38, 38, 0.08);
+  --bg-critical-lighter: rgba(239, 68, 68, 0.05);
+  --bg-purple-subtle: rgba(132, 94, 247, 0.05);
+  --bg-warning-medium: rgba(245, 158, 11, 0.1);
+  --bg-indigo-subtle: rgba(99, 102, 241, 0.1);
+  --border-indigo: rgba(99, 102, 241, 0.3);
+  --bg-green-subtle: rgba(64, 192, 87, 0.05);
+
+  --code-success-bg: rgba(34, 197, 94, 0.15);
+  --code-warning-bg: rgba(245, 158, 11, 0.15);
+  --code-critical-bg: rgba(220, 38, 38, 0.15);
+
+  --shadow-sm: 0 10px 25px -10px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 20px 50px -20px rgba(0, 0, 0, 0.9);
+  --shadow-sidebar: 2px 0 10px rgba(0, 0, 0, 0.3);
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --grid-pattern: radial-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+
+  --font-primary: 'Inter', sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --sidebar-width: 260px;
+  --toc-width: 240px;
+  --header-height: 64px;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  --leoscolor: #ff5c86;
+  --gustavoscolor: #fa003f;
+  --marcoscolor: #ede8d0;
+  --nicolascolor: #ffde21;
 }
 
 /* Light Theme - WCAG AA Compliant (4.5:1 contrast ratio) */
-[data-theme="light"] {
-    --bg-app: #FFFFFF;
-    --bg-sidebar: #F1F5F9;
-    --bg-panel: #F8FAFC;
-    --bg-hover: #E2E8F0;
-    --bg-code: #F1F5F9;
-    
-    --primary-blue: #1D4ED8;
-    --primary-glow: rgba(29, 78, 216, 0.1);
-    --accent-cyan: #0E7490;
-    --accent-gold: #B45309;
-    --accent-purple: #6D28D9;
-    --border-subtle: #CBD5E1;
-    
-    --text-main: #0F172A;
-    --text-muted: #334155;
-    --text-dark: #475569;
-    --text-on-colored: #1E293B;
-    
-    --status-success: #047857;
-    --status-critical: #B91C1C;
-    
-    --bg-success-subtle: rgba(5, 150, 105, 0.12);
-    --bg-warning-subtle: rgba(180, 83, 9, 0.12);
-    --bg-critical-subtle: rgba(185, 28, 28, 0.12);
-    --bg-critical-lighter: rgba(185, 28, 28, 0.08);
-    --bg-purple-subtle: rgba(109, 40, 217, 0.08);
-    --bg-warning-medium: rgba(180, 83, 9, 0.15);
-    --bg-indigo-subtle: rgba(67, 56, 202, 0.12);
-    --border-indigo: rgba(67, 56, 202, 0.3);
-    --bg-green-subtle: rgba(5, 150, 105, 0.08);
-    
-    --code-success-bg: rgba(5, 150, 105, 0.15);
-    --code-warning-bg: rgba(180, 83, 9, 0.15);
-    --code-critical-bg: rgba(185, 28, 28, 0.15);
-    
-    --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
-    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.12);
-    --shadow-sidebar: 2px 0 10px rgba(15, 23, 42, 0.1);
-    --overlay-bg: rgba(15, 23, 42, 0.3);
-    --grid-pattern: radial-gradient(rgba(29, 78, 216, 0.08) 1px, transparent 1px);
+[data-theme='light'] {
+  --bg-app: #ffffff;
+  --bg-sidebar: #f1f5f9;
+  --bg-panel: #f8fafc;
+  --bg-hover: #e2e8f0;
+  --bg-code: #f1f5f9;
+
+  --primary-blue: #1d4ed8;
+  --primary-glow: rgba(29, 78, 216, 0.1);
+  --accent-cyan: #0e7490;
+  --accent-gold: #b45309;
+  --accent-purple: #6d28d9;
+  --border-subtle: #cbd5e1;
+
+  --text-main: #0f172a;
+  --text-muted: #334155;
+  --text-dark: #475569;
+  --text-on-colored: #1e293b;
+
+  --status-success: #047857;
+  --status-critical: #b91c1c;
+
+  --bg-success-subtle: rgba(5, 150, 105, 0.12);
+  --bg-warning-subtle: rgba(180, 83, 9, 0.12);
+  --bg-critical-subtle: rgba(185, 28, 28, 0.12);
+  --bg-critical-lighter: rgba(185, 28, 28, 0.08);
+  --bg-purple-subtle: rgba(109, 40, 217, 0.08);
+  --bg-warning-medium: rgba(180, 83, 9, 0.15);
+  --bg-indigo-subtle: rgba(67, 56, 202, 0.12);
+  --border-indigo: rgba(67, 56, 202, 0.3);
+  --bg-green-subtle: rgba(5, 150, 105, 0.08);
+
+  --code-success-bg: rgba(5, 150, 105, 0.15);
+  --code-warning-bg: rgba(180, 83, 9, 0.15);
+  --code-critical-bg: rgba(185, 28, 28, 0.15);
+
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-sidebar: 2px 0 10px rgba(15, 23, 42, 0.1);
+  --overlay-bg: rgba(15, 23, 42, 0.3);
+  --grid-pattern: radial-gradient(rgba(29, 78, 216, 0.08) 1px, transparent 1px);
+
+  --leoscolor: #ca0054;
+  --gustavoscolor: #bb002d;
+  --marcoscolor: #1f1e1a;
+  --nicolascolor: #241e00;
 }
