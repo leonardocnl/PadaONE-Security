@@ -133,63 +133,40 @@
                 produção.
               </p>
             </section>
-            <section id="diagrama" style="margin: 40px 0">
-  <div
-    style="
-      background: rgba(var(--primary-blue-rgb), 0.03);
-      border-left: 4px solid var(--primary-blue);
-      padding: 24px;
-      border-radius: 0 8px 8px 0;
-      backdrop-filter: blur(4px);
-    "
-  >
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px">
-      <div style="
-        background: var(--primary-blue);
-        color: white;
-        width: 28px;
-        height: 28px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      ">
-        <i class="ph ph-info" style="font-size: 1.2rem;"></i>
-      </div>
-      <span
-        style="
-          color: var(--text-main);
-          font-weight: 700;
-          font-size: 0.9rem;
-          text-transform: uppercase;
-          letter-spacing: 1.5px;
-        "
-        >Sobre o Diagrama</span
-      >
-    </div>
-    <div style="display: flex; gap: 30px; flex-wrap: wrap;">
-      <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; max-width: 3000px;">
-        O pipeline representa o fluxo completo de segurança, desde a configuração do ambiente até o sign-off final. Linhas sólidas indicam fluxo principal, linhas tracejadas indicam falhas e loops de feedback.
-      </p>
-      <div style="display: flex; align-items: center; gap: 20px; font-size: 0.8rem; border-left: 1px solid var(--border-color); padding-left: 20px;">
-      </div>
-    </div>
-  </div>
-</section>
-
-            <div
-              style="
-                background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-cyan) 100%);
-                height: 2px;
-                width: 100px;
-                margin: 30px 0;
-              "
-            ></div>
 
             <div class="diagram-container">
               <img src="assets/images/Fluxograma-Fase1-DM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
               <img src="assets/images/Fluxograma-Fase1-LM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
             </div>
+
+            <section id="diagrama" style="margin: 40px 0">
+              <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  padding: 20px;
+                  max-width: 3000px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px">
+                  <i class="ph ph-info" style="font-size: 1.5rem; color: var(--primary-blue)"></i>
+                  <strong
+                    style="
+                      color: var(--primary-blue);
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                    "
+                    >Sobre o Diagrama</strong
+                  >
+                </div>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6">
+                  O pipeline representa o fluxo completo da <strong>Fase 1: Estação de Trabalho</strong>. Cada etapa do
+                  processo de desenvolvimento é integrada com ferramentas de segurança automatizadas, garantindo que
+                  vulnerabilidades sejam detectadas e corrigidas antes mesmo do commit.
+                </p>
+              </div>
+            </section>
 
             <section id="fases" style="margin-top: 40px; padding-top: 0px">
               <h3
@@ -305,20 +282,19 @@
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('trivy')"
-                  style="border-left: 3px solid var(--primary-blue)"
+                  style="border-left: 3px solid var(--primary-blue); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--primary-blue); margin: 0">TRIVY<br />(SCA)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--primary-blue); margin: 0"
+                      >TRIVY (SCA)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
                     Ferramenta de <strong>Software Composition Analysis</strong> que realiza varredura completa de
                     vulnerabilidades em dependências, bibliotecas de terceiros, imagens Docker e sistemas de arquivos.
-                    Identifica CVEs conhecidos através de bancos de dados atualizados diariamente, permitindo a detecção
-                    precoce de riscos na Supply Chain. Suporta múltiplos formatos de saída e integração nativa com
-                    CI/CD.
                   </p>
                   <div
                     style="
@@ -335,20 +311,19 @@
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('semgrep')"
-                  style="border-left: 3px solid var(--accent-cyan)"
+                  style="border-left: 3px solid var(--accent-cyan); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--accent-cyan); margin: 0">SEMGREP<br />(SAST)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--accent-cyan); margin: 0"
+                      >SEMGREP (SAST)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
                     Engine de <strong>análise estática de código</strong> (SAST) que detecta vulnerabilidades, bugs e
-                    padrões de código inseguro através de regras customizáveis. Identifica falhas como SQL Injection,
-                    XSS, hardcoded secrets e uso de funções inseguras. Suporta mais de 30 linguagens e permite criar
-                    regras específicas para os padrões de segurança do projeto, executando tanto localmente quanto no
-                    pipeline.
+                    padrões de código inseguro através de regras customizáveis.
                   </p>
                   <div
                     style="
@@ -365,19 +340,19 @@
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('gitleaks')"
-                  style="border-left: 3px solid var(--accent-gold)"
+                  style="border-left: 3px solid var(--accent-gold); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--accent-gold); margin: 0">GITLEAKS<br />(SECRETS)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--accent-gold); margin: 0"
+                      >GITLEAKS (SECRETS)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
                     Scanner especializado em <strong>detecção de secrets e credenciais</strong> expostos no código-fonte
-                    e histórico do Git. Identifica API keys, tokens de autenticação, senhas hardcoded, chaves privadas e
-                    outros dados sensíveis através de regex patterns e entropia. Previne vazamentos críticos antes que
-                    cheguem aos repositórios remotos, executando via pre-commit hooks e pipeline.
+                    e histórico do Git.
                   </p>
                   <div
                     style="

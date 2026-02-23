@@ -289,23 +289,25 @@
                 "
               >
                 <i class="ph ph-shield-check" style="margin-right: 10px; color: var(--primary-blue)"></i>Ferramentas
-                Integradas
+                Principais
               </h3>
               <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 40px 0">
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('trivy')"
-                  style="border-left: 3px solid var(--primary-blue)"
+                  style="border-left: 3px solid var(--primary-blue); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-package" style="font-size: 2rem; color: var(--primary-blue); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--primary-blue); margin: 0">TRIVY<br />(SCA)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--primary-blue); margin: 0"
+                      >TRIVY (SCA)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
-                    Ferramenta de <strong>análise de composição de software</strong> que identifica vulnerabilidades
-                    conhecidas em dependências, bibliotecas de terceiros e imagens de containers.
+                    Ferramenta de <strong>Software Composition Analysis</strong> que realiza varredura completa de
+                    vulnerabilidades em dependências, bibliotecas de terceiros, imagens Docker e sistemas de arquivos.
                   </p>
                   <div
                     style="
@@ -322,17 +324,19 @@
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('semgrep')"
-                  style="border-left: 3px solid var(--accent-cyan)"
+                  style="border-left: 3px solid var(--accent-cyan); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-code" style="font-size: 2rem; color: var(--accent-cyan); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--accent-cyan); margin: 0">SEMGREP<br />(SAST)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--accent-cyan); margin: 0"
+                      >SEMGREP (SAST)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
-                    Engine de <strong>análise estática de código-fonte</strong> que detecta padrões inseguros,
-                    vulnerabilidades de lógica e más práticas diretamente no código.
+                    Engine de <strong>análise estática de código</strong> (SAST) que detecta vulnerabilidades, bugs e
+                    padrões de código inseguro através de regras customizáveis.
                   </p>
                   <div
                     style="
@@ -349,17 +353,19 @@
                 <div
                   class="meta-card clickable"
                   onclick="nav.switchTool('gitleaks')"
-                  style="border-left: 3px solid var(--accent-gold)"
+                  style="border-left: 3px solid var(--accent-gold); display: flex; flex-direction: column"
                 >
                   <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px">
                     <i class="ph ph-key" style="font-size: 2rem; color: var(--accent-gold); flex-shrink: 0"></i>
-                    <span class="meta-label" style="color: var(--accent-gold); margin: 0">GITLEAKS<br />(SECRETS)</span>
+                    <span class="meta-label" style="font-size: 1rem; color: var(--accent-gold); margin: 0"
+                      >GITLEAKS (SECRETS)</span
+                    >
                   </div>
                   <p
                     style="margin: 0 0 16px 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1"
                   >
-                    Scanner especializado em <strong>detecção de credenciais e secrets</strong> expostos no código e
-                    histórico do repositório Git.
+                    Scanner especializado em <strong>detecção de secrets e credenciais</strong> expostos no código-fonte
+                    e histórico do Git.
                   </p>
                   <div
                     style="
