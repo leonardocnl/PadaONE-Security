@@ -200,10 +200,10 @@ trivy image nome-da-imagem:tag</code></pre>
               <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0">FILTRANDO VULNERABILIDADES</h4>
               <div class="code-block">
                 <pre><code># Apenas bibliotecas de linguagem
-trivy fs ./ --scanners vuln --pkg-types library .
+trivy fs ./ --scanners vuln --pkg-types library
 
 # Por nível de severidade (Alta e Crítica)
-trivy fs ./ --severity CRITICAL,HIGH .</code></pre>
+trivy fs ./ --severity CRITICAL,HIGH </code></pre>
               </div>
             </section>
 
