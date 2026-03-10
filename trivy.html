@@ -105,8 +105,8 @@
             </div>
             <h1>Trivy - Software Composition Analysis</h1>
             <p>
-              O Trivy é a nossa principal ferramenta de visibilidade para a Supply Chain, identificando vulnerabilidades [cite: 3]
-              em dependências, imagens de container e infraestrutura como código (IaC). [cite: 3]
+              O Trivy é a nossa principal ferramenta de visibilidade para a Supply Chain, identificando vulnerabilidades 
+              em dependências, imagens de container e infraestrutura como código (IaC). 
             </p>
 
             <section style="margin-bottom: 50px">
@@ -122,9 +122,9 @@
                   TRIVY: O NOSSO DETETIVE
                 </div>
                 <p style="margin: 10px 0 0 0; font-size: 0.95rem; line-height: 1.6; color: var(--text-main)">
-                  O Trivy atua como um <strong>investigador implacável</strong>: ele vasculha cada camada do projeto [cite: 3]
-                  para encontrar o crime (vulnerabilidade). No entanto, ele apenas reporta os fatos. [cite: 3] A sentença final —
-                  se vamos atualizar, ignorar ou mitigar — é ditada estritamente pela nossa [cite: 3]
+                  O Trivy atua como um <strong>investigador implacável</strong>: ele vasculha cada camada do projeto 
+                  para encontrar o crime (vulnerabilidade). No entanto, ele apenas reporta os fatos.  A sentença final —
+                  se vamos atualizar, ignorar ou mitigar — é ditada estritamente pela nossa 
                   <a
                     href="#"
                     onclick="
@@ -262,12 +262,12 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                   <i class="ph ph-tree-structure"></i> Por que a biblioteca não está no meu arquivo?
                 </h4>
                 <p style="margin: 0; font-size: 0.95rem; line-height: 1.6">
-                  É comum pesquisar por <code>@remix-run/router</code> no seu <strong>pom.xml</strong> ou [cite: 3]
-                  <strong>package.json</strong> e não encontrar resultados. [cite: 3] Isso ocorre porque você declara apenas as [cite: 3]
-                  <strong>bibliotecas "pai"</strong> (diretas). <br /><br /> [cite: 3]
-                  O Trivy, porém, reconstrói o grafo completo para identificar falhas em [cite: 3]
-                  <strong>dependências transitivas</strong>. [cite: 3] Ou seja, ele encontra vulnerabilidades nos "filhos" [cite: 3]
-                  e "netos" das bibliotecas que você instalou. [cite: 3]
+                  É comum pesquisar por <code>@remix-run/router</code> no seu <strong>pom.xml</strong> ou 
+                  <strong>package.json</strong> e não encontrar resultados.  Isso ocorre porque você declara apenas as 
+                  <strong>bibliotecas "pai"</strong> (diretas). <br /><br /> 
+                  O Trivy, porém, reconstrói o grafo completo para identificar falhas em 
+                  <strong>dependências transitivas</strong>.  Ou seja, ele encontra vulnerabilidades nos "filhos" 
+                  e "netos" das bibliotecas que você instalou. 
                 </p>
               </div>
 
@@ -281,20 +281,20 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                 "
               >
                 <p style="margin: 0; font-size: 0.95rem; color: var(--text-main); line-height: 1.6">
-                  <strong>Entenda a lógica:</strong> Quando o relatório aponta o seu arquivo de manifesto como o [cite: 3]
-                  <strong>Target</strong>, ele não está dizendo que o erro está escrito ali textualmente, mas sim que [cite: 3]
-                  aquele arquivo é a <strong>origem da cadeia de importação</strong>. <br /><br /> [cite: 3]
-                  Para o desenvolvedor, o desafio é identificar qual "pai" trouxe esse "filho" vulnerável. [cite: 3] Corrigir a
-                  versão da biblioteca pai no seu arquivo geralmente resolve as falhas de toda a sua linhagem de [cite: 3]
-                  dependências. [cite: 3]
+                  <strong>Entenda a lógica:</strong> Quando o relatório aponta o seu arquivo de manifesto como o 
+                  <strong>Target</strong>, ele não está dizendo que o erro está escrito ali textualmente, mas sim que 
+                  aquele arquivo é a <strong>origem da cadeia de importação</strong>. <br /><br /> 
+                  Para o desenvolvedor, o desafio é identificar qual "pai" trouxe esse "filho" vulnerável.  Corrigir a
+                  versão da biblioteca pai no seu arquivo geralmente resolve as falhas de toda a sua linhagem de 
+                  dependências. 
                 </p>
               </div>
 
               <h3><i class="ph ph-wrench"></i> 4.1 Como Corrigir</h3>
               <p>
-                Se o Trivy apontar uma vulnerabilidade em uma biblioteca que <strong>não está</strong> declarada [cite: 3]
-                diretamente no seu arquivo de configuração, siga os passos abaixo para forçar a correção das [cite: 3]
-                dependências transitivas. [cite: 3]
+                Se o Trivy apontar uma vulnerabilidade em uma biblioteca que <strong>não está</strong> declarada 
+                diretamente no seu arquivo de configuração, siga os passos abaixo para forçar a correção das 
+                dependências transitivas. 
               </p>
 
               <div class="meta-card" style="margin-bottom: 20px; border-top: 3px solid var(--primary-blue)">
@@ -302,11 +302,11 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                   <i class="ph ph-coffee"></i> Correção no Backend (Java/Maven)
                 </h4>
                 <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
-                  <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha. [cite: 3]</li>
-                  <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;properties&gt;</code>. [cite: 3]</li>
+                  <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha. </li>
+                  <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;properties&gt;</code>. </li>
                   <li>
-                    Adicione a tag específica da biblioteca com a versão sugerida pelo Trivy para forçar o [cite: 3]
-                    <i>override</i>. [cite: 3]
+                    Adicione a tag específica da biblioteca com a versão sugerida pelo Trivy para forçar o 
+                    <i>override</i>. 
                   </li>
                 </ol>
 
@@ -325,11 +325,11 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                 </h4>
                 <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
                   <li>
-                    Identifique o nome da biblioteca vulnerável e a <strong>Fixed Version</strong> no relatório do [cite: 3]
-                    Trivy. [cite: 3]
+                    Identifique o nome da biblioteca vulnerável e a <strong>Fixed Version</strong> no relatório do 
+                    Trivy. 
                   </li>
-                  <li>No seu <code>package.json</code>, adicione ou localize o campo <strong>"overrides"</strong>. [cite: 3]</li>
-                  <li>Insira o nome da biblioteca "filha" e a versão corrigida conforme o exemplo abaixo. [cite: 3]</li>
+                  <li>No seu <code>package.json</code>, adicione ou localize o campo <strong>"overrides"</strong>. </li>
+                  <li>Insira o nome da biblioteca "filha" e a versão corrigida conforme o exemplo abaixo. </li>
                 </ol>
 
                 <div class="code-block" style="margin-top: 15px">
@@ -353,8 +353,8 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                   "
                 >
                   <p style="margin: 0; font-size: 0.85rem">
-                    <strong>Dica:</strong> Após salvar, execute <code>npm install</code> para aplicar as mudanças no [cite: 3]
-                    <code>package-lock.json</code>. [cite: 3]
+                    <strong>Dica:</strong> Após salvar, execute <code>npm install</code> para aplicar as mudanças no 
+                    <code>package-lock.json</code>. 
                   </p>
                 </div>
               </div>
@@ -401,8 +401,8 @@ EOF</code></pre>
             <section id="trivy-trivyignore" style="margin-bottom: 50px">
               <h3>6. O Arquivo .trivyignore</h3>
               <p>
-                O arquivo <code>.trivyignore</code> serve para que o detetive ignore vulnerabilidades específicas que já [cite: 3]
-                foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe. [cite: 3]
+                O arquivo <code>.trivyignore</code> serve para que o detetive ignore vulnerabilidades específicas que já 
+                foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe. 
               </p>
 
               <div class="code-block">
@@ -415,7 +415,7 @@ CVE-2023-1234
 CVE-2024-5678</code></pre>
               </div>
               <p style="font-size: 0.85rem; color: var(--text-muted)">
-                * Toda entrada deve conter um comentário explicando o motivo da supressão. [cite: 3]
+                * Toda entrada deve conter um comentário explicando o motivo da supressão. 
               </p>
             </section>
 
@@ -424,13 +424,13 @@ CVE-2024-5678</code></pre>
               <div class="meta-card card-critical">
                 <span class="meta-label" style="color: var(--status-success)">CHECKLIST DO DETETIVE</span>
                 <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8">
-                  <li><strong>Pre-commit:</strong> Rode <code>o trivy</code> antes de cada commit. [cite: 3]</li>
+                  <li><strong>Pre-commit:</strong> Rode <code>o trivy</code> antes de cada commit. </li>
                   <li>
-                    <strong>Integridade:</strong> Mantenha o <code>.trivyignore</code> sempre atualizado e documentado. [cite: 3]
+                    <strong>Integridade:</strong> Mantenha o <code>.trivyignore</code> sempre atualizado e documentado. 
                   </li>
                   <li>
-                    <strong>Decisão:</strong> O Trivy acha o erro, a <strong>Lógica de Biblioteca</strong> resolve o [cite: 3]
-                    erro. [cite: 3]
+                    <strong>Decisão:</strong> O Trivy acha o erro, a <strong>Lógica de Biblioteca</strong> resolve o 
+                    erro. 
                   </li>
                 </ul>
               </div>
@@ -448,8 +448,8 @@ CVE-2024-5678</code></pre>
                 <div class="cvss-row">
                   <span style="color: var(--status-critical); font-weight: 700">CRITICAL</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE de Exploração Remota:</strong> Bloqueio obrigatório. Requer atualização imediata ou [cite: 3]
-                    remoção da lib. [cite: 3]
+                    <strong>CVE de Exploração Remota:</strong> Bloqueio obrigatório. Requer atualização imediata ou 
+                    remoção da lib. 
                   </span>
                   <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical)">
                     PROIBIDO
@@ -459,8 +459,8 @@ CVE-2024-5678</code></pre>
                 <div class="cvss-row">
                   <span style="color: var(--accent-gold); font-weight: 700">HIGH</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE de Alto Impacto:</strong> Correção obrigatória no sprint atual. Aceita waiver apenas se [cite: 3]
-                    não houver patch. [cite: 3]
+                    <strong>CVE de Alto Impacto:</strong> Correção obrigatória no sprint atual. Aceita waiver apenas se 
+                    não houver patch. 
                   </span>
                   <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold)">
                     RESTRITO
@@ -470,8 +470,8 @@ CVE-2024-5678</code></pre>
                 <div class="cvss-row">
                   <span style="color: var(--primary-blue); font-weight: 700">MEDIUM</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE Moderado:</strong> Correção recomendada. Waiver permitido se o esforço de migração for > [cite: 3]
-                    16h. [cite: 3]
+                    <strong>CVE Moderado:</strong> Correção recomendada. Waiver permitido se o esforço de migração for > 
+                    16h. 
                   </span>
                   <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue)">
                     PERMITIDO
@@ -481,8 +481,8 @@ CVE-2024-5678</code></pre>
                 <div class="cvss-row">
                   <span style="color: var(--status-success); font-weight: 700">LOW</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE de Baixo Risco:</strong> Monitorar via deps.dev. Correção realizada apenas em janelas de [cite: 3]
-                    manutenção. [cite: 3]
+                    <strong>CVE de Baixo Risco:</strong> Monitorar via deps.dev. Correção realizada apenas em janelas de 
+                    manutenção. 
                   </span>
                   <div class="badge-full" style="border-color: var(--status-success); color: var(--status-success)">
                     PERMITIDO
@@ -493,9 +493,9 @@ CVE-2024-5678</code></pre>
               <div class="pro-tip" style="margin-top: 30px">
                 <div class="pro-tip-header"><i class="ph ph-info"></i> O que é um CVE?</div>
                 <p style="margin: 0; font-size: 0.9rem">
-                  <strong>Common Vulnerabilities and Exposures (CVE)</strong> é uma lista de registros para [cite: 3]
-                  vulnerabilidades de segurança cibernética publicamente conhecidas. [cite: 3] Cada ID (ex: CVE-2024-1234) [cite: 3]
-                  refere-se a uma falha específica em um software ou biblioteca. [cite: 3]
+                  <strong>Common Vulnerabilities and Exposures (CVE)</strong> é uma lista de registros para 
+                  vulnerabilidades de segurança cibernética publicamente conhecidas.  Cada ID (ex: CVE-2024-1234) 
+                  refere-se a uma falha específica em um software ou biblioteca. 
                 </p>
               </div>
             </section>
@@ -507,7 +507,7 @@ CVE-2024-5678</code></pre>
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--accent-cyan)">SBOM GENERATION</span>
                   <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Gerar Software Bill of Materials [cite: 3]
+                    Gerar Software Bill of Materials 
                   </p>
                   <div class="code-block" style="margin: 0">
                     <pre style="padding: 15px"><code>trivy sbom --format cyclonedx \
@@ -518,7 +518,7 @@ CVE-2024-5678</code></pre>
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--accent-cyan)">IAC SCAN (TERRAFORM)</span>
                   <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Scan de misconfigurations IaC [cite: 3]
+                    Scan de misconfigurations IaC 
                   </p>
                   <div class="code-block" style="margin: 0">
                     <pre style="padding: 15px"><code>trivy config \
@@ -531,7 +531,7 @@ CVE-2024-5678</code></pre>
               <div class="meta-grid" style="grid-template-columns: 1fr 1fr; margin-top: 20px">
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--accent-cyan)">KUBERNETES MANIFESTS</span>
-                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">Scan de YAML do K8s [cite: 3]</p>
+                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">Scan de YAML do K8s </p>
                   <div class="code-block" style="margin: 0">
                     <pre style="padding: 15px"><code>trivy config \
   --scanners misconfig \
@@ -541,7 +541,7 @@ CVE-2024-5678</code></pre>
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--accent-cyan)">ROOTFS SCAN</span>
                   <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Scan de filesystem de container [cite: 3]
+                    Scan de filesystem de container 
                   </p>
                   <div class="code-block" style="margin: 0">
                     <pre style="padding: 15px"><code>trivy rootfs \
@@ -555,25 +555,25 @@ CVE-2024-5678</code></pre>
             <section id="trivy-deps-dev" style="margin-bottom: 50px">
               <h3>10. Integração com deps.dev</h3>
 
-              <p>O deps.dev do Google complementa o Trivy com análise de reachability e OpenSSF Scorecard. [cite: 3]</p>
+              <p>O deps.dev do Google complementa o Trivy com análise de reachability e OpenSSF Scorecard. </p>
 
               <div class="meta-grid" style="grid-template-columns: 1fr 1fr">
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--primary-blue)">TRIVY</span>
                   <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.6">
-                    <li>Vulnerabilidades conhecidas (CVE) [cite: 3]</li>
-                    <li>Scan de imagens Docker [cite: 3]</li>
-                    <li>Automação CI/CD [cite: 3]</li>
-                    <li>Offline-capable [cite: 3]</li>
+                    <li>Vulnerabilidades conhecidas (CVE) </li>
+                    <li>Scan de imagens Docker </li>
+                    <li>Automação CI/CD </li>
+                    <li>Offline-capable </li>
                   </ul>
                 </div>
                 <div class="meta-card">
                   <span class="meta-label" style="color: var(--accent-cyan)">DEPS.DEV</span>
                   <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.6">
-                    <li>Análise de alcançabilidade [cite: 3]</li>
-                    <li>OpenSSF Scorecard [cite: 3]</li>
-                    <li>Grafo de dependências [cite: 3]</li>
-                    <li>Web-based UI [cite: 3]</li>
+                    <li>Análise de alcançabilidade </li>
+                    <li>OpenSSF Scorecard </li>
+                    <li>Grafo de dependências </li>
+                    <li>Web-based UI </li>
                   </ul>
                 </div>
               </div>
@@ -581,8 +581,8 @@ CVE-2024-5678</code></pre>
               <div class="pro-tip" style="margin-top: 30px">
                 <div class="pro-tip-header"><i class="ph ph-info"></i> Fluxo Recomendado</div>
                 <p style="margin: 0; font-size: 0.9rem">
-                  <strong>1.</strong> Trivy (local/pipeline) detecta CVE → <strong>2.</strong> deps.dev valida se é [cite: 3]
-                  exploitável → <strong>3.</strong> Lógica de Bibliotecas define ação. [cite: 3]
+                  <strong>1.</strong> Trivy (local/pipeline) detecta CVE → <strong>2.</strong> deps.dev valida se é 
+                  exploitável → <strong>3.</strong> Lógica de Bibliotecas define ação. 
                 </p>
               </div>
             </section>
@@ -594,17 +594,17 @@ CVE-2024-5678</code></pre>
                 <span class="meta-label" style="color: var(--status-success)">CHECKLIST TRIVY</span>
                 <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8">
                   <li>
-                    <strong>Local:</strong> Executar <code>trivy fs .</code> antes de commits com novas dependências. [cite: 3]
+                    <strong>Local:</strong> Executar <code>trivy fs .</code> antes de commits com novas dependências. 
                   </li>
-                  <li><strong>Pre-commit Hook:</strong> Bloquear commits com CRITICAL/HIGH vulnerabilities. [cite: 3]</li>
-                  <li><strong>Pipeline:</strong> Gate obrigatório no CI/CD com <code>--exit-code 1</code>. [cite: 3]</li>
-                  <li><strong>Imagens:</strong> Scan de todas as imagens antes de push para registry. [cite: 3]</li>
-                  <li><strong>Base Images:</strong> Preferir imagens slim/alpine com menos vulnerabilidades. [cite: 3]</li>
-                  <li><strong>DB Updates:</strong> Atualizar banco de vulnerabilidades diariamente. [cite: 3]</li>
-                  <li><strong>SARIF Upload:</strong> Integrar com GitHub/GitLab Security Dashboards. [cite: 3]</li>
+                  <li><strong>Pre-commit Hook:</strong> Bloquear commits com CRITICAL/HIGH vulnerabilities. </li>
+                  <li><strong>Pipeline:</strong> Gate obrigatório no CI/CD com <code>--exit-code 1</code>. </li>
+                  <li><strong>Imagens:</strong> Scan de todas as imagens antes de push para registry. </li>
+                  <li><strong>Base Images:</strong> Preferir imagens slim/alpine com menos vulnerabilidades. </li>
+                  <li><strong>DB Updates:</strong> Atualizar banco de vulnerabilidades diariamente. </li>
+                  <li><strong>SARIF Upload:</strong> Integrar com GitHub/GitLab Security Dashboards. </li>
                   <li>
-                    <strong>Waivers:</strong> Documentar todas as exceções no <code>.trivyignore</code> com [cite: 3]
-                    justificativa. [cite: 3]
+                    <strong>Waivers:</strong> Documentar todas as exceções no <code>.trivyignore</code> com 
+                    justificativa. 
                   </li>
                 </ul>
               </div>
