@@ -297,65 +297,62 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                 dependências transitivas. 
               </p>
 
-              <div class="meta-card" style="margin-bottom: 20px; border-top: 3px solid var(--primary-blue)">
-                <h4 style="color: var(--primary-blue); margin-top: 0">
-                  <i class="ph ph-coffee"></i> Correção no Backend (Java/Maven)
-                </h4>
-                <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
-                  <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha. </li>
-                  <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;properties&gt;</code>. </li>
-                  <li>
-                    Adicione a tag específica da biblioteca com a versão sugerida pelo Trivy para forçar o 
-                    <i>override</i>. 
-                  </li>
-                </ol>
+<div class="meta-card" style="margin-bottom: 20px; border-top: 3px solid var(--primary-blue)">
+  <h4 style="color: var(--primary-blue); margin-top: 0">
+    <i class="ph ph-coffee"></i> Correção no Backend (Java/Maven)
+  </h4>
+  <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
+    <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha. </li>
+    <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;properties&gt;</code>. </li>
+    <li>
+      Adicione a tag específica da biblioteca com a versão sugerida pelo Trivy para forçar o 
+      <i>override</i>. 
+    </li>
 
-                <div class="code-block" style="margin-top: 15px">
-                  <div class="code-header"><span>pom.xml</span></div>
-                  <pre><code>&lt;properties&gt;
+    <div class="code-block" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="code-header"><span>pom.xml</span></div>
+      <pre><code>&lt;properties&gt;
     &lt;!-- Exemplo: O Trivy acusou Tomcat 10.1.30 vulnerável e sugeriu a 11.0.12 --&gt;
     &lt;tomcat.version&gt;11.0.12&lt;/tomcat.version&gt;
 &lt;/properties&gt;</code></pre>
-                </div>
-              </div>
+    </div>
 
-              <div class="meta-card" style="border-top: 3px solid var(--accent-gold)">
-                <h4 style="color: var(--accent-gold); margin-top: 0">
-                  <i class="ph ph-file-js"></i> Correção no Frontend (Angular/Node.js)
-                </h4>
-                <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
-                  <li>
-                    Identifique o nome da biblioteca vulnerável e a <strong>Fixed Version</strong> no relatório do 
-                    Trivy. 
-                  </li>
-                  <li>No seu <code>package.json</code>, adicione ou localize o campo <strong>"overrides"</strong>. </li>
-                  <li>Insira o nome da biblioteca "filha" e a versão corrigida conforme o exemplo abaixo. </li>
-                </ol>
+    <li>Na pasta do backend, execute o comando abaixo para aplicar as mudanças:</li>
+    
+    <div class="code-block" style="margin-top: 15px">
+      <div class="code-header"><span>Terminal</span></div>
+      <pre><code>mvn clean install</code></pre>
+    </div>
+  </ol>
+</div>
 
-                <div class="code-block" style="margin-top: 15px">
-                  <div class="code-header"><span>package.json</span></div>
-                  <pre><code>
-                  "overrides": {
-                    "nome-da-lib-filha": "1.2.3"
-                  }
-                    </code></pre>
-                </div>
+              <div class="meta-card" style="border-top: 3px solid var(--accent-gold); margin-bottom: 20px;">
+  <h4 style="color: var(--accent-gold); margin-top: 0">
+    <i class="ph ph-file-js"></i> Correção no Frontend (Angular/Node.js)
+  </h4>
+  <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
+    <li>
+      Identifique o nome da biblioteca vulnerável e a <strong>Fixed Version</strong> no relatório do 
+      Trivy. 
+    </li>
+    <li>No seu <code>package.json</code>, adicione ou localize o campo <strong>"overrides"</strong>. </li>
+    <li>Insira o nome da biblioteca "filha" e a versão corrigida conforme o exemplo abaixo:</li>
 
-                <div
-                  class="pro-tip"
-                  style="
-                    margin-top: 15px;
-                    background: rgba(255, 193, 7, 0.1);
-                    border-left: 4px solid var(--accent-gold);
-                  "
-                >
-                  <p style="margin: 0; font-size: 0.85rem">
-                    <strong>Dica:</strong> Após salvar, execute <code>npm install</code> para aplicar as mudanças no 
-                    <code>package-lock.json</code>. 
-                  </p>
-                </div>
-              </div>
-            </section>
+    <div class="code-block" style="margin-top: 15px; margin-bottom: 15px">
+      <div class="code-header"><span>package.json</span></div>
+      <pre><code>"overrides": {
+  "nome-da-lib-filha": "1.2.3"
+}</code></pre>
+    </div>
+
+    <li>Após salvar, execute o comando abaixo para aplicar as mudanças no <code>package-lock.json</code>:</li>
+
+    <div class="code-block" style="margin-top: 15px">
+      <div class="code-header"><span>Terminal</span></div>
+      <pre><code>npm install</code></pre>
+    </div>
+  </ol>
+</div>
 
              <section id="trivy-relatorio" style="margin-bottom: 50px">
               <h3>5. Gerar Relatório (OPCIONAL)</h3>
