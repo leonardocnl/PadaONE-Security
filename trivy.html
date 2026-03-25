@@ -302,21 +302,27 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
     <i class="ph ph-coffee"></i> Correção no Backend (Java/Maven)
   </h4>
   <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
-    <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha. </li>
-    <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;properties&gt;</code>. </li>
+    <li>Identifique na coluna <strong>"Fixed Version"</strong> a versão mínima que corrige a falha no relatório do Trivy.</li>
     <li>
-      Adicione a tag específica da biblioteca com a versão sugerida pelo Trivy para forçar o 
-      <i>override</i>. 
+      Acesse o <a href="https://mvnrepository.com/" target="_blank" style="color: var(--primary-blue); font-weight: bold;">MVN Repository</a> e pesquise pelo nome da biblioteca (ex: <code>org.apache.tomcat.embed:tomcat-embed-core</code>)
+      <ul style="margin-top: 10px; list-style-type: '-' ; margin-left: 15px;">
+        <li>Selecione a versão que o trivy sugeriu como "Fixed Version".</li>
+        <li>Confirme se o <strong>groupId</strong> e <strong>artifactId</strong> correspondem ao reportado pelo Trivy.</li>
+        <li>Copie o bloco de código da dependência XML (exemplo de bloco abaixo).</li>
+      </ul>
     </li>
 
     <div class="code-block" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="code-header"><span>pom.xml</span></div>
-      <pre><code>&lt;properties&gt;
-    &lt;!-- Exemplo: O Trivy acusou Tomcat 10.1.30 vulnerável e sugeriu a 11.0.12 --&gt;
-    &lt;tomcat.version&gt;11.0.12&lt;/tomcat.version&gt;
-&lt;/properties&gt;</code></pre>
+      <div class="code-header"><span>Exemplo de Dependência</span></div>
+      <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.apache.tomcat.embed&lt;/groupId&gt;
+    &lt;artifactId&gt;tomcat-embed-core&lt;/artifactId&gt;
+    &lt;version&gt;10.1.30&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
     </div>
 
+    <li>No seu <code>pom.xml</code>, localize a seção <code>&lt;dependencies&gt;</code> e cole o código copiado para forçar o <strong>override</strong> da versão transitiva.</li>
+    
     <li>Na pasta do backend, execute o comando abaixo para aplicar as mudanças:</li>
     
     <div class="code-block" style="margin-top: 15px">
