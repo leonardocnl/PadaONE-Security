@@ -284,23 +284,27 @@
                                 <button class="btn-copy" onclick="utils.copyCode('frontend-scan')"><i class="ph ph-copy"></i></button>
                             </div>
                             <pre><code id="frontend-scan">semgrep scan \
-  --config=auto \
-  --config=p/supply-chain \
-  --config=p/secrets \
+  semgrep scan \
+  --config=p/typescript \
+  --config=p/javascript \
+  --config=p/nodejsscan \
   --config=p/owasp-top-ten \
-  --config="p/cwe-top-25" \
-  --config="p/owasp-top-ten" \
-  --config="p/r2c-security-audit" \
-  --config="p/supply-chain" \
-  --config="p/secrets" \
-  --config="p/xss" \
-  --config="p/jwt" \
-  --config="p/nodejsscan" \
-  --config="p/javascript" \
-  --config="p/typescript" \
-  --config="p/insecure-transport" \
-  --config="p/react" \
-  --output=relatorio_maximo.txt</code></pre>
+  --config=p/security-audit \
+  --config=p/r2c-security-audit \
+  --config=p/supply-chain \
+  --config=p/jwt \
+  --config=p/insecure-transport \
+  --config=p/cwe-top-25 \
+  --config=p/default \
+  --config=p/ci \
+  --config=p/clientside-js \
+  --max-target-bytes 0 \
+  --timeout 0 \
+  --no-git-ignore \
+  --severity INFO \
+  --severity WARNING \
+  --severity ERROR \
+  --output=../relatorio_semgrep.txt</code></pre>
                         </div>
                     </section>
 
@@ -519,47 +523,56 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
 
                     <section id="fluxogramas" style="margin-bottom: 50px;">
                         <h3>Fluxogramas de Decisão</h3>
-                        <p>Utilize estes fluxogramas visuais para navegar pelo processo de triagem e correção de vulnerabilidades detectadas pelo Semgrep.</p>
+                        <p>Utilize os fluxogramas abaixo em ordem sequencial. As duas primeiras entradas correspondem a ETAPA 1 (fluxogramaSemgrep1 e fluxogramaSemgrep2), seguidas das demais etapas.</p>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">FLUXO COMPLETO: LOCALIZAÇÃO E ANÁLISE INICIAL</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 1: LOCALIZAÇÃO E ANÁLISE INICIAL</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma1.png" alt="Fluxograma 1: Localização e Análise Inicial" style="width: 100%; max-width: 1120px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Início do Processo:</strong> Ao detectar uma vulnerabilidade, primeiro identifique se está no código de <em>Aplicação</em> ou <em>Infraestrutura</em>. Se for Infra, repasse para o time responsável. Se for Aplicação, prossiga para validar a incidência.</p>
+                            <img src="assets/images/fluxogramaSemgrep1.png" alt="Fluxograma 1: Localização e Análise Inicial" style="width: 100%; max-width: 1120px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 1:</strong> Ao detectar uma vulnerabilidade, primeiro identifique se está no código de <em>Aplicação</em> ou <em>Infraestrutura</em>. Se for Infra, repasse para o time responsável. Se for Aplicação, prossiga para validar a incidência.</p>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1: ANÁLISE DE VERACIDADE</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 2: ANÁLISE DE VERACIDADE</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma2.png" alt="Fluxograma 2: Análise de Veracidade" style="width: 100%; max-width: 1180px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Passo 1:</strong> Determine se o alerta é um <em>Erro Real</em> ou <em>Falso Positivo</em>. Se for real, valide o escopo da vulnerabilidade e prossiga para o Passo 2. Se a vulnerabilidade não nos afeta (código inativo/seguro), documente como "Não Afetado" e encerre o processo.</p>
+                            <img src="assets/images/fluxogramaSemgrep2.png" alt="Fluxograma 2: Análise de Veracidade" style="width: 100%; max-width: 1180px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 1:</strong> Determine se o alerta é um <em>Erro Real</em> ou <em>Falso Positivo</em>. Se for real, valide o escopo da vulnerabilidade e prossiga para a Etapa 3. Se a vulnerabilidade não nos afeta (código inativo/seguro), documente como "Não Afetado" e encerre o processo.</p>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 2: ANÁLISE DE ALCANCE E ESFORÇO</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 3: ANÁLISE DE ALCANCE</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma3.png" alt="Fluxograma 3: Análise de Alcance e Esforço" style="width: 100%; max-width: 1300px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Passo 2:</strong> Se a vulnerabilidade nos afeta, estime o esforço de correção. Aplique a <em>Regra das 16 horas</em> no Passo 3. Se o esforço for <strong>menor que 16h</strong>, a correção é <strong>obrigatória e imediata</strong>. Se for <strong>maior que 16h</strong>, solicite um Waiver.</p>
+                            <img src="assets/images/fluxogramaSemgrep3.png" alt="Fluxograma 3: Análise de Alcance e Esforço" style="width: 100%; max-width: 1300px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 3:</strong> Se a vulnerabilidade não nos afeta, documente como "Não Afetado" e encerre o processo. Se for real, passe para a próxima etapa.</p>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 3: AVALIAÇÃO DE SEVERIDADE</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 4: AVALIAÇÃO DE ESFORÇO</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma4.png" alt="Fluxograma 4: Avaliação de Severidade" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Passo 3:</strong> Se o esforço for <strong>maior que 16h</strong>, analise a severidade. Se for <em>WARNING</em> (média), você pode registrar um Waiver diretamente no código e ticket. Se for <em>CRÍTICA (ERROR)</em>, prossiga para o Escalonamento Crítico obrigatório.</p>
+                            <img src="assets/images/fluxogramaSemgrep4.png" alt="Fluxograma 4: Avaliação de Severidade" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 4:</strong> Se a vulnerabilidade nos afeta, verifique o esforço, se ele não for <strong>maior que 16h</strong>, a correção é obrigatória. Se for maior, passe para a próxima etapa.</p>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ESCALONAMENTO CRÍTICO</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 5: ANÁLISE DE SEVERIDADE</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma5.png" alt="Fluxograma 5: Escalonamento Crítico" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Escalonamento:</strong> Para vulnerabilidades <em>CRÍTICAS</em>, é obrigatória a <strong>Revisão por Desenvolvedor Sênior ou Time de Segurança</strong>. A criação do Waiver deve ser aprovada formalmente. Se não aprovada, a correção é obrigatória e imediata.</p>
+                            <img src="assets/images/fluxogramaSemgrep5.png" alt="Fluxograma 5: Escalonamento Crítico" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 5:</strong> Se a correção exigir mais de 16 horas, verifique a severidade. Se não for crítica, o waiver é permitido. Se for crítica, o waiver só é permitido após aprovação de um revisor sênior ou do time de segurança.</p>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">APROVAÇÃO E REGISTRO DE WAIVER</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 6: ESCALONAMENTO CRÍTICO</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma6.png" alt="Fluxograma 6: Aprovação e Registro de Waiver" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Decisão Final:</strong> Se o Waiver for <em>aprovado</em>, registre-o no código (comentário nosemgrep) e no OpenProject. Se <em>não aprovado</em>, realize a correção obrigatória. Em ambos os casos, finalize com a codificação/commit.</p>
+                            <img src="assets/images/fluxogramaSemgrep6.png" alt="Fluxograma 6: Aprovação e Registro de Waiver" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 6:</strong> Se for severidade crítica, o escalonamento é obrigatório. E você deve verificar se a criação do waiver é permitida.
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">FINALIZAÇÃO DO PROCESSO</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 7: APROVAÇÃO DE WAIVER CRÍTICO</h4>
                         <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/semgrep fluxograma7.png" alt="Fluxograma 7: Finalização do Processo" style="width: 100%; max-width: 900px; display: block; margin: 0 auto;">
+                            <img src="assets/images/fluxogramaSemgrep7.png" alt="Fluxograma 7: Finalização do Processo" style="width: 100%; max-width: 900px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 7:</strong> Se o waiver for permitido, crie o item no OpenProject seguindo o modelo. Se não for permitido, corrija a vulnerabilidade imediatamente.</p>
+                        </div>
+
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 8: FINALIZAÇÃO DO PROCESSO</h4>
+                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <img src="assets/images/fluxogramaSemgrep8.png" alt="Fluxograma 8: Registro e Rastreabilidade" style="width: 100%; max-width: 1000px; display: block; margin: 0 auto;">
+                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 8:</strong> Consolide as decisões de segurança com evidências, responsáveis e prazo de reavaliação para auditoria contínua.</p>
+                        </div>
+
                         <div class="pro-tip">
                             <div class="pro-tip-header"><i class="ph ph-flow-arrow"></i> Navegação pelos Fluxogramas</div>
                             <p style="margin: 0; font-size: 0.9rem;">Siga os fluxogramas em ordem sequencial. Cada decisão tomada (losango amarelo) direciona você para o próximo passo apropriado. Processos em <span style="color: var(--status-critical);">vermelho</span> exigem atenção especial e aprovação formal.</p>
