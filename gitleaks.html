@@ -175,15 +175,19 @@ gitleaks version</code></pre>
               </div>
 
               <div class="code-block" style="margin-top: 15px">
-                <div class="code-header">
-                  <span>Gerar Relatório JSON ou CSV</span
-                  ><button class="btn-copy" onclick="utils.copyCode('cmd-json')"><i class="ph ph-copy"></i></button>
-                </div>
-                <pre><code id="cmd-json"># Salva o Relatório de falhas em um arquivo json
-gitleaks detect -v --report-path gitleaks-report.json</code></pre>
-                <pre><code id="cmd-json"># Salva o Relatório de falhas em um arquivo Csv
-                gitleaks detect -v --report-path gitleaks-report.csv</code></pre>
+              <div class="code-header">
+                <span>Gerar Relatório JSON ou CSV</span>
+                <button class="btn-copy" onclick="utils.copyCode('cmd-json')">
+                  <i class="ph ph-copy"></i>
+                </button>
               </div>
+              
+              <pre><code id="cmd-json"># Salva o Relatório de falhas em um arquivo json
+            gitleaks detect -v --report-path gitleaks-report.json -f json</code></pre>
+
+              <pre><code id="cmd-csv"># Salva o Relatório de falhas em um arquivo Csv
+            gitleaks detect -v --report-path gitleaks-report.csv -f csv</code></pre>
+            </div>
             </section>
 
             <section id="gitleaks-campos" style="margin-bottom: 50px">
