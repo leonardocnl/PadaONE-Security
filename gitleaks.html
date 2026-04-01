@@ -183,10 +183,10 @@ gitleaks version</code></pre>
               </div>
               
               <pre><code id="cmd-json"># Salva o Relatório de falhas em um arquivo json
-            gitleaks detect -v --report-path gitleaks-report.json -f json</code></pre>
+gitleaks detect -v --report-path gitleaks-report.json -f json</code></pre>
 
               <pre><code id="cmd-csv"># Salva o Relatório de falhas em um arquivo Csv
-            gitleaks detect -v --report-path gitleaks-report.csv -f csv</code></pre>
+gitleaks detect -v --report-path gitleaks-report.csv -f csv</code></pre>
             </div>
             </section>
 
@@ -287,7 +287,7 @@ gitleaks version</code></pre>
               </div>
             </section>
 
-            <section id="gitleaks-waivers" style="margin-bottom: 100px">
+            <section id="gitleaks-waivers" style="margin-bottom: 50px">
               <h3>6. Falso Positivo e Waivers</h3>
 
               <div
@@ -350,7 +350,75 @@ Status: Validado como Falso Positivo.</code></pre>
                 </ul>
               </div>
             </section>
-          </div>
+
+            <section id="gitleaks-ignore" style="margin-bottom: 50px">
+              <h3>7. Ignorando Credenciais Específicas (.gitleaksignore)</h3>
+              <p>
+                O arquivo <code>.gitleaksignore</code> funciona como uma "lista de permissões" para ocorrências específicas (falsos positivos) que já foram validadas.
+              </p>
+              
+              <div class="code-block" style="margin-top: 15px">
+                <div class="code-header">
+                  <span>.gitleaksignore</span>
+                  <button class="btn-copy" onclick="utils.copyCode('cmd-ignore')">
+                    <i class="ph ph-copy"></i>
+                  </button>
+                </div>
+                <pre><code id="cmd-ignore"># Ignora chaves de teste específicas em arquivos de regras
+418edf165dbb63d6f46993ae8f8818ffd87ea582:cmd/generate/config/rules/jwt.go:jwt:17
+525d9792b1e3670b4630b8fcc385ca22e8544f9b:detect/detect_test.go:sidekiq-secret:120
+717cf1b10be1625875199eca8cdf48883348985f:README.md:aws-access-token:23</code></pre>
+              </div>
+            </section>
+
+            <section id="gitleaks-toml" style="margin-bottom: 100px">
+              <h3>8. Ignorando Arquivos e Pastas (.gitleaks.toml)</h3>
+              <p>
+                Para ignorar diretórios inteiros (como <code>testdata</code> ou documentações) e evitar que o Gitleaks perca tempo os analisando, crie um arquivo <code>.gitleaks.toml</code> na raiz estendendo as regras originais.
+              </p>
+
+              <div class="code-block" style="margin-top: 15px">
+                <div class="code-header">
+                  <span>.gitleaks.toml</span>
+                  <button class="btn-copy" onclick="utils.copyCode('cmd-toml')">
+                    <i class="ph ph-copy"></i>
+                  </button>
+                </div>
+                <pre><code id="cmd-toml"># This is NOT the default gitleaks config. The default gitleaks config is located
+# here: https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+# This gitleaks config extends the default config and ignores secrets located in the `cmd/generate/config/rules`
+
+title = "Gitleaks development"
+[extend]
+useDefault = true
+
+[allowlist]
+paths = [
+  '''(^|/)cmd/generate/config/rules''',
+  '''.*test\.go''',
+  '''testdata'''
+]</code></pre>
+              </div>
+
+              <div class="pro-tip" style="margin-top: 25px;">
+                <div class="pro-tip-header"><i class="ph ph-terminal-window"></i> Rodando com Custom Config</div>
+                <p style="margin: 0; font-size: 0.9rem">
+                  Para aplicar as regras do seu <code>.toml</code>, adicione a flag <code>--config</code> no comando de execução.
+                </p>
+              </div>
+
+              <div class="code-block" style="margin-top: 15px">
+                <div class="code-header">
+                  <span>Execução Customizada</span>
+                  <button class="btn-copy" onclick="utils.copyCode('cmd-custom-run')">
+                    <i class="ph ph-copy"></i>
+                  </button>
+                </div>
+                <pre><code id="cmd-custom-run"># Detecta falhas ignorando os arquivos listados no .gitleaks.toml
+gitleaks detect -v --config .gitleaks.toml</code></pre>
+              </div>
+            </section>
+            </div>
 
           <aside class="right-toc">
             <div class="toc-header">Nesta Página</div>
@@ -361,6 +429,8 @@ Status: Validado como Falso Positivo.</code></pre>
               <li class="toc-item"><a href="#gitleaks-campos">Campos do Relatório</a></li>
               <li class="toc-item"><a href="#gitleaks-acao">O que fazer?</a></li>
               <li class="toc-item"><a href="#gitleaks-waivers">Falso Positivo e Waivers</a></li>
+              <li class="toc-item"><a href="#gitleaks-ignore">Ignorando Credenciais</a></li>
+              <li class="toc-item"><a href="#gitleaks-toml">Ignorando Arquivos/Pastas</a></li>
             </ul>
           </aside>
         </div>
