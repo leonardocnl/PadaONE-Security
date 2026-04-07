@@ -5,6 +5,7 @@ window.nav = window.nav || {
   switchTool: (toolId, isBack = false) => {
     const pageMap = {
       dashboard: 'dashboard',
+      quickguide: 'quickguide',
       logic: 'logic',
       sobre: 'sobre',
       trivy: 'trivy',
@@ -22,6 +23,7 @@ window.nav = window.nav || {
     const title =
       {
         dashboard: 'Dashboard',
+        quickguide: 'Quick Guide',
         logic: 'Lógica de Bibliotecas',
         sobre: 'Sobre o Projeto',
         trivy: 'Trivy (SCA)',

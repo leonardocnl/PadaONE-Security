@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Guide - PADAONE Security</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/BlackOL.png"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/images/WhiteOL.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/BlackOL.png" />
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <script src="js/theme.js"></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-area">
+            <button
+              style="background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center"
+              onclick="nav.switchTool('dashboard')"
+            >
+              <img
+                src="assets/images/PADAONE-Security Dark.png"
+                alt="PADAONE Security"
+                style="height: 80px; width: 100%; object-fit: contain"
+              />
+              <img
+                src="assets/images/PADAONE-Security Light.png"
+                alt="PADAONE Security"
+                style="height: 80px; width: 100%; object-fit: contain"
+              />
+            </button>
+          </div>
+        </div>
+
+        <nav>
+          <div class="nav-group">
+            <div class="nav-title">Geral</div>
+            <div class="nav-item" onclick="nav.switchTool('dashboard')">
+              <i class="ph ph-squares-four"></i> Dashboard
+            </div>
+            <div class="nav-item active" onclick="nav.switchTool('quickguide')">
+              <i class="ph ph-lightning"></i> Quick Guide
+            </div>
+            <div class="nav-item" onclick="nav.switchTool('logic')">
+              <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
+            </div>
+          </div>
+
+          <div class="nav-group">
+            <div class="nav-title">Ferramentas</div>
+            <div class="nav-item" onclick="nav.switchTool('trivy')"><i class="ph ph-package"></i> Trivy (SCA)</div>
+            <div class="nav-item" onclick="nav.switchTool('semgrep')"><i class="ph ph-code"></i> Semgrep (SAST)</div>
+            <div class="nav-item" onclick="nav.switchTool('gitleaks')">
+              <i class="ph ph-key"></i> Gitleaks (Secrets)
+            </div>
+          </div>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="nav-item" onclick="nav.switchTool('sobre')"><i class="ph ph-info"></i> Sobre o Projeto</div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar">
+          <button class="menu-toggle" id="menuToggle" onclick="toggleMobileSidebar()">
+            <i class="ph ph-list"></i>
+          </button>
+          <button id="btn-back" class="back-btn" onclick="nav.goBack()">
+            <i class="ph ph-caret-left"></i>
+          </button>
+          <span id="breadcrumb" style="color: var(--text-muted); font-size: 0.9rem">Quick Guide</span>
+          <button class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">
+            <i class="ph ph-sun"></i>
+          </button>
+        </header>
+
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
+
+        <div class="tool-layout">
+          <div class="scroll-area">
+            <h1 style="margin-bottom: 10px">Quick Guide</h1>
+            <div
+              style="
+                display: flex;
+                gap: 12px;
+                cursor: default;
+                pointer-events: none;
+                user-select: none;
+                margin-bottom: 20px;
+                font-size: 0.95rem;
+                color: var(--text-muted);
+                font-weight: 700;
+              "
+            >
+              <span>ONBOARDING</span>
+              <span>•</span>
+              <span>SEGURANÇA LOCAL</span>
+            </div>
+
+            <section id="intro" style="margin-bottom: 40px">
+              <h3>Instalação e Execução em Fluxo Único</h3>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
+                Esta página concentra o setup das 3 ferramentas de segurança e o passo a passo para rodar um script
+                único de verificação local. A proposta é reduzir o tempo de configuração e padronizar o início do
+                trabalho de novos desenvolvedores.
+              </p>
+              <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  padding: 20px;
+                  max-width: 3000px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px">
+                  <i class="ph ph-info" style="font-size: 1.4rem; color: var(--primary-blue)"></i>
+                  <strong
+                    style="
+                      color: var(--primary-blue);
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                    "
+                    >Windows</strong
+                  >
+                </div>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6">
+                  Os comandos abaixo são para <strong>Linux/macOS</strong>. Se você está no <strong>Windows</strong>,
+                  utilize o WSL 2 (Windows Subsystem for Linux) ou adapte os comandos conforme a documentação oficial
+                  de cada ferramenta.
+                </p>
+              </div>
+            </section>
+
+            <section id="instalacao" style="margin-bottom: 40px">
+              <h3>1. Instalação das Ferramentas</h3>
+
+              <h4 style="color: var(--primary-blue); margin: 20px 0 10px 0">1.1 Trivy</h4>
+              <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
+                Ferramenta de SCA para detectar vulnerabilidades em dependências e arquivos de projeto.
+              </p>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>sudo apt update
+sudo apt install -y wget apt-transport-https gnupg lsb-release
+wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | gpg --dearmor | sudo tee /usr/share/keyrings/trivy.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/trivy.list
+sudo apt update
+sudo apt install -y trivy</code></pre>
+              </div>
+
+              <h4 style="color: var(--accent-cyan); margin: 20px 0 10px 0">1.2 Semgrep</h4>
+              <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
+                Ferramenta de SAST para análise estática de padrões inseguros no código.
+              </p>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>sudo apt update
+sudo apt install -y pipx
+pipx ensurepath
+pipx install semgrep</code></pre>
+              </div>
+
+              <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  padding: 15px;
+                  margin: 15px 0 20px 0;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px">
+                  <i class="ph ph-warning" style="font-size: 1rem; color: var(--accent-gold)"></i>
+                  <strong
+                    style="
+                      color: var(--accent-gold);
+                      font-size: 0.8rem;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                    "
+                    >Autenticação Obrigatória</strong
+                  >
+                </div>
+                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5">
+                  Semgrep requer login para usar a Pro Engine (regras avançadas). Execute:
+                </p>
+              </div>
+              <div class="code-block" style="margin-bottom: 20px">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>semgrep login</code></pre>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px">
+                Se preferir usar token (útil em CI), veja a
+                <a
+                  onclick="nav.switchTool('semgrep')"
+                  style="color: var(--accent-cyan); cursor: pointer; text-decoration: underline"
+                  >página detalhada do Semgrep</a
+                >.
+              </p>
+
+              <h4 style="color: var(--status-critical); margin: 20px 0 10px 0">1.3 Gitleaks</h4>
+              <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
+                Ferramenta de Secrets Detection para identificar vazamento de credenciais no repositório.
+              </p>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>GITLEAKS_VERSION="8.23.3"
+wget -q https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+tar -xzf gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz
+sudo install -m 755 gitleaks /usr/local/bin/gitleaks
+rm -f gitleaks gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz LICENSE README.md</code></pre>
+              </div>
+            </section>
+
+            <section id="validacao" style="margin-bottom: 40px">
+              <h3>2. Validação Rápida</h3>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>trivy --version
+semgrep --version
+gitleaks version</code></pre>
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0">
+                Se os 3 comandos retornarem versão, o ambiente está pronto para execução automatizada.
+              </p>
+            </section>
+
+            <section id="script" style="margin-bottom: 40px">
+              <h3>3. Rodando o Script Pré-definido</h3>
+
+              <h4 style="color: var(--text-main); margin: 20px 0 10px 0">3.1 Execução</h4>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px">
+                Criar arquivo e permissao:
+              </p>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>mkdir -p ./scripts
+touch ./scripts/security-check.sh
+chmod +x ./scripts/security-check.sh</code></pre>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px">Rodar script:</p>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>./scripts/security-check.sh</code></pre>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0">
+                Se o arquivo ja existir, pule os dois primeiros comandos e mantenha apenas a edicao do conteudo.
+              </p>
+
+              <h4 style="color: var(--text-main); margin: 20px 0 10px 0">3.2 Frontend (Angular)</h4>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>#!/bin/bash
+
+set -euo pipefail
+
+REPORT_MD="relatorio_final.md"
+GITLEAKS_JSON="gitleaks_temp.json"
+TRIVY_JSON="trivy_temp.json"
+SEMGREP_JSON="semgrep_temp.json"
+
+for cmd in jq gitleaks trivy semgrep; do
+  if ! command -v "$cmd" > /dev/null 2>&1; then
+    echo "Erro: comando '$cmd' nao encontrado."
+    exit 1
+  fi
+done
+
+echo "### Iniciando Varredura de Segurança: $(date) ###"
+
+gitleaks detect -v --report-format json --report-path "$GITLEAKS_JSON" > /dev/null 2>&1
+trivy fs ./ --scanners vuln --pkg-types library --format json --output "$TRIVY_JSON" > /dev/null 2>&1
+semgrep scan \
+  --config=p/typescript \
+  --config=p/javascript \
+  --config=p/clientside-js \
+  --config=p/owasp-top-ten \
+  --config=p/security-audit \
+  --config=p/cwe-top-25 \
+  --severity INFO --severity WARNING --severity ERROR \
+  --output="$SEMGREP_JSON" > /dev/null 2>&1
+
+{
+    echo "# Relatório Consolidado de Segurança"
+    echo "Data: $(date)"
+    echo "## 1. Gitleaks (Secrets)"
+    if [ -f "$GITLEAKS_JSON" ] && [ -s "$GITLEAKS_JSON" ]; then
+        jq -r '.[] | "- **Regra**: \(.Description)\n  **Arquivo**: \(.File):\(.StartLine)"' "$GITLEAKS_JSON"
+    else
+        echo "✓ Nenhum segredo exposto."
+    fi
+
+    echo -e "\n## 2. Trivy (SCA)"
+    if [ -f "$TRIVY_JSON" ] && [ -s "$TRIVY_JSON" ]; then
+        jq -r '.Results[]? | .Vulnerabilities[]? | "- [\(.Severity)] \(.VulnerabilityID): \(.PkgName)"' "$TRIVY_JSON"
+    else
+        echo "✓ Nenhuma vulnerabilidade de biblioteca."
+    fi
+
+    echo -e "\n## 3. Semgrep (SAST)"
+    if [ -f "$SEMGREP_JSON" ] && [ -s "$SEMGREP_JSON" ]; then
+        jq -r '.results[] | "- [\(.extra.severity)] \(.check_id): \(.path):\(.start.line)"' "$SEMGREP_JSON"
+    else
+        echo "✓ Nenhum issue de código."
+    fi
+} > "$REPORT_MD"
+
+echo "Relatório: $REPORT_MD"
+
+rm -f "$GITLEAKS_JSON" "$TRIVY_JSON" "$SEMGREP_JSON"</code></pre>
+              </div>
+
+              <h4 style="color: var(--text-main); margin: 20px 0 10px 0">3.3 Backend (Spring Boot)</h4>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>#!/bin/bash
+
+set -euo pipefail
+
+REPORT_MD="relatorio_final.md"
+GITLEAKS_JSON="gitleaks_temp.json"
+TRIVY_JSON="trivy_temp.json"
+SEMGREP_JSON="semgrep_temp.json"
+
+for cmd in jq gitleaks trivy semgrep; do
+  if ! command -v "$cmd" > /dev/null 2>&1; then
+    echo "Erro: comando '$cmd' nao encontrado."
+    exit 1
+  fi
+done
+
+echo "### Iniciando Varredura de Segurança: $(date) ###"
+
+gitleaks detect -v --report-format json --report-path "$GITLEAKS_JSON" > /dev/null 2>&1
+trivy fs ./ --scanners vuln --pkg-types library --format json --output "$TRIVY_JSON" > /dev/null 2>&1
+
+semgrep scan \
+  --config=p/java \
+  --config=p/jwt \
+  --config=p/insecure-transport \
+  --config=p/owasp-top-ten \
+  --config=p/security-audit \
+  --config=p/sql-injection \
+  --config=p/cwe-top-25 \
+  --severity INFO --severity WARNING --severity ERROR \
+  --output="$SEMGREP_JSON" > /dev/null 2>&1
+
+{
+    echo "# Relatório Consolidado de Segurança"
+    echo "Data: $(date)"
+    echo "## 1. Gitleaks (Secrets)"
+    if [ -f "$GITLEAKS_JSON" ] && [ -s "$GITLEAKS_JSON" ]; then
+        jq -r '.[] | "- **Regra**: \(.Description)\n  **Arquivo**: \(.File):\(.StartLine)"' "$GITLEAKS_JSON"
+    else
+        echo "✓ Nenhum segredo exposto."
+    fi
+
+    echo -e "\n## 2. Trivy (SCA)"
+    if [ -f "$TRIVY_JSON" ] && [ -s "$TRIVY_JSON" ]; then
+        jq -r '.Results[]? | .Vulnerabilities[]? | "- [\(.Severity)] \(.VulnerabilityID): \(.PkgName)"' "$TRIVY_JSON"
+    else
+        echo "✓ Nenhuma vulnerabilidade de biblioteca."
+    fi
+
+    echo -e "\n## 3. Semgrep (SAST)"
+    if [ -f "$SEMGREP_JSON" ] && [ -s "$SEMGREP_JSON" ]; then
+        jq -r '.results[] | "- [\(.extra.severity)] \(.check_id): \(.path):\(.start.line)"' "$SEMGREP_JSON"
+    else
+        echo "✓ Nenhum issue de código."
+    fi
+} > "$REPORT_MD"
+
+echo "Relatório: $REPORT_MD"
+
+rm -f "$GITLEAKS_JSON" "$TRIVY_JSON" "$SEMGREP_JSON"</code></pre>
+              </div>
+
+              <h4 style="color: var(--text-main); margin: 20px 0 10px 0">3.4 Gateway (Spring Cloud Gateway)</h4>
+              <div class="code-block">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>#!/bin/bash
+
+set -euo pipefail
+
+REPORT_MD="relatorio_final.md"
+GITLEAKS_JSON="gitleaks_temp.json"
+TRIVY_JSON="trivy_temp.json"
+SEMGREP_JSON="semgrep_temp.json"
+
+for cmd in jq gitleaks trivy semgrep; do
+  if ! command -v "$cmd" > /dev/null 2>&1; then
+    echo "Erro: comando '$cmd' nao encontrado."
+    exit 1
+  fi
+done
+
+echo "### Iniciando Varredura de Segurança: $(date) ###"
+
+gitleaks detect -v --report-format json --report-path "$GITLEAKS_JSON" > /dev/null 2>&1
+trivy fs ./ --scanners vuln --pkg-types library --format json --output "$TRIVY_JSON" > /dev/null 2>&1
+
+semgrep scan \
+  --config=p/java \
+  --config=p/owasp-top-ten \
+  --config=p/sql-injection \
+  --config=p/security-audit \
+  --config=p/insecure-transport \
+  --config=p/jwt \
+  --config=p/cwe-top-25 \
+  --severity INFO --severity WARNING --severity ERROR \
+  --output="$SEMGREP_JSON" > /dev/null 2>&1
+
+{
+    echo "# Relatório Consolidado de Segurança"
+    echo "Data: $(date)"
+    echo "## 1. Gitleaks (Secrets)"
+    if [ -f "$GITLEAKS_JSON" ] && [ -s "$GITLEAKS_JSON" ]; then
+        jq -r '.[] | "- **Regra**: \(.Description)\n  **Arquivo**: \(.File):\(.StartLine)"' "$GITLEAKS_JSON"
+    else
+        echo "✓ Nenhum segredo exposto."
+    fi
+
+    echo -e "\n## 2. Trivy (SCA)"
+    if [ -f "$TRIVY_JSON" ] && [ -s "$TRIVY_JSON" ]; then
+        jq -r '.Results[]? | .Vulnerabilities[]? | "- [\(.Severity)] \(.VulnerabilityID): \(.PkgName)"' "$TRIVY_JSON"
+    else
+        echo "✓ Nenhuma vulnerabilidade de biblioteca."
+    fi
+
+    echo -e "\n## 3. Semgrep (SAST)"
+    if [ -f "$SEMGREP_JSON" ] && [ -s "$SEMGREP_JSON" ]; then
+        jq -r '.results[] | "- [\(.extra.severity)] \(.check_id): \(.path):\(.start.line)"' "$SEMGREP_JSON"
+    else
+        echo "✓ Nenhum issue de código."
+    fi
+} > "$REPORT_MD"
+
+echo "Relatório: $REPORT_MD"
+
+rm -f "$GITLEAKS_JSON" "$TRIVY_JSON" "$SEMGREP_JSON"</code></pre>
+              </div>
+            </section>
+
+            <section id="saida" style="margin-bottom: 40px">
+              <h3>4. Resultado Esperado</h3>
+              <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
+                Exemplo de como deve ficar o arquivo <strong>relatorio_final.md</strong> ao final da execucao:
+              </p>
+              <div class="code-block" style="margin-bottom: 40px">
+                <div class="code-header"><span>Markdown</span></div>
+                <pre><code># Relatório Consolidado de Segurança
+Data: Mon Apr 07 16:21:10 -03 2026
+
+## 1. Gitleaks (Secrets)
+- **Regra**: GitHub Token
+  **Arquivo**: src/environments/environment.ts:22
+
+## 2. Trivy (SCA)
+- [HIGH] CVE-2024-12345: axios
+- [CRITICAL] CVE-2023-99999: jackson-databind
+
+## 3. Semgrep (SAST)
+- [ERROR] java.sql-injection: src/main/java/com/acme/UserController.java:87
+- [WARNING] jwt-hardcode: src/main/java/com/acme/security/JwtConfig.java:34</code></pre>
+              </div>
+              <div
+                style="
+                  background: var(--bg-green-subtle);
+                  border-left: 4px solid var(--status-success);
+                  padding: 20px;
+                  margin-top: 8px;
+                "
+              >
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px">
+                  <i class="ph ph-check-circle" style="font-size: 1.2rem; color: var(--status-success)"></i>
+                  <strong
+                    style="
+                      color: var(--status-success);
+                      font-size: 0.85rem;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                    "
+                    >Sem Achados</strong
+                  >
+                </div>
+                <p style="margin: 0 0 8px 0; font-size: 0.9rem; color: var(--text-main)">
+                  Quando nao houver ocorrencias, o arquivo deve apresentar as mensagens padrao de sucesso por etapa.
+                </p>
+                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.7">
+                  "Nenhum segredo exposto."<br />
+                  "Nenhuma vulnerabilidade de biblioteca."<br />
+                  "Nenhum issue de codigo."
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <aside class="right-toc">
+            <div class="toc-header">Nesta Página</div>
+            <ul class="toc-list">
+              <li class="toc-item"><a href="#instalacao">Instalação</a></li>
+              <li class="toc-item"><a href="#validacao">Validação</a></li>
+              <li class="toc-item"><a href="#script">Script Pré-definido</a></li>
+              <li class="toc-item"><a href="#saida">Resultado Esperado</a></li>
+            </ul>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/mobile-menu.js"></script>
+    <script src="js/utils.js"></script>
+  </body>
+</html>
