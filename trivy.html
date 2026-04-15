@@ -141,77 +141,8 @@
               </div>
             </section>
 
-            <section id="trivy-visao-geral" style="margin-bottom: 50px">
-              <h3>1. Visão Geral</h3>
-              <div class="meta-grid" style="grid-template-columns: repeat(4, 1fr)">
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">TIPO</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">SCA + Container Scan</p>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">LINGUAGENS</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">20+ (JS, Python, etc.)</p>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">ALVOS</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">Code, Images, IaC</p>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">EXECUÇÃO</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">Local + Pipeline</p>
-                </div>
-              </div>
-            </section>
-
-            <section id="trivy-instalacao" style="margin-bottom: 50px">
-              <h3>2. Instalação e Configuração</h3>
-
-              <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0">INSTALAÇÃO (WINDOWS/LINUX)</h4>
-              <div class="code-block">
-                <div class="code-header">
-                  <span>PowerShell / Bash</span>
-                  <button class="btn-copy" onclick="utils.copyCode('trivy-install')">
-                    <i class="ph ph-copy"></i>
-                  </button>
-                </div>
-                <pre><code id="trivy-install"># Windows (Chocolatey)
-choco install trivy
-
-# Linux (Debian/Ubuntu)
-sudo apt-get install trivy</code></pre>
-              </div>
-            </section>
-
-            <section id="trivy-comandos" style="margin-bottom: 50px">
-              <h3>3. Comandos de Uso</h3>
-
-              <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0">ESCANEANDO DIRETÓRIOS E IMAGENS</h4>
-              <div class="code-block">
-                <div class="code-header">
-                  <span>Terminal</span>
-                  <button class="btn-copy" onclick="utils.copyCode('trivy-scan')">
-                    <i class="ph ph-copy"></i>
-                  </button>
-                </div>
-                <pre><code id="trivy-scan"># Diretório atual (Filesystem)
-trivy fs ./
-
-# Imagem Docker
-trivy image nome-da-imagem:tag</code></pre>
-              </div>
-
-              <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0">FILTRANDO VULNERABILIDADES</h4>
-              <div class="code-block">
-                <pre><code># Apenas bibliotecas de linguagem
-trivy fs ./ --scanners vuln --pkg-types library
-
-# Por nível de severidade (Alta e Crítica)
-trivy fs ./ --severity CRITICAL,HIGH </code></pre>
-              </div>
-            </section>
-
             <section id="trivy-analise-relatorio" style="margin-bottom: 50px">
-              <h3>4. Avaliação dos Resultados após rodar o Trivy</h3>
+              <h3>1. Avaliação dos Resultados após rodar o Trivy</h3>
 
               <p>Ao executar o scanner, o Trivy apresenta uma tabela de resultados parecida com este exemplo abaixo:</p>
 
@@ -293,7 +224,7 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
                 </p>
               </div>
 
-              <h3><i class="ph ph-wrench"></i> 4.1 Como Corrigir</h3>
+              <h3><i class="ph ph-wrench"></i> 1.1 Como Corrigir</h3>
               <p>
                 Se o Trivy apontar uma vulnerabilidade em uma biblioteca que <strong>não está</strong> declarada 
                 diretamente no seu arquivo de configuração, siga os passos abaixo para forçar a correção das 
@@ -364,7 +295,7 @@ trivy fs ./ --severity CRITICAL,HIGH </code></pre>
 </div>
 
              <section id="trivy-relatorio" style="margin-bottom: 50px">
-              <h3>5. Gerar Relatório (OPCIONAL)</h3>
+              <h3>2. Gerar Relatório (OPCIONAL)</h3>
               <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0">GERAR RELATÓRIO EM CSV</h4>
               <p style="margin-bottom: 15px; font-size: 0.9em; opacity: 0.8;">Se você deseja gerar um relatório formatado para acompanhamento das vúlnerabilidades, siga os passos abaixo:</p>
               
@@ -402,7 +333,7 @@ EOF</code></pre>
             </section>
 
             <section id="trivy-trivyignore" style="margin-bottom: 50px">
-              <h3>6. O Arquivo .trivyignore</h3>
+              <h3>3. O Arquivo .trivyignore</h3>
               <p>
                 O arquivo <code>.trivyignore</code> serve para que o detetive ignore vulnerabilidades específicas que já 
                 foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe. 
@@ -423,7 +354,7 @@ CVE-2024-5678</code></pre>
             </section>
 
             <section id="trivy-boas-praticas" style="margin-bottom: 50px">
-              <h3>7. Boas Práticas</h3>
+              <h3>4. Boas Práticas</h3>
               <div class="meta-card card-critical">
                 <span class="meta-label" style="color: var(--status-success)">CHECKLIST DO DETETIVE</span>
                 <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8">
@@ -440,7 +371,7 @@ CVE-2024-5678</code></pre>
             </section>
 
             <section id="trivy-severidade" style="margin-bottom: 50px">
-              <h3>8. Tratamento de CVEs por Severidade</h3>
+              <h3>5. Tratamento de CVEs por Severidade</h3>
               <div class="cvss-table">
                 <div class="cvss-row cvss-header">
                   <span class="col-label">NÍVEL DO CVE</span>
@@ -503,95 +434,8 @@ CVE-2024-5678</code></pre>
               </div>
             </section>
 
-            <section id="trivy-scan-avancados" style="margin-bottom: 50px">
-              <h3>9. Tipos de Scan Avançados</h3>
-
-              <div class="meta-grid" style="grid-template-columns: 1fr 1fr">
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">SBOM GENERATION</span>
-                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Gerar Software Bill of Materials 
-                  </p>
-                  <div class="code-block" style="margin: 0">
-                    <pre style="padding: 15px"><code>trivy sbom --format cyclonedx \
-  --output sbom.json \
-  myapp:latest</code></pre>
-                  </div>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">IAC SCAN (TERRAFORM)</span>
-                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Scan de misconfigurations IaC 
-                  </p>
-                  <div class="code-block" style="margin: 0">
-                    <pre style="padding: 15px"><code>trivy config \
-  --severity CRITICAL,HIGH \
-  ./terraform/</code></pre>
-                  </div>
-                </div>
-              </div>
-
-              <div class="meta-grid" style="grid-template-columns: 1fr 1fr; margin-top: 20px">
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">KUBERNETES MANIFESTS</span>
-                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">Scan de YAML do K8s </p>
-                  <div class="code-block" style="margin: 0">
-                    <pre style="padding: 15px"><code>trivy config \
-  --scanners misconfig \
-  k8s/deployment.yaml</code></pre>
-                  </div>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">ROOTFS SCAN</span>
-                  <p style="margin: 5px 0 10px 0; font-size: 0.85rem; color: var(--text-main)">
-                    Scan de filesystem de container 
-                  </p>
-                  <div class="code-block" style="margin: 0">
-                    <pre style="padding: 15px"><code>trivy rootfs \
-  --security-checks vuln \
-  /path/to/rootfs</code></pre>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section id="trivy-deps-dev" style="margin-bottom: 50px">
-              <h3>10. Integração com deps.dev</h3>
-
-              <p>O deps.dev do Google complementa o Trivy com análise de reachability e OpenSSF Scorecard. </p>
-
-              <div class="meta-grid" style="grid-template-columns: 1fr 1fr">
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--primary-blue)">TRIVY</span>
-                  <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.6">
-                    <li>Vulnerabilidades conhecidas (CVE) </li>
-                    <li>Scan de imagens Docker </li>
-                    <li>Automação CI/CD </li>
-                    <li>Offline-capable </li>
-                  </ul>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">DEPS.DEV</span>
-                  <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.85rem; line-height: 1.6">
-                    <li>Análise de alcançabilidade </li>
-                    <li>OpenSSF Scorecard </li>
-                    <li>Grafo de dependências </li>
-                    <li>Web-based UI </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="pro-tip" style="margin-top: 30px">
-                <div class="pro-tip-header"><i class="ph ph-info"></i> Fluxo Recomendado</div>
-                <p style="margin: 0; font-size: 0.9rem">
-                  <strong>1.</strong> Trivy (local/pipeline) detecta CVE → <strong>2.</strong> deps.dev valida se é 
-                  exploitável → <strong>3.</strong> Lógica de Bibliotecas define ação. 
-                </p>
-              </div>
-            </section>
-
             <section id="trivy-implementacao" style="margin-bottom: 50px">
-              <h3>11. Boas Práticas de Implementação</h3>
+              <h3>6. Boas Práticas de Implementação</h3>
 
               <div class="meta-card card-critical">
                 <span class="meta-label" style="color: var(--status-success)">CHECKLIST TRIVY</span>
@@ -618,18 +462,8 @@ CVE-2024-5678</code></pre>
             <div class="toc-header">Nesta Página</div>
             <ul class="toc-list">
               <li class="toc-item">
-                <a href="#trivy-visao-geral">Visão Geral</a>
-              </li>
-              <li class="toc-item">
-                <a href="#trivy-instalacao">Instalação e Configuração</a>
-              </li>
-              <li class="toc-item">
-                <a href="#trivy-comandos">Comandos de Uso</a>
-              </li>
-              <li class="toc-item">
                 <a href="#trivy-analise-relatorio">Avaliação dos Resultados após rodar o Trivy</a>
               </li>
-              
               <li class="toc-item">
                 <a href="#trivy-relatorio">Gerar Relatório (OPCIONAL)</a>
               </li>
@@ -641,12 +475,6 @@ CVE-2024-5678</code></pre>
               </li>
               <li class="toc-item">
                 <a href="#trivy-severidade">Tabela de Severidade</a>
-              </li>
-              <li class="toc-item">
-                <a href="#trivy-scan-avancados">Scans Avançados</a>
-              </li>
-              <li class="toc-item">
-                <a href="#trivy-deps-dev">Integração deps.dev</a>
               </li>
               <li class="toc-item">
                 <a href="#trivy-implementacao">Implementação</a>

@@ -133,43 +133,8 @@
               O Gitleaks monitora e previne o vazamento de segredos no histórico do Git. Este manual foca na geração de
               evidências e no processo de Waiver.
             </p>
-
-            <section id="gitleaks-visao-geral" style="margin-bottom: 50px">
-              <h3>1. Visão Geral</h3>
-              <div class="meta-grid" style="grid-template-columns: repeat(3, 1fr)">
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">TIPO</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">Secrets Detection</p>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">LINGUAGEM</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">Agnóstico (All)</p>
-                </div>
-                <div class="meta-card">
-                  <span class="meta-label" style="color: var(--accent-cyan)">EXECUÇÃO</span>
-                  <p style="margin: 0; font-size: 0.85rem; color: var(--text-main)">Local + Pipeline</p>
-                </div>
-              </div>
-            </section>
-
-            <section id="gitleaks-instalacao" style="margin-bottom: 50px">
-              <h3>2. Instalação (Linux)</h3>
-              <div class="code-block">
-                <div class="code-header">
-                  <span>Bash</span>
-                  <button class="btn-copy" onclick="utils.copyCode('gitleaks-install-linux')">
-                    <i class="ph ph-copy"></i>
-                  </button>
-                </div>
-                <pre><code id="gitleaks-install-linux">wget https://github.com/gitleaks/gitleaks/releases/download/v8.18.4/gitleaks_8.18.4_linux_x64.tar.gz
-tar -xf gitleaks_8.18.4_linux_x64.tar.gz
-sudo mv gitleaks /usr/local/bin/
-gitleaks version</code></pre>
-              </div>
-            </section>
-
             <section id="gitleaks-fluxo" style="margin-bottom: 50px">
-              <h3>3. Fluxo de Trabalho</h3>
+              <h3>1. Fluxo de Trabalho</h3>
               <div class="pro-tip">
                 <div class="pro-tip-header"><i class="ph ph-file-js"></i> Geração de Evidências</div>
                 <p style="margin: 0; font-size: 0.9rem">
@@ -194,7 +159,7 @@ gitleaks detect -v --no-git --report-path gitleaks-report.csv -f csv</code></pre
             </section>
 
             <section id="gitleaks-campos" style="margin-bottom: 50px">
-              <h3>4. Campos do Relatório</h3>
+              <h3>2. Campos do Relatório</h3>
               <div
                 class="grid-2x2"
                 style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 25px"
@@ -261,7 +226,7 @@ gitleaks detect -v --no-git --report-path gitleaks-report.csv -f csv</code></pre
             </section>
 
             <section id="gitleaks-acao" style="margin-bottom: 50px">
-              <h3>5. O que fazer se achar uma credencial?</h3>
+              <h3>3. O que fazer se achar uma credencial?</h3>
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px">
                 <div
                   class="meta-card"
@@ -293,7 +258,7 @@ gitleaks detect -v --no-git --report-path gitleaks-report.csv -f csv</code></pre
             </section>
 
             <section id="gitleaks-waivers" style="margin-bottom: 50px">
-              <h3>6. Falso Positivo e Waivers</h3>
+              <h3>4. Falso Positivo e Waivers</h3>
 
               <div
                 class="meta-card card-critical"
@@ -357,7 +322,7 @@ Status: Validado como Falso Positivo.</code></pre>
             </section>
 
             <section id="gitleaks-ignore" style="margin-bottom: 50px">
-              <h3>7. Ignorando Credenciais Específicas (.gitleaksignore)</h3>
+              <h3>5. Ignorando Credenciais Específicas (.gitleaksignore)</h3>
               <p>
                 O arquivo <code>.gitleaksignore</code> funciona como uma "lista de permissões" para ocorrências específicas (falsos positivos) que já foram validadas.
               </p>
@@ -377,7 +342,7 @@ Status: Validado como Falso Positivo.</code></pre>
             </section>
 
             <section id="gitleaks-toml" style="margin-bottom: 100px">
-              <h3>8. Ignorando Arquivos e Pastas (.gitleaks.toml)</h3>
+              <h3>6. Ignorando Arquivos e Pastas (.gitleaks.toml)</h3>
               <p>
                 Para ignorar diretórios inteiros (como <code>testdata</code> ou documentações) e evitar que o Gitleaks perca tempo os analisando, crie um arquivo <code>.gitleaks.toml</code> na raiz estendendo as regras originais.
               </p>
@@ -423,8 +388,6 @@ gitleaks detect -v --no-git -c .gitleaks.toml -r evidencias_vazamento.json</code
           <aside class="right-toc">
             <div class="toc-header">Nesta Página</div>
             <ul class="toc-list">
-              <li class="toc-item"><a href="#gitleaks-visao-geral">Visão Geral</a></li>
-              <li class="toc-item"><a href="#gitleaks-instalacao">Instalação (Linux)</a></li>
               <li class="toc-item"><a href="#gitleaks-fluxo">Fluxo de Trabalho</a></li>
               <li class="toc-item"><a href="#gitleaks-campos">Campos do Relatório</a></li>
               <li class="toc-item"><a href="#gitleaks-acao">O que fazer?</a></li>
