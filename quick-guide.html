@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/responsive.css" />
 
     <script src="js/theme.js"></script>
+
   </head>
   <body>
     <div class="app-container">
@@ -202,6 +203,28 @@
               <h3>2. Instalação das Ferramentas</h3>
 
               <h4 style="color: var(--primary-blue); margin: 20px 0 10px 0">2.1 Trivy</h4>
+              <button
+                type="button"
+                onclick="nav.switchTool('trivy')"
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 10px 14px;
+                  border: 1px solid var(--primary-blue);
+                  background: transparent;
+                  color: var(--primary-blue);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                  font-size: 0.78rem;
+                  cursor: pointer;
+                  margin-bottom: 12px;
+                "
+              >
+                <i class="ph ph-package"></i>
+                Abrir página do Trivy
+              </button>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de SCA para detectar vulnerabilidades em dependências e arquivos de projeto.
               </p>
@@ -211,6 +234,28 @@
               </div>
 
               <h4 style="color: var(--accent-cyan); margin: 20px 0 10px 0">2.2 Semgrep</h4>
+              <button
+                type="button"
+                onclick="nav.switchTool('semgrep')"
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 10px 14px;
+                  border: 1px solid var(--accent-cyan);
+                  background: transparent;
+                  color: var(--accent-cyan);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                  font-size: 0.78rem;
+                  cursor: pointer;
+                  margin-bottom: 12px;
+                "
+              >
+                <i class="ph ph-code"></i>
+                Abrir página do Semgrep
+              </button>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de SAST para análise estática de padrões inseguros no código.
               </p>
@@ -273,15 +318,29 @@ pipx install semgrep</code></pre>
                 <div class="code-header"><span>Bash</span></div>
                 <pre><code>semgrep login</code></pre>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px">
-                Se preferir usar token (útil em CI), veja a
-                <a
-                  onclick="nav.switchTool('semgrep')"
-                  style="color: var(--accent-cyan); cursor: pointer; text-decoration: underline"
-                  >página detalhada do Semgrep</a
-                >.
-              </p>
               <h4 style="color: var(--status-critical); margin: 20px 0 10px 0">2.3 Gitleaks</h4>
+              <button
+                type="button"
+                onclick="nav.switchTool('gitleaks')"
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 10px 14px;
+                  border: 1px solid var(--status-critical);
+                  background: transparent;
+                  color: var(--status-critical);
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  letter-spacing: 0.5px;
+                  font-size: 0.78rem;
+                  cursor: pointer;
+                  margin-bottom: 12px;
+                "
+              >
+                <i class="ph ph-key"></i>
+                Abrir página do Gitleaks
+              </button>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de Secrets Detection para identificar vazamento de credenciais no repositório.
               </p>
@@ -307,6 +366,28 @@ gitleaks version</code></pre>
               </p>
             </section>
 
+            <section id="githooks-fluxo" style="margin-bottom: 40px">
+              <h3>4. Git Hooks no Fluxo</h3>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 12px">
+                Com o ambiente configurado, o repositório passa a usar o <strong>pre-commit</strong> como controle
+                local de segurança. Em toda execução de <strong>git commit</strong>, o hook dispara Trivy, Semgrep e
+                Gitleaks para validar dependências, código e possíveis vazamentos de credenciais antes do push.
+              </p>
+              <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  border-left: 6px solid var(--status-critical);
+                  padding: 16px;
+                "
+              >
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.6">
+                  Resultado esperado: se houver risco alto detectado no commit, o hook bloqueia localmente e o
+                  desenvolvedor corrige antes do push.
+                </p>
+              </div>
+            </section>
+
           </div>
 
           <aside class="right-toc">
@@ -315,6 +396,7 @@ gitleaks version</code></pre>
               <li class="toc-item"><a href="#script-ambiente">Script de Ambiente</a></li>
               <li class="toc-item"><a href="#instalacao">Instalação</a></li>
               <li class="toc-item"><a href="#validacao">Validação</a></li>
+              <li class="toc-item"><a href="#githooks-fluxo">Git Hooks no Fluxo</a></li>
             </ul>
           </aside>
         </div>
