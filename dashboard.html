@@ -336,6 +336,288 @@
               </div>
             </section>
 
+            <section id="scripts-relatorio" style="margin: 20px 0 40px 0">
+              <h3
+                style="
+                  margin: 0 0 20px 0;
+                  color: var(--text-main);
+                  font-size: 1rem;
+                  text-transform: uppercase;
+                  letter-spacing: 1px;
+                "
+              >
+                <i class="ph ph-terminal-window" style="margin-right: 10px; color: var(--primary-blue)"></i>Scripts
+                de Relatorio
+              </h3>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
+                Os scripts operacionais de varredura ficam separados do setup de ambiente e podem ser executados
+                conforme o tipo de repositorio analisado.
+              </p>
+
+              <div
+                style="
+                  border: 1px solid var(--border-indigo);
+                  background: var(--bg-panel);
+                  box-shadow: var(--shadow-md);
+                  overflow: hidden;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 10px;
+                    flex-wrap: wrap;
+                    border-bottom: 1px solid var(--border-indigo);
+                    padding: 14px 16px;
+                    background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+                  "
+                >
+                  <strong
+                    style="
+                      color: var(--text-main);
+                      font-size: 0.76rem;
+                      text-transform: uppercase;
+                      letter-spacing: 0.9px;
+                    "
+                    >Repositorio</strong
+                  >
+                  <strong
+                    style="
+                      color: var(--text-main);
+                      font-size: 0.76rem;
+                      text-transform: uppercase;
+                      letter-spacing: 0.9px;
+                    "
+                    >Script e Execucao</strong
+                  >
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px">
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      gap: 12px;
+                      flex-wrap: wrap;
+                      border: 1px solid rgba(59, 130, 246, 0.25);
+                      background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+                      padding: 14px;
+                      box-shadow: var(--shadow-sm);
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <i class="ph ph-monitor" style="font-size: 1.1rem; color: var(--primary-blue)"></i>
+                      <div>
+                        <strong style="display: block; color: var(--text-main); font-size: 0.92rem">Frontend</strong>
+                        <span style="font-size: 0.78rem; color: var(--text-muted)">sec-report-frontend.sh</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                      <span
+                        style="
+                          font-size: 0.75rem;
+                          color: var(--text-muted);
+                          border: 1px solid rgba(59, 130, 246, 0.28);
+                          background: rgba(59, 130, 246, 0.06);
+                          padding: 7px 10px;
+                          font-family: monospace;
+                        "
+                        >./sec-report-frontend.sh</span
+                      >
+                      <a
+                        href="sec-report-frontend.sh"
+                        download="sec-report-frontend.sh"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          gap: 7px;
+                          padding: 8px 12px;
+                          border: 1px solid var(--primary-blue);
+                          color: var(--primary-blue);
+                          text-decoration: none;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                          font-size: 0.72rem;
+                        "
+                      >
+                        <i class="ph ph-download-simple"></i>
+                        Download
+                      </a>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      gap: 12px;
+                      flex-wrap: wrap;
+                      border: 1px solid rgba(59, 130, 246, 0.25);
+                      background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+                      padding: 14px;
+                      box-shadow: var(--shadow-sm);
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <i class="ph ph-database" style="font-size: 1.1rem; color: var(--primary-blue)"></i>
+                      <div>
+                        <strong style="display: block; color: var(--text-main); font-size: 0.92rem">Backend</strong>
+                        <span style="font-size: 0.78rem; color: var(--text-muted)">sec-report-backend.sh</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                      <span
+                        style="
+                          font-size: 0.75rem;
+                          color: var(--text-muted);
+                          border: 1px solid rgba(59, 130, 246, 0.28);
+                          background: rgba(59, 130, 246, 0.06);
+                          padding: 7px 10px;
+                          font-family: monospace;
+                        "
+                        >./sec-report-backend.sh</span
+                      >
+                      <a
+                        href="sec-report-backend.sh"
+                        download="sec-report-backend.sh"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          gap: 7px;
+                          padding: 8px 12px;
+                          border: 1px solid var(--primary-blue);
+                          color: var(--primary-blue);
+                          text-decoration: none;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                          font-size: 0.72rem;
+                        "
+                      >
+                        <i class="ph ph-download-simple"></i>
+                        Download
+                      </a>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      gap: 12px;
+                      flex-wrap: wrap;
+                      border: 1px solid rgba(59, 130, 246, 0.25);
+                      background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+                      padding: 14px;
+                      box-shadow: var(--shadow-sm);
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <i class="ph ph-git-branch" style="font-size: 1.1rem; color: var(--primary-blue)"></i>
+                      <div>
+                        <strong style="display: block; color: var(--text-main); font-size: 0.92rem">Gateway</strong>
+                        <span style="font-size: 0.78rem; color: var(--text-muted)">sec-report-gateway.sh</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                      <span
+                        style="
+                          font-size: 0.75rem;
+                          color: var(--text-muted);
+                          border: 1px solid rgba(59, 130, 246, 0.28);
+                          background: rgba(59, 130, 246, 0.06);
+                          padding: 7px 10px;
+                          font-family: monospace;
+                        "
+                        >./sec-report-gateway.sh</span
+                      >
+                      <a
+                        href="sec-report-gateway.sh"
+                        download="sec-report-gateway.sh"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          gap: 7px;
+                          padding: 8px 12px;
+                          border: 1px solid var(--primary-blue);
+                          color: var(--primary-blue);
+                          text-decoration: none;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                          font-size: 0.72rem;
+                        "
+                      >
+                        <i class="ph ph-download-simple"></i>
+                        Download
+                      </a>
+                    </div>
+                  </div>
+
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      gap: 12px;
+                      flex-wrap: wrap;
+                      border: 1px solid rgba(59, 130, 246, 0.25);
+                      background: linear-gradient(90deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.03));
+                      padding: 14px;
+                      box-shadow: var(--shadow-sm);
+                    "
+                  >
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <i class="ph ph-lock" style="font-size: 1.1rem; color: var(--primary-blue)"></i>
+                      <div>
+                        <strong style="display: block; color: var(--text-main); font-size: 0.92rem">IMA Auth</strong>
+                        <span style="font-size: 0.78rem; color: var(--text-muted)">sec-report-auth.sh</span>
+                      </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap">
+                      <span
+                        style="
+                          font-size: 0.75rem;
+                          color: var(--text-muted);
+                          border: 1px solid rgba(59, 130, 246, 0.28);
+                          background: rgba(59, 130, 246, 0.06);
+                          padding: 7px 10px;
+                          font-family: monospace;
+                        "
+                        >./sec-report-auth.sh</span
+                      >
+                      <a
+                        href="sec-report-auth.sh"
+                        download="sec-report-auth.sh"
+                        style="
+                          display: inline-flex;
+                          align-items: center;
+                          gap: 7px;
+                          padding: 8px 12px;
+                          border: 1px solid var(--primary-blue);
+                          color: var(--primary-blue);
+                          text-decoration: none;
+                          font-weight: 700;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                          font-size: 0.72rem;
+                        "
+                      >
+                        <i class="ph ph-download-simple"></i>
+                        Download
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <footer class="app-footer">
               <p>© 2026 PADAONE Security · Todos os direitos reservados</p>
             </footer>
@@ -352,6 +634,9 @@
               </li>
               <li class="toc-item">
                 <a href="#ferramentas">Ferramentas Principais</a>
+              </li>
+              <li class="toc-item">
+                <a href="#scripts-relatorio">Scripts de Relatorio</a>
               </li>
             </ul>
           </aside>
