@@ -184,28 +184,12 @@
                             </div>
                             <pre><code id="install-semgrep">pipx install semgrep</code></pre>
                         </div>
-                    </section>
 
-                    <section id="manual-utilizacao" style="margin-bottom: 50px;">
-                        <h3>Manual de Utilização</h3>
+                        <section id="manual-instalacao" style="margin-bottom: 50px;">
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">CRIAÇÃO DE CONTA E AUTENTICAÇÃO (OBRIGATÓRIO)</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Para desbloquear a Pro Engine (que reduz falsos positivos) e realizar a análise de dependências (SCA), é necessário vincular o terminal a uma conta Semgrep.</p>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1.1: CRIAR A CONTA</h4>
-                        <div class="meta-card">
-                            <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li>Acesse <a href="https://semgrep.dev/login" target="_blank" style="color: var(--accent-cyan);">https://semgrep.dev/login</a>.</li>
-                                <li>Escolha a opção "Continue with GitHub" (ou GitLab).
-                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
-                                        <li><strong>Recomendação:</strong> Use a mesma conta que você utiliza para acessar os repositórios da empresa.</li>
-                                    </ul>
-                                </li>
-                                <li>Siga as instruções na tela para autorizar o acesso básico.</li>
-                            </ol>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1.2: AUTENTICAR NO TERMINAL</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 5: AUTENTICAR NO TERMINAL</h4>
+                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Para utilizar as regras Pro e sincronizar com o dashboard, você precisa autenticar sua máquina.</p>
+                        
                         <div class="code-block">
                             <div class="code-header">
                                 <span>Bash</span>
@@ -215,23 +199,23 @@
                         </div>
                         <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">Se o navegador não abrir ou ocorrer erro, utilize o método de Login via Token abaixo.</p>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">LOGIN VIA TOKEN</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">MÉTODO ALTERNATIVO: LOGIN VIA TOKEN</h4>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Gere um token manualmente seguindo os passos abaixo:</p>
+                        
                         <div class="meta-card">
                             <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li>Acesse a página inicial (você deve estar logado).</li>
+                                <li>Acesse a página inicial do Semgrep Cloud (você deve estar logado).</li>
                                 <li>Clique em <strong>Settings</strong> no menu lateral esquerdo.</li>
-                                <li>Clique em <strong>tokens</strong> no menu superior.</li>
+                                <li>Clique em <strong>Tokens</strong> no menu superior.</li>
                                 <li>Clique no botão azul "<strong>Create new token</strong>".</li>
                                 <li>Preencha os campos:
                                     <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
-                                        <li><strong>Name:</strong> Coloque o nome da sua máquina (ex: terminal-linux-gustavo).</li>
-                                        <li><strong>Token Scopes:</strong> Marque a opção <strong>Agent (CI)</strong> (Esta opção é essencial para baixar as regras Pro).</li>
+                                        <li><strong>Name:</strong> Identifique sua máquina (ex: terminal-linux-nicolas).</li>
+                                        <li><strong>Token Scopes:</strong> Marque a opção <strong>Agent (CI)</strong> (Essencial para baixar as regras Pro).</li>
                                     </ul>
                                 </li>
-                                <li>Clique em <strong>Save</strong>.</li>
-                                <li>Copie o código que aparecerá (começa com <code>sk_</code> ou <code>st_</code>).</li>
-                                <li>No seu terminal, execute o comando abaixo (colando o seu token):</li>
+                                <li>Clique em <strong>Save</strong> e copie o código gerado (começa com <code>sk_</code> ou <code>st_</code>).</li>
+                                <li>No seu terminal, exporte o token com o comando abaixo:</li>
                             </ol>
                         </div>
 
@@ -245,7 +229,7 @@
 
                         <div class="pro-tip" style="margin-top: 15px;">
                             <div class="pro-tip-header"><i class="ph ph-lightbulb"></i> Dica de Persistência</div>
-                            <p style="margin: 0 0 10px 0; font-size: 0.9rem;">Para não precisar repetir esse passo toda vez que abrir o terminal, adicione a linha acima ao final do seu arquivo de configuração do shell (~/.bashrc ou ~/.zshrc).</p>
+                            <p style="margin: 0 0 10px 0; font-size: 0.9rem;">Para evitar que o token expire ao fechar o terminal, adicione-o ao seu arquivo de configuração (<code>.bashrc</code> ou <code>.zshrc</code>).</p>
                             <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Comando para automatizar a persistência:</strong></p>
                             <div class="code-block" style="margin-top: 10px;">
                                 <div class="code-header">
@@ -255,62 +239,10 @@
                                 <pre><code id="persist-token">echo 'export SEMGREP_APP_TOKEN=cole_seu_token_aqui' >> ~/.bashrc</code></pre>
                             </div>
                         </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">EXECUTANDO A PRIMEIRA ANÁLISE</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Agora que você está logado, utilize os comandos abaixo para verificar vulnerabilidades no código:</p>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PARA BACKEND:</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('backend-scan')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="backend-scan">semgrep scan \
-  --config="p/java" \
-  --config="p/owasp-top-ten" \
-  --config="p/cwe-top-25" \
-  --config="p/findsecbugs" \
-  --config="p/r2c-security-audit" \
-  --config="p/secrets" \
-  --config="p/sql-injection" \
-  --config="p/command-injection" \
-  --config="p/xss" \
-  --config="p/jwt" \
-  --config="p/insecure-transport" \
-  --output=relatorio_full_owasp.txt</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PARA FRONTEND:</h4>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('frontend-scan')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="frontend-scan">semgrep scan \
-  semgrep scan \
-  --config=p/typescript \
-  --config=p/javascript \
-  --config=p/nodejsscan \
-  --config=p/owasp-top-ten \
-  --config=p/security-audit \
-  --config=p/r2c-security-audit \
-  --config=p/supply-chain \
-  --config=p/jwt \
-  --config=p/insecure-transport \
-  --config=p/cwe-top-25 \
-  --config=p/default \
-  --config=p/ci \
-  --config=p/clientside-js \
-  --max-target-bytes 0 \
-  --timeout 0 \
-  --no-git-ignore \
-  --severity INFO \
-  --severity WARNING \
-  --severity ERROR \
-  --output=../relatorio_semgrep.txt</code></pre>
-                        </div>
+                    </section>
                     </section>
 
+                    <!--Aqui começa o conteúdo da seção de triagem manual-->
                     <section id="manual-triagem" style="margin-bottom: 50px;">
                         <h3>Manual de Triagem e Correção de Vulnerabilidades (SAST)</h3>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Este documento estabelece o fluxo obrigatório para análise, correção e gestão de exceções (Waivers) para vulnerabilidades detectadas no código-fonte após realizar a execução da ferramenta.</p>
@@ -588,7 +520,6 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
                     <ul class="toc-list">
                         <li class="toc-item"><a href="#o-que-e">O que é o Semgrep</a></li>
                         <li class="toc-item"><a href="#manual-instalacao">Manual de Instalação</a></li>
-                        <li class="toc-item"><a href="#manual-utilizacao">Manual de Utilização</a></li>
                         <li class="toc-item"><a href="#manual-triagem">Manual de Triagem</a></li>
                         <li class="toc-item"><a href="#fluxogramas">Fluxogramas de Decisão</a></li>
                     </ul>
