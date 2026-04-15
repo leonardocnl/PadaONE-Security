@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/flowcharts.css" />
     <link rel="stylesheet" href="css/responsive.css" />
 
     <script src="js/theme.js"></script>
@@ -75,7 +74,7 @@
               <i class="ph ph-squares-four"></i> Dashboard
             </div>
             <div class="nav-item" onclick="nav.switchTool('quickguide')">
-              <i class="ph ph-lightning"></i> Quick Guide
+              <i class="ph ph-lightning"></i> Configuração de Ambiente
             </div>
             <div class="nav-item" onclick="nav.switchTool('logic')">
               <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
@@ -131,44 +130,9 @@
               </p>
               <p style="line-height: 1.8; color: var(--text-muted)">
                 Este dashboard apresenta o fluxo integrado de segurança em <strong>3 fases distintas</strong>: Estação
-                de Trabalho, Pipeline CI/CD e Auditoria Manual. O diagrama abaixo representa todo o ciclo de vida de
-                segurança, desde a configuração inicial do ambiente de desenvolvimento até o sign-off final para
-                produção.
+                de Trabalho, Pipeline CI/CD e Auditoria Manual, desde a configuração inicial do ambiente de
+                desenvolvimento até o sign-off final para produção.
               </p>
-            </section>
-
-            <div class="diagram-container">
-              <img src="assets/images/Fluxograma-Fase1-DM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
-              <img src="assets/images/Fluxograma-Fase1-LM.svg" alt="Pipeline DevSecOps Completo" class="diagram-svg" />
-            </div>
-
-            <section id="diagrama" style="margin: 40px 0">
-              <div
-                style="
-                  background: var(--bg-sidebar);
-                  border: 1px solid var(--border-indigo);
-                  padding: 20px;
-                  max-width: 3000px;
-                "
-              >
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px">
-                  <i class="ph ph-info" style="font-size: 1.5rem; color: var(--primary-blue)"></i>
-                  <strong
-                    style="
-                      color: var(--primary-blue);
-                      font-size: 0.85rem;
-                      text-transform: uppercase;
-                      letter-spacing: 1px;
-                    "
-                    >Sobre o Diagrama</strong
-                  >
-                </div>
-                <p style="margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6">
-                  O pipeline representa o fluxo completo da <strong>Fase 1: Estação de Trabalho</strong>. Cada etapa do
-                  processo de desenvolvimento é integrada com ferramentas de segurança automatizadas, garantindo que
-                  vulnerabilidades sejam detectadas e corrigidas antes mesmo do commit.
-                </p>
-              </div>
             </section>
 
             <section id="fases" style="margin-top: 40px; padding-top: 0px">
@@ -385,9 +349,6 @@
               </li>
               <li class="toc-item">
                 <a href="#fases">Fases do Pipeline</a>
-              </li>
-              <li class="toc-item">
-                <a href="#diagrama">Sobre o Diagrama</a>
               </li>
               <li class="toc-item">
                 <a href="#ferramentas">Ferramentas Principais</a>
