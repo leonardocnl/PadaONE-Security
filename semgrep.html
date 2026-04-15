@@ -121,73 +121,8 @@
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">O Semgrep opera através de linhas de comando no terminal ou via configurações definidas em arquivos <code>.yaml</code> (regras). Ele escaneia o código fonte em busca de padrões que correspondam a vulnerabilidades conhecidas.</p>
                     </section>
 
-                    <section id="manual-instalacao" style="margin-bottom: 50px;">
-                        <h3>Manual de Instalação via Terminal</h3>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PRÉ-REQUISITOS</h4>
-                        <div class="meta-card">
-                            <ul style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li>Sistema Operacional Linux (Ubuntu, Debian, Kali, Fedora, etc.).</li>
-                                <li>Python 3 instalado (versão 3.7 ou superior).</li>
-                                <li>Acesso ao terminal com permissões de superusuário (sudo) para instalação de dependências básicas.</li>
-                            </ul>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">MÉTODO 1: INSTALAÇÃO VIA PIPX (RECOMENDADO)</h4>
-                        <div class="pro-tip" style="margin-bottom: 20px;">
-                            <div class="pro-tip-header"><i class="ph ph-star"></i> Método Oficial Recomendado</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Este é o método oficial recomendado para distribuições Linux modernas. O uso do pipx cria um ambiente virtual isolado para o Semgrep, evitando conflitos com bibliotecas do sistema e o erro "externally-managed-environment" comum no Kali Linux e Debian.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 1: ATUALIZAR OS REPOSITÓRIOS</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Antes de iniciar, garanta que suas listas de pacotes estejam atualizadas.</p>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('update-repos')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="update-repos">sudo apt update</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 2: INSTALAR O GERENCIADOR PIPX</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Se você ainda não possui o pipx, instale-o utilizando o gerenciador de pacotes da sua distribuição.</p>
-                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-main);"><strong>Para Debian/Ubuntu/Kali:</strong></p>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('install-pipx')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="install-pipx">sudo apt install -y pipx</code></pre>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 3: CONFIGURAR O PATH DO PIPX</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Após a instalação, é necessário garantir que os executáveis instalados pelo pipx estejam acessíveis no seu terminal.</p>
-                        <p style="margin-bottom: 10px; font-size: 0.9rem; color: var(--text-main);">Execute o comando abaixo:</p>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('pipx-path')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="pipx-path">pipx ensurepath</code></pre>
-                        </div>
-                        <div class="pro-tip" style="margin-top: 15px;">
-                            <div class="pro-tip-header"><i class="ph ph-info"></i> Nota Importante</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Após executar este comando, é recomendável fechar e abrir o terminal novamente para que as alterações surtam efeito.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 4: INSTALAR O SEMGREP</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Agora realize a instalação da ferramenta.</p>
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('install-semgrep')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="install-semgrep">pipx install semgrep</code></pre>
-                        </div>
-
-                        <section id="manual-instalacao" style="margin-bottom: 50px;">
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PASSO 5: AUTENTICAR NO TERMINAL</h4>
+                    <section id = "manual-login" style="margin-bottom: 50px;">
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">AUTENTICAR NO TERMINAL</h4>
                         <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Para utilizar as regras Pro e sincronizar com o dashboard, você precisa autenticar sua máquina.</p>
                         
                         <div class="code-block">
@@ -240,8 +175,6 @@
                             </div>
                         </div>
                     </section>
-                    </section>
-
                     <!--Aqui começa o conteúdo da seção de triagem manual-->
                     <section id="manual-triagem" style="margin-bottom: 50px;">
                         <h3>Manual de Triagem e Correção de Vulnerabilidades (SAST)</h3>
@@ -519,7 +452,7 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
                     <div class="toc-header">Nesta Página</div>
                     <ul class="toc-list">
                         <li class="toc-item"><a href="#o-que-e">O que é o Semgrep</a></li>
-                        <li class="toc-item"><a href="#manual-instalacao">Manual de Instalação</a></li>
+                        <li class="toc-item"><a href="#manual-login">Como fazer login</a></li>
                         <li class="toc-item"><a href="#manual-triagem">Manual de Triagem</a></li>
                         <li class="toc-item"><a href="#fluxogramas">Fluxogramas de Decisão</a></li>
                     </ul>
