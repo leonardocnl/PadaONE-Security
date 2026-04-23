@@ -120,133 +120,11 @@
                         <h3>Como ele funciona na prática?</h3>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">O Semgrep opera através de linhas de comando no terminal ou via configurações definidas em arquivos <code>.yaml</code> (regras). Ele escaneia o código fonte em busca de padrões que correspondam a vulnerabilidades conhecidas.</p>
                     </section>
-
-                    <section id = "manual-login" style="margin-bottom: 50px;">
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">AUTENTICAR NO TERMINAL</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.9rem; color: var(--text-muted);">Para utilizar as regras Pro e sincronizar com o dashboard, você precisa autenticar sua máquina.</p>
-                        
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('semgrep-login')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="semgrep-login">semgrep login</code></pre>
-                        </div>
-                        <p style="margin-top: 15px; font-size: 0.9rem; color: var(--text-muted);">Se o navegador não abrir ou ocorrer erro, utilize o método de Login via Token abaixo.</p>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">MÉTODO ALTERNATIVO: LOGIN VIA TOKEN</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Gere um token manualmente seguindo os passos abaixo:</p>
-                        
-                        <div class="meta-card">
-                            <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li>Acesse a página inicial do Semgrep Cloud (você deve estar logado).</li>
-                                <li>Clique em <strong>Settings</strong> no menu lateral esquerdo.</li>
-                                <li>Clique em <strong>Tokens</strong> no menu superior.</li>
-                                <li>Clique no botão azul "<strong>Create new token</strong>".</li>
-                                <li>Preencha os campos:
-                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
-                                        <li><strong>Name:</strong> Identifique sua máquina (ex: terminal-linux-nicolas).</li>
-                                        <li><strong>Token Scopes:</strong> Marque a opção <strong>Agent (CI)</strong> (Essencial para baixar as regras Pro).</li>
-                                    </ul>
-                                </li>
-                                <li>Clique em <strong>Save</strong> e copie o código gerado (começa com <code>sk_</code> ou <code>st_</code>).</li>
-                                <li>No seu terminal, exporte o token com o comando abaixo:</li>
-                            </ol>
-                        </div>
-
-                        <div class="code-block">
-                            <div class="code-header">
-                                <span>Bash</span>
-                                <button class="btn-copy" onclick="utils.copyCode('export-token')"><i class="ph ph-copy"></i></button>
-                            </div>
-                            <pre><code id="export-token">export SEMGREP_APP_TOKEN=cole_seu_token_aqui</code></pre>
-                        </div>
-
-                        <div class="pro-tip" style="margin-top: 15px;">
-                            <div class="pro-tip-header"><i class="ph ph-lightbulb"></i> Dica de Persistência</div>
-                            <p style="margin: 0 0 10px 0; font-size: 0.9rem;">Para evitar que o token expire ao fechar o terminal, adicione-o ao seu arquivo de configuração (<code>.bashrc</code> ou <code>.zshrc</code>).</p>
-                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Comando para automatizar a persistência:</strong></p>
-                            <div class="code-block" style="margin-top: 10px;">
-                                <div class="code-header">
-                                    <span>Bash</span>
-                                    <button class="btn-copy" onclick="utils.copyCode('persist-token')"><i class="ph ph-copy"></i></button>
-                                </div>
-                                <pre><code id="persist-token">echo 'export SEMGREP_APP_TOKEN=cole_seu_token_aqui' >> ~/.bashrc</code></pre>
-                            </div>
-                        </div>
-                    </section>
                     <!--Aqui começa o conteúdo da seção de triagem manual-->
                     <section id="manual-triagem" style="margin-bottom: 50px;">
                         <h3>Manual de Triagem e Correção de Vulnerabilidades (SAST)</h3>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Este documento estabelece o fluxo obrigatório para análise, correção e gestão de exceções (Waivers) para vulnerabilidades detectadas no código-fonte após realizar a execução da ferramenta.</p>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">1. TABELA DE DECISÃO RÁPIDA</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Utilize esta matriz para determinar a urgência da correção assim que o Semgrep reportar um problema. A classificação baseia-se na severidade da regra violada.</p>
-                        
-                        <div style="overflow-x: auto; margin: 20px 0;">
-                            <table style="width: 100%; border-collapse: collapse; background: var(--bg-panel); border-radius: 8px; overflow: hidden;">
-                                <thead>
-                                    <tr style="background: var(--accent-cyan); color: var(--text-inverse);">
-                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Severidade (Semgrep)</th>
-                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Plano de Ação Imediato</th>
-                                        <th style="padding: 15px; text-align: left; font-weight: 600;">Condição para Waiver (Aceite de Risco)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr style="border-bottom: 1px solid var(--border-subtle);">
-                                        <td style="padding: 15px; color: var(--status-critical); font-weight: 600;">
-                                            CRÍTICA / ERROR<br>
-                                            <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 400;">(Ex: Hardcoded Secrets, SQL Injection)</span>
-                                        </td>
-                                        <td style="padding: 15px; color: var(--text-main);">
-                                            <strong>Bloqueio Obrigatório.</strong><br>
-                                            O Pull Request não pode ser mergeado, ou o deploy deve ser cancelado até a correção.
-                                        </td>
-                                        <td style="padding: 15px; color: var(--text-main);">
-                                            Apenas se:<br>
-                                            1. For comprovadamente um Falso Positivo.<br>
-                                            2. O código for inativo (morto) e impossível de ser executado.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding: 15px; color: var(--status-warning); font-weight: 600;">
-                                            MÉDIA / WARNING<br>
-                                            <span style="color: var(--text-muted); font-size: 0.85rem; font-weight: 400;">(Ex: Falta de HttpOnly, Configurações de Log)</span>
-                                        </td>
-                                        <td style="padding: 15px; color: var(--text-main);">
-                                            <strong>Correção Programada.</strong><br>
-                                            Deve entrar no backlog da Sprint atual ou próxima. Monitorar se não houver tempo hábil.
-                                        </td>
-                                        <td style="padding: 15px; color: var(--text-main);">
-                                            Permitido se:<br>
-                                            O tempo/custo técnico da refatoração for desproporcional ao risco residual (baixo impacto).
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">2. DIFERENCIAÇÃO DE CONTEXTO (ONDE ESTÁ O ERRO?)</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Antes de iniciar a correção, identifique a localização do arquivo afetado. O rigor da análise muda dependendo do ambiente.</p>
-                        
-                        <div class="meta-grid" style="grid-template-columns: 1fr 1fr;">
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--status-critical);">CÓDIGO DE PRODUÇÃO (RIGOR MÁXIMO)</span>
-                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Pastas:</strong></p>
-                                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--text-muted);">src/main, controllers/, repository/, arquivos de configuração (application.yaml, Dockerfile).</p>
-                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Impacto:</strong></p>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">Afeta diretamente o usuário final ou a segurança do servidor. Vulnerabilidades aqui têm prioridade absoluta.</p>
-                            </div>
-                            <div class="meta-card">
-                                <span class="meta-label" style="color: var(--status-warning);">CÓDIGO DE DESENVOLVIMENTO/TESTE (RIGOR MODERADO)</span>
-                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Pastas:</strong></p>
-                                <p style="margin: 0 0 10px 0; font-size: 0.85rem; color: var(--text-muted);">src/test, mock/, scripts de automação local.</p>
-                                <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);"><strong>Impacto:</strong></p>
-                                <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted);">O risco principal é comprometer a esteira de CI/CD (ex: vazar credenciais de teste). Injeções de SQL em testes mocks, por exemplo, geralmente são ignoradas.</p>
-                            </div>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">3. PLANO DE AÇÃO: PASSO A PASSO DO DESENVOLVEDOR</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">PLANO DE AÇÃO: PASSO A PASSO DO DESENVOLVEDOR</h4>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Ao receber um alerta do Semgrep, siga este fluxo lógico antes de escrever qualquer código.</p>
 
                         <div class="meta-card" style="margin-bottom: 20px;">
@@ -272,71 +150,59 @@
                                 <li><strong>Decisão:</strong>
                                     <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
                                         <li>Se a função nunca é chamada ou o dado é interno (hardcoded seguro), a vulnerabilidade é classificada como <strong>Não Afetada</strong>.</li>
-                                        <li>Documente isso no código e encerre o fluxo.</li>
+                                        <li>Documente isso no código crie um ticket no openproject e encerre o fluxo.</li>
                                     </ul>
                                 </li>
                             </ol>
                         </div>
 
                         <div class="meta-card" style="margin-bottom: 20px;">
-                            <span class="meta-label" style="color: var(--accent-cyan);">PASSO 3: AVALIAÇÃO DE ESFORÇO (A REGRA DAS 16 HORAS)</span>
+                            <span class="meta-label" style="color: var(--accent-cyan);">PASSO 3: AVALIAÇÃO DE ESFORÇO</span>
                             <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Estime quanto tempo levará para refatorar o código, testar e implantar.</p>
                             <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li><strong>Esforço &lt; 16 horas:</strong> A correção ou refatoração é obrigatória e imediata.</li>
-                                <li><strong>Esforço &gt; 16 horas:</strong> Se a correção exigir reescrever arquitetura (ex: mudar de JDBC puro para JPA/Hibernate em todo o projeto), o desenvolvedor está autorizado a solicitar um Waiver temporário.</li>
+                                <li><strong>Esforço &lt; 8 horas:</strong> A correção ou refatoração é obrigatória e imediata.</li>
+                                <li><strong>Esforço &gt; 8 horas:</strong> Se a correção exigir reescrever arquitetura (ex: mudar de JDBC puro para JPA/Hibernate em todo o projeto), o desenvolvedor está autorizado a solicitar um Waiver temporário.</li>
                             </ol>
                         </div>
 
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">4. GESTÃO DE WAIVERS E JUSTIFICATIVAS</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Se você decidiu não corrigir o código agora (seja por Falso Positivo ou Esforço Elevado), você deve oficializar essa decisão. Não basta ignorar o alerta.</p>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">GESTÃO DE WAIVERS E JUSTIFICATIVAS</h4>
 
                         <div class="meta-card" style="margin-bottom: 20px;">
-                            <span class="meta-label" style="color: var(--accent-cyan);">A. NO CÓDIGO (OBRIGATÓRIO)</span>
-                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Use o comentário de supressão do Semgrep na linha acima do erro:</p>
+                            <span class="meta-label" style="color: var(--accent-cyan);">A. Se você decidiu não corrigir o código agora (seja por Falso Positivo ou Esforço Elevado), você deve oficializar essa decisão. Não basta ignorar o alerta.</span>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Use o comentário de supressão do Semgrep na linha acima do erro e atribua o ID do waiver/ticket correspondente:</p>
                             <div class="code-block" style="margin-top: 15px;">
                                 <div class="code-header">
                                     <span>Java</span>
                                     <button class="btn-copy" onclick="utils.copyCode('waiver-code')"><i class="ph ph-copy"></i></button>
                                 </div>
-                                <pre><code id="waiver-code">// nosemgrep: [ID-DA-REGRA]
-// Motivo: [Waiver de Segurança] - O input já é sanitizado pelo filtro XSS global.
-String query = "SELECT ... " + input;</code></pre>
+                                <pre><code id="waiver-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
+// nosemgrep: [ID-DA-REGRA (gerado no relatorio do Semgrep)]
+// Motivo: [ID colocado no waiver (ticket do openProject)] - O input já é sanitizado pelo filtro XSS global.
+
+EXEMPLO DE WAIVER PARA FALSO POSITIVO
+// nosemgrep: gitlab.find_sec_bugs.CUSTOM_INJECTION-2
+// Motivo: [#5553 sprint x] - O input já é sanitizado no método xxx.
+.......</code></pre>
                             </div>
                         </div>
-
                         <div class="meta-card" style="margin-bottom: 20px;">
-                            <span class="meta-label" style="color: var(--accent-cyan);">B. NO COMMIT E TICKET</span>
-                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Todo Waiver exige uma justificativa formal. Use este modelo:</p>
+                            <span class="meta-label" style="color: var(--accent-cyan);">B. Após a correção de uma vulnerabilidade real</span> 
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Use somente o comentário de supressão do Semgrep na linha acima do antigo erro para que a ferramenta não reporte novamente:</p>
                             <div class="code-block" style="margin-top: 15px;">
                                 <div class="code-header">
-                                    <span>Modelo de Waiver</span>
-                                    <button class="btn-copy" onclick="utils.copyCode('waiver-template')"><i class="ph ph-copy"></i></button>
+                                    <span>Java</span>
+                                    <button class="btn-copy" onclick="utils.copyCode('waiver-code')"><i class="ph ph-copy"></i></button>
                                 </div>
-                                <pre><code id="waiver-template">Waiver de Segurança: [ID da Regra ou CVE]
-Justificativa Técnica: [Ex: Falso Positivo validado / Risco de negócio baixo / Custo de migração > 16h].
-Status: Função devidamente isolada ou protegida por WAF.
-Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
+                                <pre><code id="waiver-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
+// nosemgrep: [ID-DA-REGRA (gerado no relatorio do Semgrep)]
+
+EXEMPLO DE WAIVER PARA FALSO POSITIVO
+// nosemgrep: gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1
+
+.......</code></pre>
                             </div>
                         </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">5. ESCALONAMENTO CRÍTICO</h4>
-                        <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Este é o mecanismo de governança para riscos altos que não serão corrigidos imediatamente.</p>
-                        
-                        <div class="meta-card">
-                            <ol style="margin: 10px 0 0 20px; color: var(--text-main); font-size: 0.9rem; line-height: 1.8;">
-                                <li><strong>Gatilho:</strong> Ativado sempre que a severidade for CRÍTICA (ERROR) e o desenvolvedor solicitar um Waiver.</li>
-                                <li><strong>Revisão Obrigatória:</strong> O Waiver não entra em vigor sozinho. Um Desenvolvedor Sênior ou o Time de Segurança deve revisar sua análise.</li>
-                                <li><strong>Critérios para Aprovação do Revisor:</strong>
-                                    <ul style="margin: 5px 0 0 20px; list-style-type: circle;">
-                                        <li>Confirmação de que a vulnerabilidade não é explorável no contexto atual (Reachability).</li>
-                                        <li>Validação de que não há uma solução simples (alternativa viável) que custe menos de 16 horas.</li>
-                                    </ul>
-                                </li>
-                                <li><strong>Conclusão:</strong> O Waiver só é válido após o "De Acordo" do revisor no sistema de gestão (OpenProject).</li>
-                            </ol>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">6. ORGANIZAÇÃO DO WAIVER NO OPENPROJECT</h4>
+                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ORGANIZAÇÃO DO WAIVER NO OPENPROJECT</h4>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">Para garantir a auditoria futura, todo débito técnico de segurança deve ser registrado seguindo a tabela abaixo:</p>
                         
                         <div style="overflow-x: auto; margin: 20px 0;">
@@ -371,7 +237,7 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
                                     </tr>
                                     <tr style="border-bottom: 1px solid var(--border-subtle);">
                                         <td style="padding: 15px; color: var(--text-main); font-weight: 600;">Atribuído a</td>
-                                        <td style="padding: 15px; color: var(--text-main);">Desenvolvedor responsável pela análise</td>
+                                        <td style="padding: 15px; color: var(--text-main);">Membro da equipe de segurança responsável pela análise</td>
                                         <td style="padding: 15px; color: var(--text-muted);">Responsabilidade técnica.</td>
                                     </tr>
                                     <tr style="border-bottom: 1px solid var(--border-subtle);">
@@ -381,69 +247,11 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
                                     </tr>
                                     <tr>
                                         <td style="padding: 15px; color: var(--text-main); font-weight: 600;">Data Finalização</td>
-                                        <td style="padding: 15px; color: var(--text-main);">Data para reavaliação (Máx. 60 dias)</td>
+                                        <td style="padding: 15px; color: var(--text-main);">Data para reavaliação (Máx. 15 dias)</td>
                                         <td style="padding: 15px; color: var(--text-muted);">Evitar que o waiver seja esquecido (Obsolescência).</td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                    </section>
-
-                    <section id="fluxogramas" style="margin-bottom: 50px;">
-                        <h3>Fluxogramas de Decisão</h3>
-                        <p>Utilize os fluxogramas abaixo em ordem sequencial. As duas primeiras entradas correspondem a ETAPA 1 (fluxogramaSemgrep1 e fluxogramaSemgrep2), seguidas das demais etapas.</p>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 1: LOCALIZAÇÃO E ANÁLISE INICIAL</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep1.png" alt="Fluxograma 1: Localização e Análise Inicial" style="width: 100%; max-width: 1120px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 1:</strong> Ao detectar uma vulnerabilidade, primeiro identifique se está no código de <em>Aplicação</em> ou <em>Infraestrutura</em>. Se for Infra, repasse para o time responsável. Se for Aplicação, prossiga para validar a incidência.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 2: ANÁLISE DE VERACIDADE</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep2.png" alt="Fluxograma 2: Análise de Veracidade" style="width: 100%; max-width: 1180px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 1:</strong> Determine se o alerta é um <em>Erro Real</em> ou <em>Falso Positivo</em>. Se for real, valide o escopo da vulnerabilidade e prossiga para a Etapa 3. Se a vulnerabilidade não nos afeta (código inativo/seguro), documente como "Não Afetado" e encerre o processo.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 3: ANÁLISE DE ALCANCE</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep3.png" alt="Fluxograma 3: Análise de Alcance e Esforço" style="width: 100%; max-width: 1300px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 3:</strong> Se a vulnerabilidade não nos afeta, documente como "Não Afetado" e encerre o processo. Se for real, passe para a próxima etapa.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 4: AVALIAÇÃO DE ESFORÇO</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep4.png" alt="Fluxograma 4: Avaliação de Severidade" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 4:</strong> Se a vulnerabilidade nos afeta, verifique o esforço, se ele não for <strong>maior que 16h</strong>, a correção é obrigatória. Se for maior, passe para a próxima etapa.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 5: ANÁLISE DE SEVERIDADE</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep5.png" alt="Fluxograma 5: Escalonamento Crítico" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 5:</strong> Se a correção exigir mais de 16 horas, verifique a severidade. Se não for crítica, o waiver é permitido. Se for crítica, o waiver só é permitido após aprovação de um revisor sênior ou do time de segurança.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 6: ESCALONAMENTO CRÍTICO</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep6.png" alt="Fluxograma 6: Aprovação e Registro de Waiver" style="width: 100%; max-width: 1350px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 6:</strong> Se for severidade crítica, o escalonamento é obrigatório. E você deve verificar se a criação do waiver é permitida.
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 7: APROVAÇÃO DE WAIVER CRÍTICO</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep7.png" alt="Fluxograma 7: Finalização do Processo" style="width: 100%; max-width: 900px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 7:</strong> Se o waiver for permitido, crie o item no OpenProject seguindo o modelo. Se não for permitido, corrija a vulnerabilidade imediatamente.</p>
-                        </div>
-
-                        <h4 style="color: var(--accent-cyan); margin: 30px 0 10px 0;">ETAPA 8: FINALIZAÇÃO DO PROCESSO</h4>
-                        <div style="background: var(--bg-panel); padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                            <img src="assets/images/fluxogramaSemgrep8.png" alt="Fluxograma 8: Registro e Rastreabilidade" style="width: 100%; max-width: 1000px; display: block; margin: 0 auto;">
-                            <p style="margin: 38px 0 0 0; font-size: 0.9rem; color: var(--text-muted); text-align: center;"><strong>Etapa 8:</strong> Consolide as decisões de segurança com evidências, responsáveis e prazo de reavaliação para auditoria contínua.</p>
-                        </div>
-
-                        <div class="pro-tip">
-                            <div class="pro-tip-header"><i class="ph ph-flow-arrow"></i> Navegação pelos Fluxogramas</div>
-                            <p style="margin: 0; font-size: 0.9rem;">Siga os fluxogramas em ordem sequencial. Cada decisão tomada (losango amarelo) direciona você para o próximo passo apropriado. Processos em <span style="color: var(--status-critical);">vermelho</span> exigem atenção especial e aprovação formal.</p>
                         </div>
                     </section>
                 </div>
@@ -452,9 +260,7 @@ Prazo de Reavaliação: XX dias (Máximo de 90 dias).</code></pre>
                     <div class="toc-header">Nesta Página</div>
                     <ul class="toc-list">
                         <li class="toc-item"><a href="#o-que-e">O que é o Semgrep</a></li>
-                        <li class="toc-item"><a href="#manual-login">Como fazer login</a></li>
                         <li class="toc-item"><a href="#manual-triagem">Manual de Triagem</a></li>
-                        <li class="toc-item"><a href="#fluxogramas">Fluxogramas de Decisão</a></li>
                     </ul>
                 </aside>
             </div>
