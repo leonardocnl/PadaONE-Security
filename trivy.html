@@ -266,30 +266,44 @@
   </ol>
 </div>
 
-              <div class="meta-card" style="border-top: 3px solid var(--accent-gold); margin-bottom: 20px;">
-  <h4 style="color: var(--accent-gold); margin-top: 0">
-    <i class="ph ph-file-js"></i> Correção no Frontend (Angular/Node.js)
+<div class="meta-card" style="border-top: 3px solid var(--accent-gold); margin-bottom: 20px; padding: 15px; background: var(--bg-card); border-radius: 8px; border-left: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+  <h4 style="color: var(--accent-gold); margin-top: 0; display: flex; align-items: center; gap: 8px;">
+    <i class="ph ph-file-js"></i> Correção de Vulnerabilidades (Frontend/Node.js)
   </h4>
-  <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6">
-    <li>
-      Identifique o nome da biblioteca vulnerável e a <strong>Fixed Version</strong> no relatório do 
-      Trivy. 
-    </li>
-    <li>No seu <code>package.json</code>, adicione ou localize o campo <strong>"overrides"</strong>. </li>
-    <li>Insira o nome da biblioteca "filha" e a versão corrigida conforme o exemplo abaixo:</li>
 
-    <div class="code-block" style="margin-top: 15px; margin-bottom: 15px">
-      <div class="code-header"><span>package.json</span></div>
-      <pre><code>"overrides": {
-  "nome-da-lib-filha": "1.2.3"
-}</code></pre>
+  <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+    Siga os passos abaixo para atualizar bibliotecas vulneráveis apontadas pelo <strong>Trivy</strong>.
+  </p>
+
+  <ol style="margin-left: 20px; font-size: 0.95rem; line-height: 1.6; color: var(--text-main);">
+    <li>
+      Identifique o <strong>nome da biblioteca</strong> e a <strong>Fixed Version</strong> no relatório do Trivy.
+    </li>
+    <li>
+      <strong>Dependência Direta:</strong> Se a biblioteca estiver listada em <code>"dependencies"</code> no <code>package.json</code>, atualize a versão diretamente lá.
+    </li>
+    <li>
+      <strong>Dependência Transitiva (Filha):</strong> Se a biblioteca não estiver lá, adicione o campo <code>"overrides"</code> entre <code>"dependencies"</code> e <code>"devDependencies"</code>:
+    </li>
+
+    <div class="code-block" style="background: #121212; border: 1px solid #333; padding: 12px; border-radius: 6px; margin: 15px 0; font-family: monospace; font-size: 0.85rem;">
+      <div style="color: #888; margin-bottom: 5px; border-bottom: 1px solid #222; padding-bottom: 5px;">package.json</div>
+      <pre style="margin: 0; color: #fff;"><code>"dependencies": { ... },
+
+<span style="color: var(--accent-gold);">"overrides": {
+  "biblioteca-vulneravel": "^2.0.0"
+},</span>
+
+"devDependencies": { ... }</code></pre>
     </div>
 
-    <li>Após salvar, execute o comando abaixo para aplicar as mudanças no <code>package-lock.json</code>:</li>
+    <li>
+      <strong>Aplique as mudanças:</strong> Exclua o arquivo <code>package-lock.json</code> e execute o comando abaixo para reinstalar e atualizar a árvore de dependências:
+    </li>
 
-    <div class="code-block" style="margin-top: 15px">
-      <div class="code-header"><span>Terminal</span></div>
-      <pre><code>npm install</code></pre>
+    <div class="code-block" style="background: #121212; border: 1px solid #333; padding: 12px; border-radius: 6px; margin-top: 15px; font-family: monospace; font-size: 0.85rem;">
+      <div style="color: #888; margin-bottom: 5px; border-bottom: 1px solid #222; padding-bottom: 5px;">Terminal</div>
+      <pre style="margin: 0; color: #fff;"><code>npm install</code></pre>
     </div>
   </ol>
 </div>
