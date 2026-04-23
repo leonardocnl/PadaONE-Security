@@ -23,7 +23,7 @@ window.nav = window.nav || {
     const title =
       {
         dashboard: 'Dashboard',
-        quickguide: 'Quick Guide',
+        quickguide: 'Configuração de Ambiente',
         logic: 'Lógica de Bibliotecas',
         sobre: 'Sobre o Projeto',
         trivy: 'Trivy (SCA)',

@@ -111,27 +111,30 @@
 
         <div class="tool-layout">
           <div class="scroll-area">
-            <h1>Pipeline DevSecOps</h1>
+            <h1>Framework de Desenvolvimento Seguro</h1>
 
             <section id="intro" style="margin-bottom: 40px">
               <h3 style="color: var(--primary-blue); margin-bottom: 20px">Security by Design</h3>
               <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
-                A implementação deste pipeline de segurança tem como objetivo fundamental realizar o
-                <strong style="color: var(--primary-blue)">Shift Left</strong> na segurança do desenvolvimento, movendo
-                a identificação e correção de vulnerabilidades para as fases mais iniciais do ciclo de vida do software.
-                Ao invés de tratar a segurança como uma etapa final, ela é incorporada desde o primeiro commit.
+                A estratégia deste framework fundamenta-se no modelo de maturidade
+                <strong style="color: var(--primary-blue)">OWASP SAMM</strong> e na integração de Segurança Contínua
+                em fluxos de CI/CD, com abordagem <strong style="color: var(--primary-blue)">Shift Left</strong>
+                desde a estação de trabalho do desenvolvedor.
               </p>
               <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 15px">
                 O conceito de <strong style="color: var(--accent-cyan)">Security by Design</strong> permeia toda a
-                arquitetura deste pipeline: as ferramentas trabalham de forma integrada e automatizada, garantindo que
-                cada linha de código, cada dependência e cada configuração sejam validadas antes de chegarem à produção.
-                Isso reduz drasticamente o custo de correção de vulnerabilidades e aumenta a confiança na entrega
-                contínua de software seguro.
+                arquitetura deste framework: os referenciais OWASP convertem fluxos DevOps em estruturas DevSecOps de
+                alta confiabilidade, transformando a segurança em um processo automatizado, escalonável e integrado a
+                todas as etapas do ciclo de vida do software.
               </p>
               <p style="line-height: 1.8; color: var(--text-muted)">
-                Este dashboard apresenta o fluxo integrado de segurança em <strong>3 fases distintas</strong>: Estação
-                de Trabalho, Pipeline CI/CD e Auditoria Manual, desde a configuração inicial do ambiente de
-                desenvolvimento até o sign-off final para produção.
+                Este dashboard apresenta o fluxo integrado de segurança em <strong>3 fases distintas</strong>:
+                <strong style="color: var(--accent-purple)">Estação de Trabalho</strong>,
+                <strong style="color: var(--status-critical)">Integração CI/CD</strong> e
+                <strong style="color: var(--status-success)">Auditoria Manual</strong>, desde a configuração inicial do ambiente de
+                desenvolvimento até o sign-off final para produção. Na Fase 3, a validação analítica final utiliza o
+                <strong>OWASP Top 10</strong> como checklist obrigatório para detecção de Falhas de Lógica de Negócio
+                e Bypass de Autenticação por meio de Pentests Manuais e escaneamentos DAST.
               </p>
             </section>
 
@@ -146,7 +149,7 @@
                 "
               >
                 <i class="ph ph-list-numbers" style="margin-right: 10px; color: var(--primary-blue)"></i>Fases do
-                Pipeline
+                Framework
               </h3>
               <div class="phases-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px">
                 <div
@@ -196,10 +199,10 @@
                       line-height: 1.4;
                     "
                   >
-                    Fase 2:<br />Pipeline CI/CD
+                    Fase 2:<br />Integração CI/CD
                   </div>
                   <p style="margin: 0; font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1">
-                    Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no pipeline de
+                    Revalidação automática paralela, DAST, geração de SBOM e monitoramento contínuo no fluxo de
                     integração.
                   </p>
                 </div>
@@ -232,6 +235,7 @@
                 </div>
               </div>
             </section>
+
             <section id="ferramentas">
               <h3
                 style="
@@ -335,6 +339,57 @@
                 </div>
               </div>
             </section>
+
+            <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  border-left: 6px solid var(--accent-purple);
+                  padding: 16px;
+                  margin-top: 15px;
+                "
+              >
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+                  <div style="display: flex; align-items: center; gap: 10px">
+                    <i class="ph ph-warning-circle" style="font-size: 1.2rem; color: var(--accent-purple)"></i>
+                    <strong
+                      style="
+                        color: var(--accent-purple);
+                        font-size: 0.84rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.9px;
+                      "
+                      >Triagem Obrigatória Antes de Nova Biblioteca</strong
+                    >
+                  </div>
+                  <button
+                    type="button"
+                    onclick="nav.switchTool('logic')"
+                    style="
+                      display: inline-flex;
+                      align-items: center;
+                      align-self: center;
+                      gap: 7px;
+                      padding: 8px 12px;
+                      border: 1px solid var(--accent-purple);
+                      background: transparent;
+                      color: var(--accent-purple);
+                      font-weight: 700;
+                      text-transform: uppercase;
+                      letter-spacing: 0.5px;
+                      font-size: 0.74rem;
+                      cursor: pointer;
+                    "
+                  >
+                    <i class="ph ph-cursor-click"></i>
+                    Abrir Triagem
+                  </button>
+                </div>
+                <p style="margin: 10px 0 0 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6">
+                  Toda nova dependência deve passar pela triagem técnica antes do uso em código para garantir
+                  governança de risco e consistência de decisão.
+                </p>
+              </div>
 
             <section id="scripts-relatorio" style="margin: 20px 0 40px 0">
               <h3
@@ -630,7 +685,7 @@
                 <a href="#intro">Security By Design</a>
               </li>
               <li class="toc-item">
-                <a href="#fases">Fases do Pipeline</a>
+                <a href="#fases">Fases do Framework</a>
               </li>
               <li class="toc-item">
                 <a href="#ferramentas">Ferramentas Principais</a>

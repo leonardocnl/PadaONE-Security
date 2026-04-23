@@ -671,3 +671,12 @@ label {
   letter-spacing: 1px;
   font-weight: 500;
 }
+
+.tool-nav-btn {
+  text-decoration: none;
+}
+
+.tool-nav-btn:hover .tool-nav-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

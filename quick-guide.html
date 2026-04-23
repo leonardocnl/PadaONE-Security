@@ -126,6 +126,7 @@
                 páginas de cada ferramenta. A proposta é reduzir o tempo de configuração e padronizar o início do
                 trabalho de novos desenvolvedores.
               </p>
+              
               <div
                 style="
                   background: var(--bg-sidebar);
@@ -202,29 +203,31 @@
             <section id="instalacao" style="margin-bottom: 40px">
               <h3>2. Instalação das Ferramentas</h3>
 
-              <h4 style="color: var(--primary-blue); margin: 20px 0 10px 0">2.1 Trivy</h4>
-              <button
-                type="button"
-                onclick="nav.switchTool('trivy')"
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 8px;
-                  padding: 10px 14px;
-                  border: 1px solid var(--primary-blue);
-                  background: transparent;
-                  color: var(--primary-blue);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                  letter-spacing: 0.5px;
-                  font-size: 0.78rem;
-                  cursor: pointer;
-                  margin-bottom: 12px;
-                "
-              >
-                <i class="ph ph-package"></i>
-                Abrir página do Trivy
-              </button>
+              <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0 12px 0">
+                <h4 style="color: var(--primary-blue); margin: 0">2.1 Trivy</h4>
+                <button
+                  class="tool-nav-btn"
+                  type="button"
+                  onclick="nav.switchTool('trivy')"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 10px 14px;
+                    border: none;
+                    background: transparent;
+                    color: var(--primary-blue);
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    font-size: 0.78rem;
+                    cursor: pointer;
+                  "
+                >
+                  <i class="ph ph-package"></i>
+                  <span class="tool-nav-label">Abrir página do Trivy</span>
+                </button>
+              </div>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de SCA para detectar vulnerabilidades em dependências e arquivos de projeto.
               </p>
@@ -233,29 +236,31 @@
                 <pre><code>sudo apt-get install trivy</code></pre>
               </div>
 
-              <h4 style="color: var(--accent-cyan); margin: 20px 0 10px 0">2.2 Semgrep</h4>
-              <button
-                type="button"
-                onclick="nav.switchTool('semgrep')"
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 8px;
-                  padding: 10px 14px;
-                  border: 1px solid var(--accent-cyan);
-                  background: transparent;
-                  color: var(--accent-cyan);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                  letter-spacing: 0.5px;
-                  font-size: 0.78rem;
-                  cursor: pointer;
-                  margin-bottom: 12px;
-                "
-              >
-                <i class="ph ph-code"></i>
-                Abrir página do Semgrep
-              </button>
+              <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0 12px 0">
+                <h4 style="color: var(--accent-cyan); margin: 0">2.2 Semgrep</h4>
+                <button
+                  class="tool-nav-btn"
+                  type="button"
+                  onclick="nav.switchTool('semgrep')"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 10px 14px;
+                    border: none;
+                    background: transparent;
+                    color: var(--accent-cyan);
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    font-size: 0.78rem;
+                    cursor: pointer;
+                  "
+                >
+                  <i class="ph ph-code"></i>
+                  <span class="tool-nav-label">Abrir página do Semgrep</span>
+                </button>
+              </div>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de SAST para análise estática de padrões inseguros no código.
               </p>
@@ -318,29 +323,31 @@ pipx install semgrep</code></pre>
                 <div class="code-header"><span>Bash</span></div>
                 <pre><code>semgrep login</code></pre>
               </div>
-              <h4 style="color: var(--status-critical); margin: 20px 0 10px 0">2.3 Gitleaks</h4>
-              <button
-                type="button"
-                onclick="nav.switchTool('gitleaks')"
-                style="
-                  display: inline-flex;
-                  align-items: center;
-                  gap: 8px;
-                  padding: 10px 14px;
-                  border: 1px solid var(--status-critical);
-                  background: transparent;
-                  color: var(--status-critical);
-                  font-weight: 700;
-                  text-transform: uppercase;
-                  letter-spacing: 0.5px;
-                  font-size: 0.78rem;
-                  cursor: pointer;
-                  margin-bottom: 12px;
-                "
-              >
-                <i class="ph ph-key"></i>
-                Abrir página do Gitleaks
-              </button>
+              <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0 12px 0">
+                <h4 style="color: var(--status-critical); margin: 0">2.3 Gitleaks</h4>
+                <button
+                  class="tool-nav-btn"
+                  type="button"
+                  onclick="nav.switchTool('gitleaks')"
+                  style="
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 10px 14px;
+                    border: none;
+                    background: transparent;
+                    color: var(--status-critical);
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    font-size: 0.78rem;
+                    cursor: pointer;
+                  "
+                >
+                  <i class="ph ph-key"></i>
+                  <span class="tool-nav-label">Abrir página do Gitleaks</span>
+                </button>
+              </div>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Ferramenta de Secrets Detection para identificar vazamento de credenciais no repositório.
               </p>
@@ -373,6 +380,10 @@ gitleaks version</code></pre>
                 local de segurança. Em toda execução de <strong>git commit</strong>, o hook dispara Trivy, Semgrep e
                 Gitleaks para validar dependências, código e possíveis vazamentos de credenciais antes do push.
               </p>
+              <div class="code-block" style="margin-bottom: 16px">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>git config core.hooksPath .githooks</code></pre>
+              </div>
               <div
                 style="
                   background: var(--bg-sidebar);

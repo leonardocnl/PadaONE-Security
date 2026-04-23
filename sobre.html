@@ -79,7 +79,7 @@
               <i class="ph ph-squares-four"></i> Dashboard
             </div>
             <div class="nav-item" onclick="nav.switchTool('quickguide')">
-              <i class="ph ph-lightning"></i> Quick Guide
+              <i class="ph ph-lightning"></i> Configuração de Ambiente
             </div>
             <div class="nav-item" onclick="nav.switchTool('logic')">
               <i class="ph ph-tree-structure"></i> Triagem de Bibliotecas
@@ -140,145 +140,136 @@
               <span>DEVSECOPS</span>
             </div>
 
-            <section id="sobre-documento" style="margin-bottom: 30px">
-              <h3>Sobre o Documento</h3>
+            <section id="framework" style="margin-bottom: 30px">
+              <h3>Framework de Desenvolvimento Seguro</h3>
               <p style="margin-bottom: 15px">
-                Este documento reúne orientações práticas de <strong>segurança da informação</strong> voltadas ao apoio
-                de equipes de desenvolvimento na construção de sistemas mais seguros, resilientes e conformes com as
-                melhores práticas de mercado. Seu foco está principalmente em sistemas web com uso extensivo de análise
-                estática de código (SAST), análise de composição de software (SCA) e detecção de secrets, oferecendo
-                checklists objetivos e fluxos de triagem que auxiliam na aplicação consistente das boas práticas de
-                segurança no dia a dia do desenvolvimento.
+                A estratégia de segurança é fundamentada no modelo de maturidade
+                <strong>OWASP SAMM (Software Assurance Maturity Model)</strong> e na integração de Segurança Contínua
+                em fluxos de CI/CD. O framework utiliza referenciais da OWASP para converter fluxos DevOps em
+                estruturas DevSecOps de alta confiabilidade, transformando a segurança em um processo automatizado,
+                escalonável e integrado a todas as etapas do ciclo de vida do software.
               </p>
-              <p>
-                As diretrizes apresentadas são fundamentadas em normas técnicas, recomendações oficiais e boas práticas
-                reconhecidas nacional e internacionalmente, como o <strong>OWASP Top 10</strong>,
-                <strong>CWE (Common Weakness Enumeration)</strong>,
-                <strong>CVSS (Common Vulnerability Scoring System)</strong> e frameworks de DevSecOps consolidados pela
-                indústria.
+              <p style="margin-bottom: 15px">
+                A validação analítica final, conduzida na Fase 3, adota o <strong>OWASP Top 10</strong> como checklist
+                obrigatório para detecção de Falhas de Lógica de Negócio e Bypass de Autenticação por meio de Pentests
+                Manuais e escaneamentos DAST. Todo o ecossistema de proteção é projetado sob a metodologia
+                <strong>Shift Left</strong>, movendo os controles técnicos desde a estação de trabalho do desenvolvedor
+                até a auditoria operacional.
               </p>
+             
             </section>
 
-            <section id="organizacao-camadas" style="margin-bottom: 30px">
-              <h3>Organização em Camadas</h3>
+            <section id="fases-framework" style="margin-bottom: 30px">
+              <h3>Fases do Framework</h3>
               <p style="margin-bottom: 20px">
-                Para facilitar a compreensão e a aplicação prática, o conteúdo foi estruturado em
-                <strong>camadas de segurança</strong>, organizadas de forma progressiva e complementar:
+                O modelo operacional está estruturado em 3 fases complementares, com objetivos técnicos, gatilhos e
+                critérios de governança definidos.
               </p>
 
-              <!-- Camada 1 -->
-              <div
-                style="
-                  background: var(--bg-panel);
-                  border-left: 4px solid var(--status-success);
-                  padding: 20px;
-                  margin-bottom: 15px;
-                "
-              >
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px">
-                  <div
-                    style="
-                      background: var(--status-success);
-                      color: #ffffff;
-                      font-weight: 700;
-                      width: 32px;
-                      height: 32px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1.1rem;
-                      flex-shrink: 0;
-                    "
-                  >
-                    1
+              <div style="background: var(--bg-panel); border-left: 4px solid var(--accent-purple); padding: 20px; margin-bottom: 15px">
+                <h4 style="color: var(--accent-purple); margin: 0 0 10px 0; font-size: 1rem">Fase 1 · Estação de Trabalho</h4>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  Camada preventiva aplicada no ambiente local para interceptar vulnerabilidades antes do envio aos
+                  servidores. Combina SAST, SCA e detecção de Secrets com bloqueio sistemático de commit em caso de
+                  achados.
+                </p>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  Inclui configuração do ambiente com scripts Bash (Linux), fluxo de inspeção em pre-commit focado em
+                  staged files e triagem de bibliotecas com apoio de plataformas como deps.dev e socket.dev.
+                </p>
+                <p style="margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  Exceções (waivers) são formalizadas com rastreabilidade e critérios de esforço de remediação. Casos
+                  críticos com CVSS acima de 9.0 passam por escalonamento técnico obrigatório.
+                </p>
+                <div
+                  style="
+                    background: var(--bg-sidebar);
+                    border: 1px solid var(--border-indigo);
+                    border-left: 6px solid var(--accent-purple);
+                    padding: 14px;
+                    margin-top: 14px;
+                  "
+                >
+                  <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+                    <div style="display: flex; align-items: center; gap: 10px">
+                      <i class="ph ph-warning-circle" style="font-size: 1.2rem; color: var(--accent-purple)"></i>
+                      <strong
+                        style="
+                          color: var(--accent-purple);
+                          font-size: 0.82rem;
+                          text-transform: uppercase;
+                          letter-spacing: 0.9px;
+                        "
+                        >Triagem Obrigatória Antes de usar uma Nova Biblioteca</strong
+                      >
+                    </div>
+                    <button
+                      type="button"
+                      onclick="nav.switchTool('logic')"
+                      style="
+                        display: inline-flex;
+                        align-items: center;
+                        align-self: center;
+                        gap: 7px;
+                        padding: 8px 12px;
+                        border: 1px solid var(--accent-purple);
+                        background: transparent;
+                        color: var(--accent-purple);
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        font-size: 0.74rem;
+                        cursor: pointer;
+                      "
+                    >
+                      <i class="ph ph-cursor-click"></i>
+                      Abrir Triagem
+                    </button>
                   </div>
-                  <h4 style="color: var(--status-success); margin: 0; font-size: 1rem">
-                    Base de Conhecimento do Desenvolvedor
-                  </h4>
                 </div>
-                <p style="margin: 0 0 0 44px; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
-                  Reúne os fundamentos essenciais que devem orientar toda interação com código e dependências, servindo
-                  como base de conhecimento permanente para o desenvolvimento seguro. Aborda conceitos como
-                  vulnerabilidades, severidade (CVSS), análise de alcance e interpretação de advisories de segurança.
+              </div>
+
+              <div style="background: var(--bg-panel); border-left: 4px solid var(--status-critical); padding: 20px; margin-bottom: 15px">
+                <h4 style="color: var(--status-critical); margin: 0 0 10px 0; font-size: 1rem">Fase 2 · Integração CI/CD</h4>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  Camada de auditoria automatizada centralizada no GitLab CI/CD, atuando como Security Gate obrigatório
+                  para evolução do código. A execução é compulsória em commits e pré-requisito para liberação de Merge
+                  Requests.
+                </p>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  O mecanismo opera em modo non-fail-fast para consolidar relatório completo de achados em uma única
+                  execução, facilitando remediação simultânea de múltiplas vulnerabilidades.
+                </p>
+                <p style="margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  A paridade de regras com a Fase 1 é mantida para evitar divergências entre validação local e auditoria
+                  centralizada. Resultados são versionados como artefatos técnicos para governança.
                 </p>
               </div>
 
-              <!-- Camada 2 -->
-              <div
-                style="
-                  background: var(--bg-panel);
-                  border-left: 4px solid var(--accent-cyan);
-                  padding: 20px;
-                  margin-bottom: 15px;
-                "
-              >
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px">
-                  <div
-                    style="
-                      background: var(--accent-cyan);
-                      color: #ffffff;
-                      font-weight: 700;
-                      width: 32px;
-                      height: 32px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1.1rem;
-                      flex-shrink: 0;
-                    "
-                  >
-                    2
-                  </div>
-                  <h4 style="color: var(--accent-cyan); margin: 0; font-size: 1rem">Ferramentas e Automação</h4>
-                </div>
-                <p style="margin: 0 0 0 44px; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
-                  Trata da implementação e uso de ferramentas de segurança automatizadas, garantindo que
-                  vulnerabilidades sejam identificadas de forma consistente e proativa. Inclui orientações sobre Trivy
-                  (SCA), Semgrep (SAST) e Gitleaks (Secrets), com foco em integração ao pipeline de desenvolvimento.
+              <div style="background: var(--bg-panel); border-left: 4px solid var(--status-success); padding: 20px; margin-bottom: 0">
+                <h4 style="color: var(--status-success); margin: 0 0 10px 0; font-size: 1rem">Fase 3 · Auditoria Manual e DAST</h4>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  Camada final de validação com Pentests Manuais e DAST, executada com defasagem de uma sprint para
+                  auditoria das funcionalidades recém-implementadas em ambiente controlado.
+                </p>
+                <p style="margin: 0 0 10px 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  O checklist técnico segue OWASP Top 10, incluindo análise de lógica de negócio, autenticação e riscos
+                  de tempo de execução que não são totalmente capturados por inspeções automatizadas.
+                </p>
+                <p style="margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
+                  O ciclo encerra com parecer técnico por release, consolidando evidências, expurgo de falsos positivos
+                  e decisão de promoção para produção.
                 </p>
               </div>
+            </section>
 
-              <!-- Camada 3 -->
-              <div
-                style="
-                  background: var(--bg-panel);
-                  border-left: 4px solid var(--primary-blue);
-                  padding: 20px;
-                  margin-bottom: 20px;
-                "
-              >
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px">
-                  <div
-                    style="
-                      background: var(--primary-blue);
-                      color: #ffffff;
-                      font-weight: 700;
-                      width: 32px;
-                      height: 32px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 1.1rem;
-                      flex-shrink: 0;
-                    "
-                  >
-                    3
-                  </div>
-                  <h4 style="color: var(--primary-blue); margin: 0; font-size: 1rem">Governança e Processos</h4>
-                </div>
-                <p style="margin: 0 0 0 44px; font-size: 0.9rem; line-height: 1.6; color: var(--text-main)">
-                  Aborda a gestão de riscos de segurança, processos de triagem, aprovações de waivers e escalonamento de
-                  vulnerabilidades críticas. Assegura que decisões técnicas sejam documentadas, rastreáveis e alinhadas
-                  às políticas de segurança organizacionais, promovendo uma cultura de segurança sustentável.
-                </p>
-              </div>
-
-              <!-- <div style="background: var(--bg-purple-subtle); border-left: 4px solid var(--accent-purple); padding: 15px; margin-bottom: 15px;">
-                            <strong style="color: var(--accent-purple);"><i class="ph ph-info"></i> ESTRUTURA PROGRESSIVA</strong>
-                            <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6;">
-                                Essa organização permite uma adoção gradual das orientações, alinhada ao fluxo natural de desenvolvimento e aos diferentes níveis de maturidade das equipes, promovendo uma segurança sustentável e integrada ao sistema como um todo.
-                            </p>
-                        </div> -->
+            <section id="conclusao-proximos-passos" style="margin-bottom: 30px">
+              <h3>Conclusão</h3>
+              <p style="margin-bottom: 15px">
+                A estruturação do framework fortalece a cultura de Security by Design e reduz retrabalho ao incorporar
+                requisitos de segurança desde a concepção arquitetural. O objetivo é garantir resultados consistentes,
+                rastreáveis e auditáveis em todo o ciclo de entrega.
+              </p>
             </section>
 
             <section id="ferramentas">
@@ -646,8 +637,9 @@
           <aside class="right-toc">
             <div class="toc-header">Nesta Página</div>
             <ul class="toc-list">
-              <li class="toc-item"><a href="#sobre-documento">Sobre o Documento</a></li>
-              <li class="toc-item"><a href="#organizacao-camadas">Organização em Camadas</a></li>
+              <li class="toc-item"><a href="#framework">Framework</a></li>
+              <li class="toc-item"><a href="#fases-framework">Fases do Framework</a></li>
+              <li class="toc-item"><a href="#conclusao-proximos-passos">Conclusão e Próximos Passos</a></li>
               <li class="toc-item"><a href="#ferramentas">Ferramentas Integradas</a></li>
               <li class="toc-item"><a href="#recursos">Recursos de Consulta</a></li>
               <li class="toc-item"><a href="#diretrizes">Diretrizes e Padrões</a></li>
