@@ -156,7 +156,7 @@
             </section>
 
             <section id="script-ambiente" style="margin-bottom: 40px">
-              <h3>1. Script de Configuração de Ambiente</h3>
+              <h3>1. Script de Configuração de Ambiente [INSTALAÇÃO RÁPIDA]</h3>
               <p style="margin-bottom: 12px; color: var(--text-muted); font-size: 0.9rem">
                 Para agilizar o onboarding, disponibilizamos um script único com os mesmos passos de instalação desta
                 página.
@@ -170,10 +170,10 @@
                 "
               >
                 <p style="margin: 0 0 10px 0; color: var(--text-main); font-size: 0.92rem">
-                  Arquivo disponível: <strong>script.sh</strong>
+                  Arquivo disponível: <strong>assets/scripts/script.sh</strong>
                 </p>
                 <a
-                  href="script.sh"
+                  href="assets/scripts/script.sh"
                   download="script.sh"
                   style="
                     display: inline-flex;
@@ -200,8 +200,34 @@
               </div>
             </section>
 
+            <section id="githooks-fluxo" style="margin-bottom: 40px">
+              <h3>2. Git Hooks no Fluxo</h3>
+              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 12px">
+                Com o ambiente configurado, o repositório passa a usar o <strong>pre-commit</strong> como controle
+                local de segurança. Em toda execução de <strong>git commit</strong>, o hook dispara Trivy, Semgrep e
+                Gitleaks para validar dependências, código e possíveis vazamentos de credenciais antes do push. Navegue até o diretório do projeto e execute o comando abaixo para configurar o hook:
+              </p>
+              <div class="code-block" style="margin-bottom: 16px">
+                <div class="code-header"><span>Bash</span></div>
+                <pre><code>git config core.hooksPath .githooks</code></pre>
+              </div>
+              <div
+                style="
+                  background: var(--bg-sidebar);
+                  border: 1px solid var(--border-indigo);
+                  border-left: 6px solid var(--status-critical);
+                  padding: 16px;
+                "
+              >
+                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.6">
+                  Resultado esperado: se houver risco alto detectado no commit, o hook bloqueia localmente e o
+                  desenvolvedor corrige antes do push.
+                </p>
+              </div>
+            </section>
+
             <section id="instalacao" style="margin-bottom: 40px">
-              <h3>2. Instalação das Ferramentas</h3>
+              <h3>3. Instalação das Ferramentas [INSTALAÇÃO MANUAL]</h3>
 
               <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0 12px 0">
                 <h4 style="color: var(--primary-blue); margin: 0">2.1 Trivy</h4>
@@ -361,7 +387,7 @@ gitleaks version</code></pre>
             </section>
 
             <section id="validacao" style="margin-bottom: 40px">
-              <h3>3. Validação Rápida</h3>
+              <h3>4. Validação Rápida</h3>
               <div class="code-block">
                 <div class="code-header"><span>Bash</span></div>
                 <pre><code>trivy --version
@@ -373,41 +399,15 @@ gitleaks version</code></pre>
               </p>
             </section>
 
-            <section id="githooks-fluxo" style="margin-bottom: 40px">
-              <h3>4. Git Hooks no Fluxo</h3>
-              <p style="line-height: 1.8; color: var(--text-muted); margin-bottom: 12px">
-                Com o ambiente configurado, o repositório passa a usar o <strong>pre-commit</strong> como controle
-                local de segurança. Em toda execução de <strong>git commit</strong>, o hook dispara Trivy, Semgrep e
-                Gitleaks para validar dependências, código e possíveis vazamentos de credenciais antes do push.
-              </p>
-              <div class="code-block" style="margin-bottom: 16px">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>git config core.hooksPath .githooks</code></pre>
-              </div>
-              <div
-                style="
-                  background: var(--bg-sidebar);
-                  border: 1px solid var(--border-indigo);
-                  border-left: 6px solid var(--status-critical);
-                  padding: 16px;
-                "
-              >
-                <p style="margin: 0; color: var(--text-main); font-size: 0.9rem; line-height: 1.6">
-                  Resultado esperado: se houver risco alto detectado no commit, o hook bloqueia localmente e o
-                  desenvolvedor corrige antes do push.
-                </p>
-              </div>
-            </section>
-
           </div>
 
           <aside class="right-toc">
             <div class="toc-header">Nesta Página</div>
             <ul class="toc-list">
               <li class="toc-item"><a href="#script-ambiente">Script de Ambiente</a></li>
+              <li class="toc-item"><a href="#githooks-fluxo">Git Hooks no Fluxo</a></li>
               <li class="toc-item"><a href="#instalacao">Instalação</a></li>
               <li class="toc-item"><a href="#validacao">Validação</a></li>
-              <li class="toc-item"><a href="#githooks-fluxo">Git Hooks no Fluxo</a></li>
             </ul>
           </aside>
         </div>
