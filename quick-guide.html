@@ -302,7 +302,7 @@ rm -f "trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" trivy</code></pre>
               <div class="code-block">
                 <div class="code-header"><span>Bash</span></div>
                 <pre><code># Se pipx nao existir no ambiente, solicite instalacao ao administrador:
-# apt-get update && apt-get install -y python3 pipx
+# apt-get update && sudo apt-get install -y python3 pipx
 
 pipx ensurepath
 pipx install semgrep || pipx upgrade semgrep</code></pre>
