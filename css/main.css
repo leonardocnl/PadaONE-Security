@@ -538,7 +538,7 @@ a .meta-card:hover .meta-label {
   background: var(--bg-code);
   border: 1px solid var(--border-subtle);
   border-radius: 0px;
-  margin: 25px 0;
+  margin: 20px 0;
 }
 .code-header {
   padding: 10px 20px;
