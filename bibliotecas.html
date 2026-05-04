@@ -1259,7 +1259,7 @@
                           <strong>Ação:</strong>
                           <strong>ESCALONAMENTO CRÍTICO OBRIGATÓRIO</strong><br />
                           <strong>Governança:</strong>
-                          Status [Em Revisão] + Aprovação de revisor<br />
+                          Status [Em Testes] + Aprovação de revisor<br />
                           <strong>Workflow:</strong>
                           Waiver válido após comentário do revisor
                         </p>
@@ -1273,7 +1273,8 @@
             <section id="logic-waiver" style="margin-bottom: 30px">
               <h3>7. Gestão de Waivers: Templates Obrigatórios</h3>
               <p>
-                Toda biblioteca vulnerável mantida exige justificativa formal em Git e OpenProject com tag Segurança.
+                Toda biblioteca vulnerável mantida exige justificativa formal em Git e OpenProject com tag Segurança,
+                com responsável definido e data de criação para rastreabilidade.
               </p>
 
               <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0">NO GIT (COMMIT MESSAGE)</h4>
@@ -1287,6 +1288,8 @@
                 <pre><code id="waiver-git-temp">Waiver de Segurança: [CVE-ID ou Obsolescência]
 
 Justificativa: [Vulnerabilidade de baixo impacto / Custo de migração elevado / Falta de alternativa viável]
+Responsável: [Nome da pessoa que abriu o waiver]
+Data de Criação: [YYYY-MM-DD]
 Status: Função não exposta ou isolada
 Prazo de Reavaliação: Máximo 10 dias</code></pre>
               </div>
@@ -1301,6 +1304,8 @@ Prazo de Reavaliação: Máximo 10 dias</code></pre>
                 <pre><code id="waiver-git-na">Waiver de Segurança: [CVE-ID]
 
 Justificativa: Biblioteca mantida por ser inalcançável no contexto atual
+Responsável: [Nome da pessoa que abriu o waiver]
+Data de Criação: [YYYY-MM-DD]
 Status: not_affected (Função não importada)
 String Vetorial: [ex: CVSS:4.0/AV:N/...]
 Registro obrigatório para checagem periódica
@@ -1319,7 +1324,7 @@ Prazo de Reavaliação: Máximo 10 dias</code></pre>
                   <li><strong>Assunto:</strong> [WAIVER] - [NOME_BIBLIOTECA] - [CVE-ID]</li>
                   <li>
                     <strong>Descrição:</strong>
-                    Justificativa técnica + Análise de Alcance + Link commit Git
+                    Justificativa técnica + Análise de Alcance + Link commit Git + Responsável + Data de criação
                   </li>
                   <li><strong>Categoria:</strong> Adicionar "Segurança" ou "Waiver"</li>
                   <li><strong>Prazo:</strong> Não superior a 10 dias</li>
@@ -1350,6 +1355,11 @@ Prazo de Reavaliação: Máximo 10 dias</code></pre>
                   <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem">Atribuído a</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">Desenvolvedor responsável pela análise</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">Responsabilidade técnica</span>
+                </div>
+                <div class="cvss-row">
+                  <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem">Data de Criação</span>
+                  <span style="font-size: 0.9rem; color: var(--text-main)">Data em que o waiver foi registrado</span>
+                  <span style="font-size: 0.9rem; color: var(--text-main)">Controle de antiguidade e revisão</span>
                 </div>
                 <div class="cvss-row">
                   <span style="color: var(--accent-cyan); font-weight: 700; font-size: 0.9rem">Link Git</span>
@@ -1394,7 +1404,7 @@ Prazo de Reavaliação: Máximo 10 dias</code></pre>
               >
                 <li>
                   Alterar status no OpenProject para
-                  <strong>[Em Revisão]</strong>
+                  <strong>[Em Testes]</strong>
                 </li>
                 <li>
                   Aguardar revisão obrigatória do
@@ -1404,6 +1414,11 @@ Prazo de Reavaliação: Máximo 10 dias</code></pre>
                 <li>Publicar comentário de aprovação conforme template</li>
                 <li>Waiver só é válido após aprovação do revisor</li>
               </ol>
+
+              <p style="margin: 0 0 15px 20px; font-size: 0.85rem; color: var(--text-muted)">
+                Use <strong>[Impedido]</strong> apenas quando o waiver realmente estiver bloqueado por falta de evidência,
+                dependência externa ou decisão pendente que impeça a continuidade da análise.
+              </p>
 
               <h4 style="color: var(--accent-cyan); margin: 30px 0 15px 0">TEMPLATE DE COMENTÁRIO DE APROVAÇÃO</h4>
               <div class="code-block">

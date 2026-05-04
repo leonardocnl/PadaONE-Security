@@ -198,8 +198,11 @@
                 </a>
               </div>
               <div class="code-block">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>chmod +x script.sh
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('script-config')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="script-config">chmod +x script.sh
 ./script.sh</code></pre>
               </div>
             </section>
@@ -212,8 +215,11 @@
                 Gitleaks para validar dependências, código e possíveis vazamentos de credenciais antes do push. Navegue até o diretório do projeto e execute o comando abaixo para configurar o hook:
               </p>
               <div class="code-block" style="margin-bottom: 16px">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>git config core.hooksPath .githooks</code></pre>
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('git-hooks-config')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="git-hooks-config">git config core.hooksPath .githooks</code></pre>
               </div>
               <div
                 style="
@@ -262,8 +268,11 @@
                 Ferramenta de SCA para detectar vulnerabilidades em dependências e arquivos de projeto.
               </p>
               <div class="code-block">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>TRIVY_VERSION=$(wget -qO- https://api.github.com/repos/aquasecurity/trivy/releases/latest | sed -n 's/.*"tag_name": "\([^"]*\)".*/\1/p' | head -n1 | sed 's/^v//')
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('trivy-install')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="trivy-install">TRIVY_VERSION=$(wget -qO- https://api.github.com/repos/aquasecurity/trivy/releases/latest | sed -n 's/.*"tag_name": "\([^"]*\)".*/\1/p' | head -n1 | sed 's/^v//')
 wget -q "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
 tar -xf "trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" trivy
 mkdir -p "$HOME/.local/bin"
@@ -300,8 +309,11 @@ rm -f "trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" trivy</code></pre>
                 Ferramenta de SAST para análise estática de padrões inseguros no código.
               </p>
               <div class="code-block">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code># Se pipx nao existir no ambiente, solicite instalacao ao administrador:
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('semgrep-install')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="semgrep-install"># Se pipx nao existir no ambiente, solicite instalacao ao administrador:
 # apt-get update && sudo apt-get install -y python3 pipx
 
 pipx ensurepath
@@ -356,8 +368,11 @@ pipx install semgrep || pipx upgrade semgrep</code></pre>
                 </p>
               </div>
               <div class="code-block" style="margin-bottom: 20px">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>semgrep login</code></pre>
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('semgrep-login')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="semgrep-login">semgrep login</code></pre>
               </div>
               <div style="display: flex; align-items: center; gap: 10px; margin: 20px 0 12px 0">
                 <h4 style="color: var(--status-critical); margin: 0">3.3 Gitleaks</h4>
@@ -388,8 +403,11 @@ pipx install semgrep || pipx upgrade semgrep</code></pre>
                 Ferramenta de Secrets Detection para identificar vazamento de credenciais no repositório.
               </p>
               <div class="code-block">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>GITLEAKS_VERSION=$(wget -qO- https://api.github.com/repos/gitleaks/gitleaks/releases/latest | sed -n 's/.*"tag_name": "\([^"]*\)".*/\1/p' | head -n1 | sed 's/^v//')
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('gitleaks-install')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="gitleaks-install">GITLEAKS_VERSION=$(wget -qO- https://api.github.com/repos/gitleaks/gitleaks/releases/latest | sed -n 's/.*"tag_name": "\([^"]*\)".*/\1/p' | head -n1 | sed 's/^v//')
 wget -q "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
 tar -xf "gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
 mkdir -p "$HOME/.local/bin"
@@ -402,8 +420,11 @@ gitleaks version</code></pre>
             <section id="validacao" style="margin-bottom: 40px">
               <h3>4. Validação Rápida</h3>
               <div class="code-block">
-                <div class="code-header"><span>Bash</span></div>
-                <pre><code>export PATH="$HOME/.local/bin:$PATH"
+                <div class="code-header">
+                  <span>Bash</span>
+                  <button class="btn-copy" onclick="utils.copyCode('validation-check')"><i class="ph ph-copy"></i></button>
+                </div>
+                <pre><code id="validation-check">export PATH="$HOME/.local/bin:$PATH"
 trivy --version
 semgrep --version
 gitleaks version</code></pre>

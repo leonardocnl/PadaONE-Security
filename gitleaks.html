@@ -271,7 +271,7 @@ gitleaks detect -v --no-git --report-path gitleaks-report.csv -f csv</code></pre
                 <span class="meta-label" style="color: var(--status-critical); font-size: 1rem">AVISO</span>
                 <p style="margin-top: 10px; color: var(--text-main); font-size: 0.9rem">
                   Waivers são exclusivos para strings que <strong>parecem</strong> senhas mas não são. Exemplo: Código hash. Segredos reais
-                  nunca ganham Waiver.
+                  nunca ganham Waiver. Toda exceção deve registrar responsável e data de criação para auditoria.
                 </p>
               </div>
 
@@ -287,6 +287,8 @@ gitleaks detect -v --no-git --report-path gitleaks-report.csv -f csv</code></pre
                 </div>
                 <pre><code id="commit-fp">Waiver de Segurança: [Gitleaks-FP]
 Justificativa: A string detectada é um exemplo de documentação/hash de integridade.
+Responsável: [Nome da pessoa que abriu o waiver]
+Data de Criação: [YYYY-MM-DD]
 Status: Validado como Falso Positivo.</code></pre>
               </div>
 
@@ -311,10 +313,18 @@ Status: Validado como Falso Positivo.</code></pre>
                     <span style="width: 120px; color: var(--text-muted); font-size: 0.8rem">ANEXO:</span>
                     <span style="color: var(--status-success); font-weight: bold">gitleaks-report.json</span>
                   </li>
+                  <li style="display: flex; border-bottom: 1px solid #333; padding-bottom: 10px">
+                    <span style="width: 120px; color: var(--text-muted); font-size: 0.8rem">RESPONSÁVEL:</span>
+                    <span style="color: var(--text-main)">Nome de quem abriu o waiver</span>
+                  </li>
+                  <li style="display: flex; border-bottom: 1px solid #333; padding-bottom: 10px">
+                    <span style="width: 120px; color: var(--text-muted); font-size: 0.8rem">DATA:</span>
+                    <span style="color: var(--text-main)">Data de criação do waiver</span>
+                  </li>
                   <li style="display: flex">
                     <span style="width: 120px; color: var(--text-muted); font-size: 0.8rem">DESCRIÇÃO:</span>
                     <span style="color: var(--text-muted); font-style: italic; font-size: 0.85rem"
-                      >Justificativa técnica + Link do Commit de Waiver.</span
+                      >Justificativa técnica + Link do Commit de Waiver + Evidência do falso positivo.</span
                     >
                   </li>
                 </ul>
@@ -400,6 +410,7 @@ gitleaks detect -v --no-git -c .gitleaks.toml -r evidencias_vazamento.json</code
       </main>
     </div>
 
+    <script src="js/utils.js"></script>
     <script>
       function toggleMobileSidebar() {
         document.querySelector('.sidebar').classList.toggle('active');
@@ -427,14 +438,6 @@ gitleaks detect -v --no-git -c .gitleaks.toml -r evidencias_vazamento.json</code
         }
       });
 
-      const utils = {
-        copyCode: function (id) {
-          const code = document.getElementById(id);
-          if (!code) return;
-          navigator.clipboard.writeText(code.innerText);
-          alert('Copiado!');
-        },
-      };
     </script>
   </body>
 </html>

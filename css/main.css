@@ -648,10 +648,30 @@ label {
   border: none;
   color: var(--text-muted);
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  position: relative;
+  transition: color 0.25s ease-in-out, transform 0.25s ease-in-out;
 }
 .btn-copy:hover {
   color: var(--text-main);
+}
+.btn-copy.copied {
+  color: var(--status-success);
+  transform: translateY(-1px) scale(1.08);
+}
+.btn-copy.copied i {
+  animation: copy-button-pop 0.45s ease;
+}
+
+@keyframes copy-button-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.28);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .app-footer {

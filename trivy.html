@@ -129,13 +129,9 @@
                   para encontrar o crime (vulnerabilidade). No entanto, ele apenas reporta os fatos.  A sentença final —
                   se vamos atualizar, ignorar ou mitigar — é ditada estritamente pela nossa 
                   <a
-                    href="#"
-                    onclick="
-                      nav.switchTool('logic');
-                      return false;
-                    "
+                    href="bibliotecas.html"
                     style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline"
-                    >Lógica de Bibliotecas</a
+                    >Triagem de Bibliotecas</a
                   >.
                 </p>
               </div>
@@ -350,7 +346,8 @@ EOF</code></pre>
               <h3>3. O Arquivo .trivyignore</h3>
               <p>
                 O arquivo <code>.trivyignore</code> serve para que o detetive ignore vulnerabilidades específicas que já 
-                foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe. 
+                foram analisadas e consideradas de baixo risco ou "falso positivo" pela equipe. As regras formais de
+                exceção e rastreabilidade ficam centralizadas na <a href="bibliotecas.html#logic-waiver" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline">Triagem de bibliotecas</a>.
               </p>
 
               <div class="code-block">
@@ -390,39 +387,39 @@ CVE-2024-5678</code></pre>
                 <div class="cvss-row cvss-header">
                   <span class="col-label">NÍVEL DO CVE</span>
                   <span class="col-label">AÇÃO IMEDIATA</span>
-                  <span class="col-label" style="text-align: center">WAIVER</span>
+                  <span class="col-label" style="text-align: center">BIBLIOTECAS</span>
                 </div>
 
                 <div class="cvss-row">
                   <span style="color: var(--status-critical); font-weight: 700">CRITICAL</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
                     <strong>CVE de Exploração Remota:</strong> Bloqueio obrigatório. Requer atualização imediata ou 
-                    remoção da lib. 
+                    remoção da lib. Consulte a política de exceção na <a href="bibliotecas.html#logic-waiver" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline">página de bibliotecas</a>. 
                   </span>
                   <div class="badge-full" style="border-color: var(--status-critical); color: var(--status-critical)">
-                    PROIBIDO
+                    BLOQUEADO
                   </div>
                 </div>
 
                 <div class="cvss-row">
                   <span style="color: var(--accent-gold); font-weight: 700">HIGH</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE de Alto Impacto:</strong> Correção obrigatória no sprint atual. Aceita waiver apenas se 
-                    não houver patch. 
+                    <strong>CVE de Alto Impacto:</strong> Correção obrigatória no sprint atual. Exceção apenas conforme 
+                    a política registrada na <a href="bibliotecas.html#logic-waiver" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline">página de bibliotecas</a>. 
                   </span>
                   <div class="badge-full" style="border-color: var(--accent-gold); color: var(--accent-gold)">
-                    RESTRITO
+                    REVISAR
                   </div>
                 </div>
 
                 <div class="cvss-row">
                   <span style="color: var(--primary-blue); font-weight: 700">MEDIUM</span>
                   <span style="font-size: 0.9rem; color: var(--text-main)">
-                    <strong>CVE Moderado:</strong> Correção recomendada. Waiver permitido se o esforço de migração for > 
-                    16h. 
+                    <strong>CVE Moderado:</strong> Correção recomendada. Exceção permitida se o esforço de migração for > 
+                    16h e o registro estiver na <a href="bibliotecas.html#logic-waiver" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline">página de bibliotecas</a>. 
                   </span>
                   <div class="badge-full" style="border-color: var(--primary-blue); color: var(--primary-blue)">
-                    PERMITIDO
+                    CONSULTAR
                   </div>
                 </div>
 
@@ -464,8 +461,8 @@ CVE-2024-5678</code></pre>
                   <li><strong>DB Updates:</strong> Atualizar banco de vulnerabilidades diariamente. </li>
                   <li><strong>SARIF Upload:</strong> Integrar com GitHub/GitLab Security Dashboards. </li>
                   <li>
-                    <strong>Waivers:</strong> Documentar todas as exceções no <code>.trivyignore</code> com 
-                    justificativa. 
+                    <strong>Exceções de bibliotecas:</strong> Documentar todas as exceções na <a href="bibliotecas.html#logic-waiver" style="color: var(--accent-cyan); font-weight: bold; text-decoration: underline">página de bibliotecas</a> com 
+                    justificativa e rastreabilidade. 
                   </li>
                 </ul>
               </div>

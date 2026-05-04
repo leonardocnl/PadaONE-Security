@@ -169,15 +169,17 @@
 
                         <div class="meta-card" style="margin-bottom: 20px;">
                             <span class="meta-label" style="color: var(--accent-cyan);">A. Se você decidiu não corrigir o código agora (seja por Falso Positivo ou Esforço Elevado), você deve oficializar essa decisão. Não basta ignorar o alerta.</span>
-                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Use o comentário de supressão do Semgrep na linha acima do erro e atribua o ID do waiver/ticket correspondente:</p>
+                            <p style="margin: 10px 0 5px 0; font-size: 0.9rem; color: var(--text-main);">Use o comentário de supressão do Semgrep na linha acima do erro e atribua o ID do waiver/ticket correspondente, junto com responsável e data de criação no ticket:</p>
                             <div class="code-block" style="margin-top: 15px;">
                                 <div class="code-header">
                                     <span>Java</span>
-                                    <button class="btn-copy" onclick="utils.copyCode('waiver-code')"><i class="ph ph-copy"></i></button>
+                                    <button class="btn-copy" onclick="utils.copyCode('waiver-fp-code')"><i class="ph ph-copy"></i></button>
                                 </div>
-                                <pre><code id="waiver-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
+                                <pre><code id="waiver-fp-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
 // nosemgrep: [ID-DA-REGRA (gerado no relatorio do Semgrep)]
 // Motivo: [ID colocado no waiver (ticket do openProject)] - O input já é sanitizado pelo filtro XSS global.
+// Responsável: [Nome de quem abriu o waiver]
+// Data de Criação: [YYYY-MM-DD]
 
 EXEMPLO DE WAIVER PARA FALSO POSITIVO
 // nosemgrep: gitlab.find_sec_bugs.CUSTOM_INJECTION-2
@@ -191,10 +193,12 @@ EXEMPLO DE WAIVER PARA FALSO POSITIVO
                             <div class="code-block" style="margin-top: 15px;">
                                 <div class="code-header">
                                     <span>Java</span>
-                                    <button class="btn-copy" onclick="utils.copyCode('waiver-code')"><i class="ph ph-copy"></i></button>
+                                    <button class="btn-copy" onclick="utils.copyCode('waiver-fixed-code')"><i class="ph ph-copy"></i></button>
                                 </div>
-                                <pre><code id="waiver-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
+                                <pre><code id="waiver-fixed-code"> MODELO DE WAIVER PARA FALSOS POSITIVOS OU ACEITE DE RISCO 
 // nosemgrep: [ID-DA-REGRA (gerado no relatorio do Semgrep)]
+// Responsável: [Nome de quem registrou a correção]
+// Data de Criação: [YYYY-MM-DD]
 
 EXEMPLO DE WAIVER PARA FALSO POSITIVO
 // nosemgrep: gitlab.find_sec_bugs.XSS_SERVLET-2.XSS_SERVLET_PARAMETER-1
@@ -239,6 +243,11 @@ EXEMPLO DE WAIVER PARA FALSO POSITIVO
                                         <td style="padding: 15px; color: var(--text-main); font-weight: 600;">Atribuído a</td>
                                         <td style="padding: 15px; color: var(--text-main);">Membro da equipe de segurança responsável pela análise</td>
                                         <td style="padding: 15px; color: var(--text-muted);">Responsabilidade técnica.</td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid var(--border-subtle);">
+                                        <td style="padding: 15px; color: var(--text-main); font-weight: 600;">Data de Criação</td>
+                                        <td style="padding: 15px; color: var(--text-main);">Data em que o waiver foi aberto</td>
+                                        <td style="padding: 15px; color: var(--text-muted);">Linha do tempo da exceção.</td>
                                     </tr>
                                     <tr style="border-bottom: 1px solid var(--border-subtle);">
                                         <td style="padding: 15px; color: var(--text-main); font-weight: 600;">Tags</td>

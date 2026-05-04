@@ -5,10 +5,41 @@ window.utils = window.utils || {
 
     try {
       await navigator.clipboard.writeText(codeElement.innerText);
-      alert('Código copiado para a área de transferência!');
+      const codeBlock = codeElement.closest('.code-block');
+      const button = codeBlock?.querySelector('.btn-copy');
+      window.utils.flashCopyFeedback(button);
     } catch (err) {
       console.error('Falha ao copiar', err);
     }
+  },
+
+  flashCopyFeedback: (button) => {
+    if (!button) return;
+
+    const icon = button.querySelector('i');
+
+    if (icon) {
+      if (!button.dataset.copyIconClass) {
+        button.dataset.copyIconClass = icon.className;
+      }
+
+      icon.className = 'ph ph-check';
+    }
+
+    button.classList.add('copied');
+
+    if (button._copyFeedbackTimeout) {
+      window.clearTimeout(button._copyFeedbackTimeout);
+    }
+
+    button._copyFeedbackTimeout = window.setTimeout(() => {
+      if (icon && button.dataset.copyIconClass) {
+        icon.className = button.dataset.copyIconClass;
+      }
+
+      button.classList.remove('copied');
+      button._copyFeedbackTimeout = null;
+    }, 1000);
   },
 
   initAnchorLinks: () => {
