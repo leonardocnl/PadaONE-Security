@@ -91,6 +91,56 @@
                     </div>
                     <h1>Semgrep - Manuais</h1>
 
+                    <section id="semgrep-login-guide" style="margin-bottom: 40px;">
+                        <h3>Guia Rápido: Login no Semgrep (passo a passo)</h3>
+                        <p style="margin-bottom: 12px; font-size: 0.95rem; color: var(--text-main);">Siga cada imagem com a legenda correspondente para concluir o login. O exemplo utiliza GitLab como provedor, mas a lógica é a mesma para GitHub, SSO ou e-mail.</p>
+
+                        <div style="display: flex; flex-direction: column; gap: 20px; margin-bottom: 12px">
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 1:</strong> Após rodar o comando <code>semgrep login</code>, você será redirecionado para esta tela. Clique em "Sign in" ou "Login".</p>
+                                <img src="assets/images/LoginSemgrep1.png" alt="Semgrep login 1" style="max-width:760px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 2:</strong> Escolha o provedor de autenticação (ex.: GitLab). Você será redirecionado para fazer login com suas credenciais e confirmar o acesso.</p>
+                                <img src="assets/images/LoginSemgrep2.png" alt="Semgrep login 2" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 3:</strong> Após fazer login, será solicitado que você selecione a opção de criar uma nova organização.</p>
+                                <img src="assets/images/LoginSemgrep3.png" alt="Semgrep login 3" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 4:</strong> Selecione a opção indicada.</p>
+                                <img src="assets/images/LoginSemgrep4.png" alt="Semgrep login 4" style="max-width:760px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 5:</strong> Nesta etapa, não é necessário preencher nenhum campo; apenas clique no botão para continuar.</p>
+                                <img src="assets/images/LoginSemgrep5.png" alt="Semgrep login 5" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 6:</strong> Clique no botão indicado. Não é necessário conectar-se com nenhuma das opções disponíveis.</p>
+                                <img src="assets/images/LoginSemgrep6.png" alt="Semgrep login 6" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 7:</strong> Seguindo as indicações anteriores, clique em <em>Skip setup.</em></p>
+                                <img src="assets/images/LoginSemgrep7.png" alt="Semgrep login 7" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+
+                            <div style="margin:0; font-size:1rem; color:var(--text-main);">
+                                <p style="margin:0 0 8px 0; font-size:1.02rem; color:var(--text-main)"><strong>Passo 8:</strong> Para finalizar, clique em <em>Activate</em> para ativar seu token.</p>
+                                <img src="assets/images/LoginSemgrep8.png" alt="Semgrep login 8" style="max-width:560px; width:100%; height:auto; border:1px solid var(--border-color);">
+                            </div>
+                            <div style="margin:0; background: linear-gradient(135deg, rgba(0, 206, 209, 0.12), rgba(0, 206, 209, 0.06)); border: 1px solid var(--accent-cyan); border-left: 6px solid var(--accent-cyan); padding: 16px; border-radius: 0; margin-top: 20px;">
+                                <p style="margin:0; font-size:1.02rem; color:var(--text-main); line-height:1.7"><strong style="color:var(--accent-cyan);">Observação Importante:</strong> Se esta for sua primeira vez usando o Semgrep, após completar os passos acima, retorne ao terminal e execute <code>semgrep login</code> novamente. Você será redirecionado ao site; clique em <em>Activate</em>. Volte ao terminal e confirme se a autenticação foi bem-sucedida.</p>
+                            </div>
+                        </div>
+                    </section>
+
                     <section id="o-que-e" style="margin-bottom: 50px;">
                         <h3>O que é o Semgrep</h3>
                         <p style="margin-bottom: 15px; font-size: 0.95rem; color: var(--text-main);">O Semgrep (Semantic Grep) é uma ferramenta de <strong>SAST (Static Application Security Testing)</strong>, ou seja, ela realiza a análise de segurança em código estático.</p>
